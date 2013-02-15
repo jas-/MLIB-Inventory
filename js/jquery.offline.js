@@ -105,7 +105,7 @@
 
 				/* network connectivity present? (testing) */
 				if (_comm.online()){
-					_comm.decide(o, {'all':true}, o.url);
+					_comm.decide(o, false, o.url);
 				} else {
 					return '{error:"Network connectivity not present"}';
 				}
@@ -629,13 +629,14 @@
 			ajax: function(o, d){
 				var _r = false, _h = false;
 
+				jQuery.support.cors = true;
 				$.ajax({
 					global: false,
 					url: o.url,
-					type: 'post',
+					type: 'get',
 					data: d,
-					/*dataType: 'json',
-					contentType: 'application/json; charset=utf8',*/
+					dataType: 'json',
+					//contentType: 'application/json; charset=utf8',
 					async: o.async,
 					xhrFields: {
 						withCredentials: true
