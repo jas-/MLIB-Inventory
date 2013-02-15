@@ -24,11 +24,12 @@
 		 * @object defaults
 		 * @abstract Default set of options for plug-in (Public elements)
 		 *
-		 * @param {String}  appID   - Unique identifier for referencing storage object
-		 * @param {String}  url     - FQDN URL end point for saves
-		 * @param {Object}  element - Element to which this plug-in is bound
-		 * @param {String}  storage - Storage mechanism to use for keys (default is crypto.KeyStorage)
-		 * @param {Boolean} debug   - Enable or disable debugging options
+		 * @param {String}    appID     - Unique identifier for referencing storage object
+		 * @param {String}    url       - FQDN URL end point for saves
+		 * @param {Object}    element   - Element to which this plug-in is bound
+		 * @param {String}    storage   - Storage mechanism to use for keys
+		 * @param {Boolean}   debug     - Enable or disable debugging options
+		 * @param {Function}  callback  - Function to call on success of any operation
 		 */
 		var defaults = {
 			appID:			'jquery.offline',
@@ -38,7 +39,9 @@
 			async:			false,
 			debug:			false,
 			data:           {},
-			logID:			''
+			logID:			'',
+			callback:       function(){},
+			preCallback:    function(){}
 		};
 
 		/**
@@ -86,7 +89,7 @@
 			 */
 			merge: function(o, d){
 				d.logID = d.appID;
-				d.key = _keys.uid();
+				d.key = _libs.uid();
 				return $.extend({}, d, o);
 			},
 
@@ -137,36 +140,6 @@
 					((o.debug) && (_d)) ? _log.debug(o.logID, '_setup.get: User supplied data specified') : false;
 				}
 				return _d;
-			}
-		};
-
-		/**
-		 * @method _keys
-		 * @scope private
-		 * @abstract Handles various key generation options
-		 */
-		var _keys = _keys || {
-
-			/**
-			 * @function uid
-			 * @scope private
-			 * @abstract Generate uid
-			 *
-			 * @param {Object} o Plug-in object
-			 *
-			 * @returns {String}
-			 */
-			uid: function(o){
-				return window.navigator.appName+
-						window.navigator.appCodeName+
-						window.navigator.product+
-						window.navigator.productSub+
-						window.navigator.appVersion+
-						window.navigator.buildID+
-						window.navigator.userAgent+
-						window.navigator.language+
-						window.navigator.platform+
-						window.navigator.oscpu;
 			}
 		};
 
@@ -636,8 +609,9 @@
 					type: 'get',
 					data: d,
 					dataType: 'json',
-					//contentType: 'application/json; charset=utf8',
+					contentType: 'application/json; charset=utf8',
 					async: o.async,
+					context: $(this),
 					xhrFields: {
 						withCredentials: true
 					},
@@ -651,6 +625,7 @@
 						xhr.setRequestHeader('Content-MD5', _h);
 						xhr.withCredentials = true;
 
+						((o.preCallback)&&($.isFunction(o.preCallback))) ? o.preCallback($(this)) : false;
 						(o.debug) ? _log.debug(o.logID, '_comm.ajax: Set request headers => {"X-Alt-Referer":"'+o.appID+'","Content-MD5":"'+_h+'"}') : false;
 					},
 
@@ -664,6 +639,9 @@
 						}
 
 						(o.debug) ? _log.debug(o.logID, '_comm.ajax: '+status+' => '+xhr.statusText) : false;
+
+						((o.callback)&&($.isFunction(o.callback))) ? o.callback.call(x) : false;
+
 						_r = x;
 					},
 
@@ -1059,6 +1037,20 @@
 				}
 				var temp = WordToHex(a)+WordToHex(b)+WordToHex(c)+WordToHex(d);
 				return temp.toLowerCase();
+			},
+
+			uid: function(o){
+				/* hmac + sha256 + pbkdf2 */
+				return window.navigator.appName+
+						window.navigator.appCodeName+
+						window.navigator.product+
+						window.navigator.productSub+
+						window.navigator.appVersion+
+						window.navigator.buildID+
+						window.navigator.userAgent+
+						window.navigator.language+
+						window.navigator.platform+
+						window.navigator.oscpu;
 			}
 		};
 

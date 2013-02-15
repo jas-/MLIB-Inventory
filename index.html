@@ -30,20 +30,32 @@
 		<div data-role="collapsible-set" data-theme="c" data-content-theme="c">
 
 			<!-- Current inventory (remote) -->
-			<div data-role="collapsible" id="current-inventory">
+			<div data-role="collapsible">
 				<h3>
 					Current Inventory
 				</h3>
-				<div class="ui-grid-b">
+				<div class="ui-grid-d">
 		      <div class="ui-block-a">
-						a
+						Hostname
 		      </div>
 		      <div class="ui-block-b">
-						b
+						SKU
 		      </div>
 		      <div class="ui-block-c">
-						c
+						UUIC
 		      </div>
+		      <div class="ui-block-d">
+						Serial
+		      </div>
+		      <div class="ui-block-e">
+						Monitor SKU
+		      </div>
+		      <div class="ui-block-f">
+						Monitor Serial
+		      </div>
+					<div id="current-inventory">
+
+					</div>
 		    </div>
 			</div>
 
@@ -146,9 +158,33 @@
 		$j('#current-inventory').offline({
 			appID:'MLIB-Inventory',
 			url: 'http://new-inventory.scl.utah.edu/?do=current',
-			debug: true
+			debug: true,
+			callback: function(){_table(this, '#current-inventory');}
 		});
 
+		/* Create a table of data */
+		function _table(o, e){
+			$j.each(o, function(x, y){
+				if ((/object|array/.test(typeof(y))) && (_size(y) > 0)){
+					//_table(o, y);
+					$j(e).append(x);
+				} else {
+					$j(e).html(y);
+				}
+			});
+		}
+
+		function _size(obj){
+			var n = 0;
+			if (/object/.test(typeof(obj))) {
+				$j.each(obj, function(k, v){
+					if (obj.hasOwnProperty(k)) n++;
+				});
+			} else if (/array/.test(typeof(obj))) {
+				n = obj.length;
+			}
+			return n;
+		}
 	});
 </script>
 </body>
