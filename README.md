@@ -1,2 +1,2 @@
 # MLIB-Inventory
-A private repository for an inventory managment project.
+An inventory managment project.
