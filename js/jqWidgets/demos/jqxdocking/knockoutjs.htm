@@ -1,0 +1,265 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title id='Description'>Integration of jqxDocking with Knockout. Type something in the text fields and
+        press the Add button.</title>
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.8.2.min.js"></script>
+    <script type="text/javascript" src="../../scripts/knockout-2.1.0.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdocking.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxwindow.js"></script>
+    <script type="text/javascript" src="../../scripts/gettheme.js"></script>
+</head>
+<body class='default'>
+    <div id="content">
+        <script type="text/javascript">
+
+            $(document).ready(function () {
+                oppModel = function () {
+
+                    this.companyName = ko.observable();
+
+                    this.contactName = ko.observable();
+
+                    this.status = ko.observable();
+
+                    this.scheduled = ko.observable();
+
+                    this.phone = ko.observable();
+
+                    this.note = ko.observable();
+
+                    this.oppValue = ko.observable();
+
+
+
+                    this.oppertunity = ko.observableArray([{
+
+                        companyName: 'Shoppers Drug Mart',
+
+                        contactName: 'John Doe',
+
+                        status: 'Stage 4 - Demonstration',
+
+                        scheduled: 'Mon 02 2013',
+
+                        phone: '1 (555) 111 2222',
+
+                        note: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque consectetur fringilla ornare. Etiam tristique, sem non pellentesque auctor, urna mauris iaculis dolor, sit amet sagittis arcu eros eget metus. Mauris quis sem ligula. Nulla in metus ac massa accumsan placerat. Ut id tellus enim, non dapibus elit.',
+
+                        oppValue: '$20,000'
+
+                    }]);
+
+                    //TODO: delete, made for testing *************************
+
+                    this.oppertunity.push({
+
+                        companyName: 'Dollar Tree',
+
+                        contactName: 'John Doe',
+
+                        status: 'Stage 8 - Won',
+
+                        scheduled: 'Mon 02 2013',
+
+                        phone: '1 (555) 111 2222',
+
+                        note: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque consectetur fringilla ornare. Etiam tristique, sem non pellentesque auctor, urna mauris iaculis dolor, sit amet sagittis arcu eros eget metus. Mauris quis sem ligula. Nulla in metus ac massa accumsan placerat. Ut id tellus enim, non dapibus elit.',
+
+                        oppValue: '$25,000'
+
+                    });
+
+                    //TODO: delete, made for testing
+
+                    this.oppertunity.push({
+
+                        companyName: 'Belle Tire',
+
+                        contactName: 'John Doe',
+
+                        status: 'Stage 8 - Lost',
+
+                        scheduled: 'Mon 02 2013',
+
+                        phone: '1 (555) 111 2222',
+
+                        note: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque consectetur fringilla ornare. Etiam tristique, sem non pellentesque auctor, urna mauris iaculis dolor, sit amet sagittis arcu eros eget metus. Mauris quis sem ligula. Nulla in metus ac massa accumsan placerat. Ut id tellus enim, non dapibus elit.',
+
+                        oppValue: '$12,000'
+
+                    });
+
+                    //TODO: Delete to here **************************************
+
+                    var sectionsCount = 0, windowsCount = 0, maxSections = 10; //TODO: remove max sections.
+
+                    //This method will handle the new added sections.
+
+                    function handleSection(el) {
+
+                        var id = 'knockout-section-' + sectionsCount;
+
+                        sectionsCount += 1;
+
+                        el.id = id;
+                        $(el).appendTo('#oppContainer');
+                    }
+
+                    //This method will handle the new windows
+
+                    function handleWindow(el) {
+
+                        var id = 'knockout-window-' + windowsCount, section = windowsCount % sectionsCount;
+
+                        windowsCount += 1;
+
+                        $(el).attr('id', id);
+
+                        $('#oppContainer').jqxDocking('addWindow', id, 'docked', section, windowsCount);
+
+
+
+                    }
+
+                    function getDOMElement(args) {
+
+                        for (var i = 0; i < args.length; i++) {
+
+                            if (args[i].tagName && args[i].tagName.toUpperCase() === 'DIV') {
+
+                                return args[i];
+
+                            }
+
+                        }
+
+                        return null;
+
+                    }
+
+                    this.addOpp = function () {
+
+                        //add all object properties in if statement.
+
+                        if (this.contactName() && this.companyName()) {
+
+                            this.oppertunity.push({
+
+                                _contactName: this.contactName(),
+
+                                _companyName: this.companyName(),
+
+                                _status: this.status(),
+
+                                _scheduled: this.scheduled(),
+
+                                _note: this.note()
+
+                            });
+
+                        }
+
+                    }
+
+                    //Custom renderer for adding new windows.
+
+                    this.buildWindow = function (element) {
+
+                        var el = getDOMElement(element);
+
+                        //REMOVED: if statement for maxsections
+
+                        if (sectionsCount == 0)
+                        handleSection(el);
+
+                        handleWindow($(el).children('.knockout-window'));
+
+                    }
+
+                };
+
+                ko.applyBindings(new oppModel());
+
+
+
+                $('#oppContainer').jqxDocking({ width: 965, mode: 'docked', orientation: 'vertical', panelsRoundedCorners: false, windowsOffset: 5 });
+
+                $('.knockout-window').jqxWindow({ height: 'auto', showCollapseButton: true, showCloseButton: false, collapsed: true });
+
+                $('#oppContainer').jqxDocking('disableWindowResize', 'window1');
+
+                $('#oppContainer').jqxDocking('disableWindowResize', 'window2');
+
+            });
+
+        </script>
+        <div id="oppContainer" data-bind="template: {foreach: oppertunity, afterRender: buildWindow}">
+
+            <div class="knockout-section" style="min-height: 0px;">
+
+                <div id="window1" class="knockout-window">
+
+                    <div class="oppWindowHeader"><span data-bind="text: contactName + ' || ' + companyName + ' || ' + status + ' || ' + scheduled + ' || ' + phone"></span></div>
+
+                    <div style="padding: 5px 0 5px 0; background: none; height: 150px; overflow: hidden;">
+
+                        <div class="oppPanel">
+
+                            <div class="oppHeader" style="height: 40px;">
+
+                                <div class="oppBttn"><span data-bind="text: contactName"></span></div>
+
+                                <div class="oppBttn">Remove</div>
+
+                                <div class="oppBttn">Change Scheduled Date</div>
+
+                                <div class="oppBttn">Change Status</div>
+
+                                <div class="oppBttn">View Notes</div>
+
+                                <div class="oppBttn">Add Note</div>
+
+                                <div class="clear"></div>
+
+                            </div>
+
+                            <div class="oppContent">
+
+                                <span data-bind="text: note"></span>
+
+                            </div>
+
+                            <div class="oppFooter" style="height: 40px;">
+
+                                <div class="oppBttn"><span>Status:</span></div>
+
+                                <div class="oppBttn oppStatus">
+
+                                    <img src="/images/check.png" style="margin: 0 0 0 40px; float: left; padding: 0;" width="20" height="20" /><span data-bind="text: status"></span>
+
+                                </div>
+
+                                <div class="oppBttn"><span>Scheduled: </span><span data-bind="text: scheduled"></span></div>
+
+                                <div class="oppBttn" style="border-right: none;"><span data-bind="text: oppValue"></span></div>
+
+                                <div class="clear"></div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</body>
+</html>
