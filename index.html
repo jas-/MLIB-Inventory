@@ -36,7 +36,7 @@
 				</h3>
 				<div data-role="content">
 					<div>
-						<div id='jqxWidget' style="font-size: 13px; font-family: Verdana; float: left;">
+						<div id='jqxWidget' style="font-size: 13px; font-family: Verdana; float: center;">
 							<div id="jqxgrid"></div>
 						</div>
 					</div>
@@ -137,128 +137,127 @@
 <!-- jqwidgets for display grid -->
 <link rel="stylesheet" href="js/jqWidgets/jqwidgets/styles/jqx.base.css" type="text/css" />
 <script type="text/javascript" src="js/jqWidgets/jqwidgets/jqxcore.js"></script>
-<script type="text/javascript" src="js/jqWidgets/jqwidgets/jqxdata.js"></script> 
+<script type="text/javascript" src="js/jqWidgets/jqwidgets/jqxdata.js"></script>
 <script type="text/javascript" src="js/jqWidgets/jqwidgets/jqxbuttons.js"></script>
 <script type="text/javascript" src="js/jqWidgets/jqwidgets/jqxscrollbar.js"></script>
 <script type="text/javascript" src="js/jqWidgets/jqwidgets/jqxlistbox.js"></script>
 <script type="text/javascript" src="js/jqWidgets/jqwidgets/jqxdropdownlist.js"></script>
 <script type="text/javascript" src="js/jqWidgets/jqwidgets/jqxmenu.js"></script>
 <script type="text/javascript" src="js/jqWidgets/jqwidgets/jqxgrid.js"></script>
-<script type="text/javascript" src="js/jqWidgets/jqwidgets/jqxgrid.sort.js"></script> 
-<script type="text/javascript" src="js/jqWidgets/jqwidgets/jqxgrid.pager.js"></script> 
-<script type="text/javascript" src="js/jqWidgets/jqwidgets/jqxgrid.columnsresize.js"></script> 
-<script type="text/javascript" src="js/jqWidgets/jqwidgets/jqxgrid.selection.js"></script> 
+<script type="text/javascript" src="js/jqWidgets/jqwidgets/jqxgrid.sort.js"></script>
+<script type="text/javascript" src="js/jqWidgets/jqwidgets/jqxgrid.pager.js"></script>
+<script type="text/javascript" src="js/jqWidgets/jqwidgets/jqxgrid.columnsresize.js"></script>
+<script type="text/javascript" src="js/jqWidgets/jqwidgets/jqxgrid.selection.js"></script>
 <script type="text/javascript" src="js/jqWidgets/scripts/gettheme.js"></script>
 <script>
   $(document).ready(function(){
-		var _data = false;
 
-		$('#current-inventory').offline({
-			appID:'MLIB-Inventory',
-			url: 'http://new-inventory.scl.utah.edu/?do=current',
-			debug: true,
-			callback: function(){
-				$.jqx.dataAdapter($(this))
-				_data = $(this);
-			}
-		});
-
-		var theme = getDemoTheme();
-
-		var customsortfunc = function (column, direction) {
-			var sortdata = new Array();
-
-			if (direction == 'ascending') direction = true;
-			if (direction == 'descending') direction = false;
-
-			if (direction != null) {
-				for (i = 0; i < _data.length; i++) {
-					sortdata.push(_data[i]);
-				}
-			} else {
-				sortdata = _data;
-			}
-
-			var tmpToString = Object.prototype.toString;
-			Object.prototype.toString = (typeof column == "function") ? column : function () { return this[column] };
-			if (direction != null) {
-				sortdata.sort(compare);
-				if (!direction) {
-					sortdata.reverse();
-				}
-			}
-			source.localdata = sortdata;
-			$("#jqxgrid").jqxGrid('databind', source, 'sort');
-			Object.prototype.toString = tmpToString;
-		}
-
-		var compare = function (value1, value2) {
-			value1 = String(value1).toLowerCase();
-			value2 = String(value2).toLowerCase();
-
-			try {
-				var tmpvalue1 = parseFloat(value1);
-				if (isNaN(tmpvalue1)) {
-					if (value1 < value2) { return -1; }
-					if (value1 > value2) { return 1; }
-				} else {
-					var tmpvalue2 = parseFloat(value2);
-					if (tmpvalue1 < tmpvalue2) { return -1; }
-					if (tmpvalue1 > tmpvalue2) { return 1; }
-				}
-			} catch (error) {
-				var er = error;
-			}
-			return 0;
-		};
-
-		var source = {
-			localdata: _data,
-			sort: customsortfunc,
-			datafields:[
-				{ name: 'hostname', type: 'string' },
-				{ name: 'sku', type: 'string' },
-				{ name: 'serial', type: 'string' },
-				{ name: 'uuic', type: 'number' },
-				{ name: 'monitor', type: 'number' },
-				{ name: 'sku', type: 'number' }
-			],
-			datatype: "json"
-		};
-		var dataAdapter = new $.jqx.dataAdapter(source);
-
-		$("#jqxgrid").jqxGrid({
-			width: 900,
-			source: dataAdapter,
-			theme: theme,
-			sortable: true,
-			pageable: true,
-			autoheight: true,
-			ready: function () {
-				$("#jqxgrid").jqxGrid('sortby', 'hostname', 'asc');
-			},
-			columns: [
-				{ text: 'Hostname', datafield: 'hostname', width: 100 },
-				{ text: 'SKU', datafield: 'sku', width: 100 },
-				{ text: 'Serial', datafield: 'serial', width: 180 },
-				{ text: 'UUIC', datafield: 'uuic', width: 80, cellsalign: 'right' },
-				{ text: 'Monitor hostname', datafield: 'monitor', width: 90, cellsalign: 'right', cellsformat: 'c2' },
-				{ text: 'Monitor SKU', datafield: 'sku', cellsalign: 'right', cellsformat: 'c2' }
-			]
-		});
-
-		function _size(obj){
-			var n = 0;
-			if (/object/.test(typeof(obj))) {
-				$.each(obj, function(k, v){
-					if (obj.hasOwnProperty(k)) n++;
-				});
-			} else if (/array/.test(typeof(obj))) {
-				n = obj.length;
-			}
-			return n;
-		}
-
+	$('#current-inventory').offline({
+	  appID:'MLIB-Inventory',
+	  url: 'http://new-inventory.scl.utah.edu/?do=current',
+	  debug: true,
+	  callback: function(){
+		_display($(this));
+	  }
 	});
+
+	function _display(obj){
+	  var theme = getDemoTheme();
+
+	  var customsortfunc = function (column, direction) {
+		var sortdata = new Array();
+
+		if (direction == 'ascending') direction = true;
+		if (direction == 'descending') direction = false;
+
+		if (direction != null) {
+		  for (i = 0; i < obj.length; i++) {
+			sortdata.push(obj[i]);
+		  }
+		} else {
+		  sortdata = obj;
+		}
+
+		var tmpToString = Object.prototype.toString;
+		Object.prototype.toString = (typeof column == "function") ? column : function () { return this[column] };
+		if (direction != null) {
+		  sortdata.sort(compare);
+		  if (!direction) {
+			  sortdata.reverse();
+		  }
+		}
+		source.localdata = sortdata;
+		$("#jqxgrid").jqxGrid('databind', source, 'sort');
+		Object.prototype.toString = tmpToString;
+	  }
+
+	  var compare = function (value1, value2) {
+		value1 = String(value1).toLowerCase();
+		value2 = String(value2).toLowerCase();
+
+		try {
+		  var tmpvalue1 = parseFloat(value1);
+		  if (isNaN(tmpvalue1)) {
+			if (value1 < value2) { return -1; }
+			if (value1 > value2) { return 1; }
+		  } else {
+			var tmpvalue2 = parseFloat(value2);
+			if (tmpvalue1 < tmpvalue2) { return -1; }
+			if (tmpvalue1 > tmpvalue2) { return 1; }
+		  }
+		} catch (error) {
+		  var er = error;
+		}
+		return 0;
+	  };
+
+	  var source = {
+		localdata: obj,
+		sort: customsortfunc,
+		datafields:[
+		  { name: 'hostname', type: 'string' },
+		  { name: 'sku', type: 'string' },
+		  { name: 'serial', type: 'string' },
+		  { name: 'uuic', type: 'number' },
+		  { name: 'monitor', type: 'number' },
+		  { name: 'sku', type: 'number' }
+		],
+		datatype: "json"
+	  };
+	  var dataAdapter = new $.jqx.dataAdapter(source);
+
+	  $("#jqxgrid").jqxGrid({
+		width: 960,
+		source: dataAdapter,
+		theme: theme,
+		sortable: true,
+		pageable: true,
+		autoheight: true,
+		ready: function () {
+		  $("#jqxgrid").jqxGrid('sortby', 'hostname', 'asc');
+		},
+		columns: [
+		  { text: 'Hostname', datafield: 'hostname', width: 150 },
+		  { text: 'SKU', datafield: 'sku', width: 150 },
+		  { text: 'Serial', datafield: 'serial', width: 150 },
+		  { text: 'UUIC', datafield: 'uuic', width: 150, cellsalign: 'right' },
+		  { text: 'Monitor hostname', datafield: 'monitor', width: 150, cellsalign: 'right' },
+		  { text: 'Monitor SKU', datafield: 'sku', cellsalign: 'right' }
+		]
+	  });
+	}
+
+	function _size(obj){
+	  var n = 0;
+	  if (/object/.test(typeof(obj))) {
+		$.each(obj, function(k, v){
+		  if (obj.hasOwnProperty(k)) n++;
+		});
+	  } else if (/array/.test(typeof(obj))) {
+		n = obj.length;
+	  }
+	  return n;
+	}
+  });
 </script>
 </body>
