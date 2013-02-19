@@ -215,12 +215,12 @@
 		localdata: obj,
 		sort: customsortfunc,
 		datafields:[
-		  { name: 'hostname', type: 'string' },
-		  { name: 'sku', type: 'string' },
-		  { name: 'serial', type: 'string' },
-		  { name: 'uuic', type: 'number' },
-		  { name: 'monitor', type: 'number' },
-		  { name: 'sku', type: 'number' }
+		  { name: 'Computer', type: 'string' },
+		  { name: 'SKU', type: 'string' },
+		  { name: 'Serial', type: 'string' },
+		  { name: 'UUIC', type: 'string' },
+		  { name: 'Monitor', type: 'string' },
+		  { name: 'SKU', type: 'string' }
 		],
 		datatype: "json"
 	  };
@@ -237,13 +237,24 @@
 		  $("#jqxgrid").jqxGrid('sortby', 'hostname', 'asc');
 		},
 		columns: [
-		  { text: 'Hostname', datafield: 'hostname', width: 150 },
-		  { text: 'SKU', datafield: 'sku', width: 150 },
-		  { text: 'Serial', datafield: 'serial', width: 150 },
-		  { text: 'UUIC', datafield: 'uuic', width: 150, cellsalign: 'right' },
-		  { text: 'Monitor hostname', datafield: 'monitor', width: 150, cellsalign: 'right' },
+		  { text: 'Hostname', datafield: 'Computer', width: 150 },
+		  { text: 'SKU', datafield: 'SKU', width: 150 },
+		  { text: 'Serial', datafield: 'Serial', width: 150 },
+		  { text: 'UUIC', datafield: 'UUIC', width: 150, cellsalign: 'right' },
+		  { text: 'Monitor hostname', datafield: 'Monitor', width: 150, cellsalign: 'right' },
 		  { text: 'Monitor SKU', datafield: 'sku', cellsalign: 'right' }
 		]
+	  });
+	}
+
+	function _inspect(obj){
+	  $.each(obj, function(x, y){
+		if ((/object|array/.test(typeof(y))) && (_size(y) > 0)){
+		  console.log('inspect: Examining '+x+' ('+typeof(y)+')');
+		  _inspect(y);
+		} else {
+		  console.log('inspect: '+x+' => '+y);
+		}
 	  });
 	}
 
