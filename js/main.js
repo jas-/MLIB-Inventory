@@ -77,6 +77,7 @@
 
 	  $("#jqxgrid").jqxGrid({
 		width: 960,
+		pagesize: 50,
 		source: dataAdapter,
 		theme: theme,
 		sortable: true,
