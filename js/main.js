@@ -61,13 +61,13 @@
 	  };
 
 	  $('#export-csv').on('click', function(){
-		$("#jqxgrid").jqxGrid('exportdata', 'csv', _date()+'-MLIB-Inventory.csv');
+		$("#jqxgrid").jqxGrid('exportdata', 'csv', _date()+'-MLIB-Inventory');
 	  });
 	  $('#export-pdf').on('click', function(){
-		$("#jqxgrid").jqxGrid('exportdata', 'pdf', _date()+'-MLIB-Inventory.pdf');
+		$("#jqxgrid").jqxGrid('exportdata', 'pdf', _date()+'-MLIB-Inventory');
 	  });
 	  $('#export-xls').on('click', function(){
-		$("#jqxgrid").jqxGrid('exportdata', 'xls', _date()+'-MLIB-Inventory.xls');
+		$("#jqxgrid").jqxGrid('exportdata', 'xls', _date()+'-MLIB-Inventory');
 	  });
 
 	  var source = {
@@ -95,7 +95,7 @@
 
 	  $("#jqxgrid").jqxGrid({
 		autoshowloadelement: true,
-		width: '90%',
+		width: '100%',
 		columnsmenuwidth: '20%',
 		altrows: true,
 		autosavestate: true,
