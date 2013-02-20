@@ -109,6 +109,7 @@
 		editable: true,
 		selectionmode: 'multiplecellsadvanced',
 		ready: function () {
+		  $('#gridR').jqxGrid('autoresizecolumns', 'cells');
 		  $("#jqxgrid").jqxGrid('loadstate', $("#jqxgrid").jqxGrid('getstate'));
 		  $("#jqxgrid").jqxGrid('sortby', 'Hostname', 'asc');
 		},
