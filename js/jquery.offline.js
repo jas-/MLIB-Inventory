@@ -645,6 +645,10 @@
 						_r = x;
 					},
 
+					complete: function(x, status){
+						//((o.callback)&&($.isFunction(o.callback))) ? o.callback.call(x) : false;
+					},
+
 					error: function(xhr, status, error){
 						_log.error(o.appID, '_comm.ajax: '+status+' => '+error.message);
 					}

@@ -91,8 +91,6 @@
 	    // call offline to send edited row contents
 	  });
 
-	  $("#jqxgrid").jqxGrid('loadstate');
-
 	  $("#jqxgrid").jqxGrid({
 		autoshowloadelement: true,
 		width: '100%',
