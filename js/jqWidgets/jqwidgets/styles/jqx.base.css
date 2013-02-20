@@ -175,6 +175,10 @@
     border: none;
     border-top: 1px solid transparent;
 }
+.jqx-grid-pager div
+{
+    width: 28%; 
+}
 /*applied to the Grid's bottom-right area between the horizontal and vertical scrollbars.*/
 .jqx-grid-bottomright
 {
