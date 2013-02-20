@@ -37,6 +37,7 @@
 		source.localdata = sortdata;
 		$("#jqxgrid").jqxGrid('databind', source, 'sort');
 		Object.prototype.toString = tmpToString;
+		$("#jqxgrid").jqxGrid('savestate');
 	  };
 
 	  var compare = function (value1, value2) {
@@ -74,10 +75,14 @@
 	  };
 	  var dataAdapter = new $.jqx.dataAdapter(source);
 
+	  $("#jqxgrid").jqxGrid('loadstate');
 	  $("#jqxgrid").jqxGrid({
 		width: '90%',
-		pagesize: 20,
-		pagesizeoptions: ['10', '20', '30', '40', '50'],
+		altrows: true,
+		autosavestate: true,
+		autoloadstate: true,
+		pagesize: 5,
+		pagesizeoptions: ['5', '10', '20', '30', '40', '50'],
 		source: dataAdapter,
 		theme: theme,
 		sortable: true,
