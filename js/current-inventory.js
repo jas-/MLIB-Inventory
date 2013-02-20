@@ -2,7 +2,7 @@ $(document).ready(function(){
 
 	/* Unload current grid on collapse */
 	$("#current-inventory").bind('collapse', function(event, ui) {
-		//$("#jqxgrid").html(false);
+		$("#jqxgrid").jqxGrid('destroy');
 	});
 
 	/* On expand load current inventory from server, generate grid & populate */
@@ -116,12 +116,55 @@ $(document).ready(function(){
 				// call offline to send edited row contents
 			});
 
+			if (_detect()){
+				/* handle the pager (since the default can't be adjusted) */
+				var pagerrenderer = function () {
+					var element = $("<div style='margin-top: 5px; width: 100%; height: 100%;'></div>");
+					var datainfo = $("#jqxgrid").jqxGrid('getdatainformation');
+					var paginginfo = datainfo.paginginformation;
+					// create navigation buttons.
+					var leftButton = $("<div style='padding: 1px; float: left;'><div style='margin-left: 9px; width: 16px; height: 16px;'></div></div>");
+					leftButton.find('div').addClass('icon-arrow-left');
+					leftButton.width(36);
+					leftButton.jqxButton();
+					var rightButton = $("<div style='padding: 1px; margin: 0px 3px; float: left;'><div style='margin-left: 9px; width: 16px; height: 16px;'></div></div>");
+					rightButton.find('div').addClass('icon-arrow-right');
+					rightButton.width(36);
+					rightButton.jqxButton();
+					// append the navigation buttons to the container DIV tag.
+					leftButton.appendTo(element);
+					rightButton.appendTo(element);
+					// create a page information label and append it to the container DIV tag.
+					var label = $("<div style='font-size: 11px; margin: 2px 3px; font-weight: bold; float: left;'></div>");
+					label.text("1-" + paginginfo.pagesize + ' of ' + datainfo.rowscount);
+					label.appendTo(element);
+					// navigate to the next page when the right navigation button is clicked.
+					rightButton.click(function () {
+						$("#jqxgrid").jqxGrid('gotonextpage');
+						var datainfo = $("#jqxgrid").jqxGrid('getdatainformation');
+						var paginginfo = datainfo.paginginformation;
+						label.text(1 + paginginfo.pagenum * paginginfo.pagesize + "-" + Math.min(datainfo.rowscount, (paginginfo.pagenum + 1) * paginginfo.pagesize) + ' of ' + datainfo.rowscount);
+					});
+					// navigate to the previous page when the right navigation button is clicked.
+					leftButton.click(function () {
+						$("#jqxgrid").jqxGrid('gotoprevpage');
+						var datainfo = $("#jqxgrid").jqxGrid('getdatainformation');
+						var paginginfo = datainfo.paginginformation;
+						label.text(1 + paginginfo.pagenum * paginginfo.pagesize + "-" + Math.min(datainfo.rowscount, (paginginfo.pagenum + 1) * paginginfo.pagesize) + ' of ' + datainfo.rowscount);
+					});
+					// return the new pager element.
+					return element;
+				}
+			} else {
+				var pagerrenderer = false;
+			}
+
 			/* Initialize grid with options while binding events etc */
 			$("#jqxgrid").jqxGrid({
-				//autoshowloadelement: true,
+				autoshowloadelement: true,
 				width: '100%',
-				columnsmenuwidth: '20%',
 				altrows: true,
+				pagerrenderer: pagerrenderer,
 				pagesize: 5,
 				pagesizeoptions: ['5', '10', '20', '30', '40', '50'],
 				source: dataAdapter,
@@ -169,6 +212,11 @@ $(document).ready(function(){
 				n = obj.length;
 			}
 			return n;
+		}
+
+		/* Check browser */
+		function _detect(){
+			return /android|blackberry|symbian|iemobile|ipad|iphone/gi.test(navigator.userAgent);
 		}
 
 		/* Return an ISO formatted date */
