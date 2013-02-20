@@ -97,9 +97,10 @@
 
 	  $("#jqxgrid").jqxGrid({
 		autoshowloadelement: true,
-		width: '100%',
+		width: window.innerWidth,
 		columnsmenuwidth: '20%',
 		altrows: true,
+		pagesize: 5,
 		pagesizeoptions: ['5', '10', '20', '30', '40', '50'],
 		source: dataAdapter,
 		theme: theme,
@@ -109,7 +110,6 @@
 		editable: true,
 		selectionmode: 'multiplecellsadvanced',
 		ready: function () {
-		  $('#gridR').jqxGrid('autoresizecolumns', 'cells');
 		  $("#jqxgrid").jqxGrid('loadstate', $("#jqxgrid").jqxGrid('getstate'));
 		  $("#jqxgrid").jqxGrid('sortby', 'Hostname', 'asc');
 		},
@@ -122,6 +122,7 @@
 		  { text: 'Monitor SKU', datafield: 'MSKU', width: '10%' }
 		]
 	  });
+	  $('#jqxgrid').jqxGrid('refreshdata');
 	}
 
 	function _inspect(obj){
