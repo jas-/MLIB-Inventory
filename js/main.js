@@ -37,7 +37,6 @@
 		source.localdata = sortdata;
 		$("#jqxgrid").jqxGrid('databind', source, 'sort');
 		Object.prototype.toString = tmpToString;
-		$("#jqxgrid").jqxGrid('savestate');
 	  };
 
 	  var compare = function (value1, value2) {
@@ -96,8 +95,6 @@
 		width: '100%',
 		columnsmenuwidth: '20%',
 		altrows: true,
-		autosavestate: true,
-		autoloadstate: true,
 		pagesize: 5,
 		pagesizeoptions: ['5', '10', '20', '30', '40', '50'],
 		source: dataAdapter,
@@ -119,6 +116,7 @@
 		  { text: 'Monitor SKU', datafield: 'MSKU', width: '10%' }
 		]
 	  });
+	  $("#jqxgrid").jqxGrid('databind', dataAdapter, 'sort');
 	}
 
 	function _inspect(obj){
