@@ -36,6 +36,7 @@
 		}
 		source.localdata = sortdata;
 		$("#jqxgrid").jqxGrid('databind', source, 'sort');
+		$("#jqxgrid").jqxGrid('savestate');
 		Object.prototype.toString = tmpToString;
 	  };
 
@@ -69,6 +70,10 @@
 		$("#jqxgrid").jqxGrid('exportdata', 'xls', _date()+'-MLIB-Inventory');
 	  });
 
+	  $("#jqxgrid").on("pagesizechanged", function (event) {
+		$("#jqxgrid").jqxGrid('savestate');
+	  });
+
 	  var source = {
 		localdata: obj,
 		sort: customsortfunc,
@@ -95,7 +100,6 @@
 		width: '100%',
 		columnsmenuwidth: '20%',
 		altrows: true,
-		pagesize: 5,
 		pagesizeoptions: ['5', '10', '20', '30', '40', '50'],
 		source: dataAdapter,
 		theme: theme,
@@ -105,6 +109,7 @@
 		editable: true,
 		selectionmode: 'multiplecellsadvanced',
 		ready: function () {
+		  $("#jqxgrid").jqxGrid('loadstate', $("#jqxgrid").jqxGrid('getstate'));
 		  $("#jqxgrid").jqxGrid('sortby', 'Hostname', 'asc');
 		},
 		columns: [
@@ -116,7 +121,6 @@
 		  { text: 'Monitor SKU', datafield: 'MSKU', width: '10%' }
 		]
 	  });
-	  $("#jqxgrid").jqxGrid('databind', dataAdapter, 'sort');
 	}
 
 	function _inspect(obj){
