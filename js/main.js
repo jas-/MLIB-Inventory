@@ -60,6 +60,16 @@
 		return 0;
 	  };
 
+	  $('#export-csv').on('click', function(){
+		$("#jqxgrid").jqxGrid('exportdata', 'csv', _date()+'-MLIB-Inventory.csv');
+	  });
+	  $('#export-pdf').on('click', function(){
+		$("#jqxgrid").jqxGrid('exportdata', 'pdf', _date()+'-MLIB-Inventory.pdf');
+	  });
+	  $('#export-xls').on('click', function(){
+		$("#jqxgrid").jqxGrid('exportdata', 'xls', _date()+'-MLIB-Inventory.xls');
+	  });
+
 	  var source = {
 		localdata: obj,
 		sort: customsortfunc,
@@ -75,9 +85,18 @@
 	  };
 	  var dataAdapter = new $.jqx.dataAdapter(source);
 
+	  $("#jqxgrid").on('cellendedit', function (event) {
+		var args = event.args;
+		//$("#cellendeditevent").text("Event Type: cellendedit, Column: " + args.datafield + ", Row: " + (1 + args.rowindex) + ", Value: " + args.value);
+	    // call offline to send edited row contents
+	  });
+
 	  $("#jqxgrid").jqxGrid('loadstate');
+
 	  $("#jqxgrid").jqxGrid({
+		autoshowloadelement: true,
 		width: '90%',
+		columnsmenuwidth: '20%',
 		altrows: true,
 		autosavestate: true,
 		autoloadstate: true,
@@ -125,5 +144,10 @@
 		n = obj.length;
 	  }
 	  return n;
+	}
+
+	function _date(){
+	  var _d = new Date();
+	  return _d.toISOString();
 	}
   });

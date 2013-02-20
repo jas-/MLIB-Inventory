@@ -40,6 +40,17 @@
 							<div id="jqxgrid"></div>
 						</div>
 					</div>
+					<div>
+						<a data-role="button" target="_blank" data-inline="true" data-theme="d" data-icon="arrow-r" data-iconpos="right" id="export-csv">
+							Export as CSV
+						</a>
+						<a data-role="button" target="_blank" data-inline="true" data-theme="c" data-icon="arrow-r" data-iconpos="right" id="export-pdf">
+							Export as PDF
+						</a>
+						<a data-role="button" target="_blank" data-inline="true" data-theme="c" data-icon="arrow-r" data-iconpos="right" id="export-xls">
+							Export as XLS
+						</a>
+					</div>
 				</div>
 			</div>
 
@@ -49,23 +60,13 @@
 					Search Inventory
 				</h3>
 				<div data-role="content">
-					<form action="?do=search" id="search-computer">
+					<form action="?do=search" id="search">
 						<div data-role="fieldcontain">
 							<fieldset data-role="controlgroup" data-mini="true" method="post">
-								<label for="search-computers">
-									Search computers
+								<label for="search">
+									Search
 								</label>
-								<input name="search-computers" placeholder="Search computers" value="" type="search">
-							</fieldset>
-						</div>
-					</form>
-					<form action="?do=search-monitors" id="search-monitors" method="post">
-						<div data-role="fieldcontain">
-							<fieldset data-role="controlgroup" data-mini="true">
-								<label for="search-monitors">
-									Search monitors
-								</label>
-								<input name="search-monitors" placeholder="Search monitors" value="" type="search">
+								<input name="search" placeholder="Search inventory" value="" type="search">
 							</fieldset>
 						</div>
 					</form>
@@ -149,6 +150,8 @@
 <script type="text/javascript" src="js/jqWidgets/jqwidgets/jqxgrid.columnsresize.js"></script>
 <script type="text/javascript" src="js/jqWidgets/jqwidgets/jqxgrid.selection.js"></script>
 <script type="text/javascript" src="js/jqWidgets/jqwidgets/jqxgrid.edit.js"></script>
+<script type="text/javascript" src="../../jqwidgets/jqxdata.export.js"></script>
+<script type="text/javascript" src="../../jqwidgets/jqxgrid.export.js"></script>
 <script type="text/javascript" src="js/jqWidgets/scripts/gettheme.js"></script>
 
 <!-- Main script execution -->
