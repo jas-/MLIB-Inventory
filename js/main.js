@@ -37,7 +37,7 @@
 		source.localdata = sortdata;
 		$("#jqxgrid").jqxGrid('databind', source, 'sort');
 		Object.prototype.toString = tmpToString;
-	  }
+	  };
 
 	  var compare = function (value1, value2) {
 		value1 = String(value1).toLowerCase();
@@ -67,7 +67,6 @@
 		  { name: 'SKU', type: 'string' },
 		  { name: 'Serial', type: 'string' },
 		  { name: 'UUIC', type: 'string' },
-		  { name: 'Monitor', map: 'Monitor>0>Monitor', type: 'string' },
 		  { name: 'MSerial', map: 'Monitor>0>Serial', type: 'string' },
 		  { name: 'MSKU', map: 'Monitor>0>SKU', type: 'string' }
 		],
@@ -76,24 +75,26 @@
 	  var dataAdapter = new $.jqx.dataAdapter(source);
 
 	  $("#jqxgrid").jqxGrid({
-		width: 960,
-		pagesize: 50,
+		width: '90%',
+		pagesize: 20,
+		pagesizeoptions: ['10', '20', '30', '40', '50'],
 		source: dataAdapter,
 		theme: theme,
 		sortable: true,
 		pageable: true,
 		autoheight: true,
+		editable: true,
+		selectionmode: 'multiplecellsadvanced',
 		ready: function () {
-		  $("#jqxgrid").jqxGrid('sortby', 'hostname', 'asc');
+		  $("#jqxgrid").jqxGrid('sortby', 'Hostname', 'asc');
 		},
 		columns: [
-		  { text: 'Hostname', datafield: 'Computer', width: 100 },
-		  { text: 'SKU', datafield: 'SKU', width: 100 },
-		  { text: 'Serial', datafield: 'Serial', width: 100 },
-		  { text: 'UUIC', datafield: 'UUIC', width: 100 },
-		  { text: 'Monitor', datafield: 'Monitor', width: 100 },
-		  { text: 'Monitor Serial', datafield: 'MSerial', width: 200 },
-		  { text: 'Monitor SKU', datafield: 'MSKU' }
+		  { text: 'Hostname', datafield: 'Computer', width: '20%' },
+		  { text: 'SKU', datafield: 'SKU', width: '20%' },
+		  { text: 'Serial', datafield: 'Serial', width: '20%' },
+		  { text: 'UUIC', datafield: 'UUIC', width: '10%' },
+		  { text: 'Monitor Serial', datafield: 'MSerial', width: '20%' },
+		  { text: 'Monitor SKU', datafield: 'MSKU', width: '10%' }
 		]
 	  });
 	}
