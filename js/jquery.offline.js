@@ -28,6 +28,7 @@
 		 * @param {String}    url       - FQDN URL end point for saves
 		 * @param {Object}    element   - Element to which this plug-in is bound
 		 * @param {String}    storage   - Storage mechanism to use for keys
+		 * @param {Boolean}   save      - Force save of returned _comm requests
 		 * @param {Boolean}   debug     - Enable or disable debugging options
 		 * @param {Function}  callback  - Function to call on success of any operation
 		 */
@@ -37,6 +38,7 @@
 			element:		$(this),
 			storage:		'',
 			async:			false,
+			save:			false,
 			debug:			false,
 			data:           {},
 			logID:			'',
@@ -645,6 +647,10 @@
 						_r = x;
 					},
 
+					complete: function(x, status){
+						_storage.save(o, o.appID, x.responseText);
+					},
+
 					error: function(xhr, status, error){
 						_log.error(o.appID, '_comm.ajax: '+status+' => '+error.message);
 					}
@@ -722,6 +728,30 @@
 				});
 				(o.debug) ? _libs.inspect(o, _obj) : false;
 				return _obj;
+			},
+
+			/**
+			 * @function exists
+			 * @scope private
+			 * @abstract Search array for value
+			 *
+			 * @param {Object} obj The haystack
+			 * @param {String} str The string
+			 *
+			 * @returns {Object}
+			 */
+			exists: function(o, s){
+				(!Array.prototype.indexOf) ? function (o){
+					var l = s.length + 1;
+					while (l -= 1){
+						if (s[l - 1] === o){
+							return true;
+						}
+					}
+					return false;
+				} : function (o){
+					return (s.indexOf(o) !== -1);
+				}
 			},
 
 			/**
