@@ -10,12 +10,14 @@ $(document).ready(function(){
 		_load();
 	});
 
+	/* retrieve current inventory, setup handlers, options & render grid */
 	function _load(){
+
 		/* Query server for JSON formatted inventory data */
 		$('#current-inventory').offline({
 			appID:'MLIB-Inventory',
 			url: 'http://new-inventory.scl.utah.edu/?do=current',
-			save: true,
+			save: false,
 			callback: function(){
 				_display($(this));
 			}
@@ -75,22 +77,6 @@ $(document).ready(function(){
 				return 0;
 			};
 
-			/* Create some export options */
-			$('#export-csv').on('click', function(){
-				$("#jqxgrid").jqxGrid('exportdata', 'csv', _date()+'-MLIB-Inventory');
-			});
-			$('#export-pdf').on('click', function(){
-				$("#jqxgrid").jqxGrid('exportdata', 'pdf', _date()+'-MLIB-Inventory');
-			});
-			$('#export-xls').on('click', function(){
-				$("#jqxgrid").jqxGrid('exportdata', 'xls', _date()+'-MLIB-Inventory');
-			});
-
-			/* When row count changes save state */
-			$("#jqxgrid").on("pagesizechanged", function (event) {
-				//$("#jqxgrid").jqxGrid('savestate');
-			});
-
 			/* Map our JSON object to fields */
 			var source = {
 				localdata: obj,
@@ -108,13 +94,47 @@ $(document).ready(function(){
 			var dataAdapter = new $.jqx.dataAdapter(source);
 
 			/* Handle editing of record elements */
-			$("#jqxgrid").on('cellendedit', function (event) {
-				var column = args.datafield;
-				var row = args.rowindex;
-				var value = args.value;
-				var oldvalue = args.oldvalue;
-				$("#cellendeditevent").text("Event Type: cellendedit, Column: " + args.datafield + ", Row: " + (1 + args.rowindex) + ", Value: " + args.value);
-				// call offline to send edited row contents
+			$("#jqxgrid").on({
+				cellvaluechanged: function(event){
+					var _d = $('#jqxgrid').jqxGrid('getrowdata', args.rowindex);
+
+					var _c = '{hostname:"'+_d.Computer+'",sku:"'+_d.SKU+'",uuic:"'+_d.UUIC+'",serial:"'+_d.Serial+'"}';
+					var _m = '{hostname:"'+_d.Computer+'",sku:"'+_d.MSKU+'",serial:"'+_d.MSerial+'"}';
+
+					$('#current-inventory').offline({
+						appID:'MLIB-Inventory',
+						url: 'http://new-inventory.scl.utah.edu/?do=add',
+						data: _c,
+						callback: function(){
+
+						}
+					});
+
+					$('#current-inventory').offline({
+						appID:'MLIB-Inventory',
+						url: 'http://new-inventory.scl.utah.edu/?do=add-monitor',
+						data: _m,
+						callback: function(){
+
+						}
+					});
+				}
+			});
+
+			/* Create some export options */
+			$('#export-csv').on('click', function(){
+				$("#jqxgrid").jqxGrid('exportdata', 'csv', _date()+'-MLIB-Inventory');
+			});
+			$('#export-pdf').on('click', function(){
+				$("#jqxgrid").jqxGrid('exportdata', 'pdf', _date()+'-MLIB-Inventory');
+			});
+			$('#export-xls').on('click', function(){
+				$("#jqxgrid").jqxGrid('exportdata', 'xls', _date()+'-MLIB-Inventory');
+			});
+
+			/* When row count changes save state */
+			$("#jqxgrid").on("pagesizechanged", function (event) {
+				//$("#jqxgrid").jqxGrid('savestate');
 			});
 
 			if (_detect()){
@@ -171,7 +191,7 @@ $(document).ready(function(){
 				width: '100%',
 				altrows: true,
 				pagerrenderer: pagerrenderer,
-				pagesize: 5,
+				pagesize: (_detect())?5:30,
 				pagesizeoptions: ['5', '10', '20', '30', '40', '50'],
 				source: dataAdapter,
 				theme: theme,
@@ -179,6 +199,7 @@ $(document).ready(function(){
 				pageable: true,
 				autoheight: true,
 				editable: true,
+				enabletooltips: true,
 				selectionmode: 'multiplecellsadvanced',
 				ready: function () {
 					//$("#jqxgrid").jqxGrid('loadstate', $("#jqxgrid").jqxGrid('getstate'));
@@ -218,6 +239,26 @@ $(document).ready(function(){
 				n = obj.length;
 			}
 			return n;
+		}
+
+		/* Perform serialization on object */
+		function _serialize(args){
+			if (_size(args) > 0) {
+				var x='';
+				$.each(args, function(a, b){
+					if (typeof(b) === 'object'){
+						$.each(b, function(c, d){
+							x+=a+'['+c+']'+'='+d+'&';
+						});
+					} else {
+						x+=a+'='+b+'&';
+					}
+				});
+				x = x.substring(0, x.length-1);
+			} else {
+				return false;
+			}
+			return x;
 		}
 
 		/* Check browser */

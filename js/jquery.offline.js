@@ -38,9 +38,8 @@
 			element:		$(this),
 			storage:		'',
 			async:			false,
-			save:			false,
 			debug:			false,
-			data:           {},
+			data:           '',
 			logID:			'',
 			callback:       function(){},
 			preCallback:    function(){}
@@ -499,6 +498,8 @@
 			 * @returns {Function}
 			 */
 			decide: function(o, d){
+				d = (o.data) ? o.data : d;
+
 				if ((/msie/i.test(navigator.userAgent)) && (/^(http|https):\/\//i.test(o.url))) {
 					return (this.online) ? this.xdr(o, d) : this.retry(o, d);
 				}
@@ -608,7 +609,7 @@
 				$.ajax({
 					global: false,
 					url: o.url,
-					type: 'get',
+					type: 'post',
 					data: d,
 					dataType: 'json',
 					contentType: 'application/json; charset=utf8',
