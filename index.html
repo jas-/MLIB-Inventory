@@ -36,6 +36,7 @@
 				</h3>
 				<div data-role="content">
 					<div>
+						<div id="message"></div>
 						<div id='jqxWidget'>
 							<div id="jqxgrid"></div>
 						</div>
@@ -68,7 +69,8 @@
 					Add / Edit / Delete Inventory
 				</h3>
 				<div data-role="content">
-					<form action="?do=add" id="add-computer" name="add-computer" method="post">
+					<div id="message"></div>
+					<form action="http://new-inventory.scl.utah.edu?do=add" id="add-computer" name="add-computer" method="post">
 						<div data-role="fieldcontain">
 							<fieldset data-role="controlgroup" data-mini=true>
 								<label for="hostname">
@@ -146,6 +148,33 @@
 <script type="text/javascript" src="js/jqWidgets/jqwidgets/jqxgrid.storage.js"></script>
 <script type="text/javascript" src="js/jqWidgets/scripts/gettheme.js"></script>
 
+<!-- Handle messages -->
+<script>
+  function _message(obj){
+	if (obj!='') {
+	  $.each(obj, function(k,v){
+		if(k=='error'){
+		  $('#message').html('<div class="error">'+v+'</div>').fadeIn(1000);
+		}
+		if(k=='warning'){
+		  $('#message').html('<div class="warning">'+v+'</div>').fadeIn(1000);
+		}
+		if(k=='info'){
+		  $('#message').html('<div class="info">'+v+'</div>').fadeIn(1000);
+		}
+		if(k=='success'){
+		  $('#message').html('<div class="success">'+v+'</div>').fadeIn(1000);
+		}
+	  });
+	} else {
+	  $('#message').html('<div class="warning">Empty response for request</div>').fadeIn(1000);
+	}
+  }
+</script>
+
 <!-- Handle loading/unloading of all inventory items -->
 <script src="js/current-inventory.js"></script>
+
+<!-- Handle new records -->
+<script src="js/add-inventory.js"></script>
 </body>

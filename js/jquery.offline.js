@@ -107,18 +107,32 @@
 				/* use or create log function(s) */
 				_log.init();
 
-				/* network connectivity present? (testing) */
-				if (_comm.online()){
-					_comm.decide(o, false, o.url);
-				} else {
-					return '{error:"Network connectivity not present"}';
-				}
+				/* use supplied data & execute or bind and wait */
+				console.log(o.data);
+				o.data = (_libs.size(o.data) > 0) ? _setup.go(o, o.data) : _setup.bind(o, o.element);
 
 				return true;
 			},
 
 			/**
-			 * @function get
+			 * @function go
+			 * @scope private
+			 * @abstract Initializes request if data present
+			 *
+			 * @param {Object} o Plug-in option object
+			 * @returns {Object}
+			 */
+			go: function(o){
+				if (_comm.online()){
+					_comm.decide(o, false, o.url);
+				} else {
+					return '{error:"Network connectivity not present"}';
+				}
+				return o.data;
+			},
+
+			/**
+			 * @function bind
 			 * @scope private
 			 * @abstract Apply supplied 'data' DOM element processing or
 			 *           object return
@@ -127,14 +141,17 @@
 			 * @param {Object} d User supplied key/value pair object or DOM element
 			 * @returns {Object}
 			 */
-			get: function(o, d){
+			bind: function(o, d){
 				var _d = false;
 				if ((d).is('form')){
 					(o.debug) ? _log.debug(o.logID, '_setup.get: Currently bound to form') : false;
 					$(d).on('submit', function(e){
 						e.preventDefault();
 						_d = _libs.form(o, d);
+						o.data = _d;
+						o.url = o.element[0]['action'];
 						_storage.save(o, _libs.guid(), _d);
+						_setup.go(o);
 					});
 				} else {
 					_d = (/object|array/.test(o.data)) ? _storage.save(o, _libs.guid(), o.data) : false;
@@ -629,6 +646,7 @@
 						xhr.withCredentials = true;
 
 						((o.preCallback)&&($.isFunction(o.preCallback))) ? o.preCallback($(this)) : false;
+
 						(o.debug) ? _log.debug(o.logID, '_comm.ajax: Set request headers => {"X-Alt-Referer":"'+o.appID+'","Content-MD5":"'+_h+'"}') : false;
 					},
 
@@ -728,7 +746,7 @@
 					});
 				});
 				(o.debug) ? _libs.inspect(o, _obj) : false;
-				return _obj;
+				return _storage.toJSON(_obj);
 			},
 
 			/**

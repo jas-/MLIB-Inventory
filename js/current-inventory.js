@@ -17,7 +17,7 @@ $(document).ready(function(){
 		$('#current-inventory').offline({
 			appID:'MLIB-Inventory',
 			url: 'http://new-inventory.scl.utah.edu/?do=current',
-			save: false,
+			data: {'do':true},
 			callback: function(){
 				_display($(this));
 			}
@@ -25,6 +25,7 @@ $(document).ready(function(){
 
 		/* Handle grid init, options, sorting, paging & editing within grid */
 		function _display(obj){
+
 			var theme = getDemoTheme();
 
 			/* Here we handle sorting of all columns */
@@ -105,8 +106,9 @@ $(document).ready(function(){
 						appID:'MLIB-Inventory',
 						url: 'http://new-inventory.scl.utah.edu/?do=add',
 						data: _c,
+						debug: true,
 						callback: function(){
-
+							_message($(this));
 						}
 					});
 
@@ -115,7 +117,7 @@ $(document).ready(function(){
 						url: 'http://new-inventory.scl.utah.edu/?do=add-monitor',
 						data: _m,
 						callback: function(){
-
+							_message($(this));
 						}
 					});
 				}
