@@ -98,8 +98,8 @@ $(document).ready(function(){
 				cellvaluechanged: function(event){
 					var _d = $('#jqxgrid').jqxGrid('getrowdata', args.rowindex);
 
-					var _c = '{hostname:"'+_d.Computer+'",sku:"'+_d.SKU+'",uuic:"'+_d.UUIC+'",serial:"'+_d.Serial+'"}';
-					var _m = '{hostname:"'+_d.Computer+'",sku:"'+_d.MSKU+'",serial:"'+_d.MSerial+'"}';
+					var _c = '{"hostname":"'+_d.Computer+'","sku":"'+_d.SKU+'","uuic":"'+_d.UUIC+'","serial":"'+_d.Serial+'"}';
+					var _m = '{"hostname":"'+_d.Computer+'","sku":"'+_d.MSKU+'","serial":"'+_d.MSerial+'"}';
 
 					$('#current-inventory').offline({
 						appID:'MLIB-Inventory',
