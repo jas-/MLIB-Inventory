@@ -1,7 +1,13 @@
 $(document).ready(function(){
-	$('#search').on('click', function(){
-		$("#jqxgrid").jqxGrid('destroy');
-		$("#jqxWidget").html('<div id="jqxgrid"></div>');
+
+	/* Unload current grid on collapse */
+	$("#current-inventory").bind('collapse', function(event, ui) {
+		$("#jqxgrid-search").jqxGrid('destroy');
+	});
+
+	/* On expand load current inventory from server, generate grid & populate */
+	$("#current-inventory").bind('expand', function(event, ui) {
+		$("#jqxWidget").html('<div id="jqxgrid-search"></div>');
 	});
 
 	$('#search-computer').offline({
