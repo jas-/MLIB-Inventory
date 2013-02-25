@@ -5,6 +5,10 @@
  padding:10px 10px 10px 50px;
  background-repeat: no-repeat;
  background-position: 10px center;
+ border-top-left-radius: 10px;
+ border-top-right-radius: 10px;
+ border-bottom-left-radius: 10px;
+ border-bottom-right-radius: 10px;
 }
 .info {
  color: #00529B;
