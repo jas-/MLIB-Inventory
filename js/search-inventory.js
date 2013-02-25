@@ -1,4 +1,8 @@
 $(document).ready(function(){
+	$('#search').on('click', function(){
+		$("#jqxgrid").jqxGrid('destroy');
+		$("#jqxWidget").html('<div id="jqxgrid"></div>');
+	});
 
 	$('#search-computer').offline({
 		appID:'MLIB-Inventory',
