@@ -11,6 +11,9 @@
 		<link rel="stylesheet"  href="css/themes/default/jquery.mobile-1.2.0.css" />
 		<link rel="stylesheet"  href="css/themes/custom/custom.min.css" />
 
+		<!-- CSS for handling AJAX responses -->
+		<link rel="stylesheet"  href="css/main.css" />
+
 		<!-- jQuery libraries -->
 		<script src="js/jquery.js"></script>
 		<script src="js/jquery.mobile-1.2.0.min.js"></script>
@@ -69,7 +72,7 @@
 					Add / Edit / Delete Inventory
 				</h3>
 				<div data-role="content">
-					<div id="message"></div>
+					<div id="message-add"></div>
 					<form action="http://new-inventory.scl.utah.edu?do=add" id="add-computer" name="add-computer" method="post">
 						<div data-role="fieldcontain">
 							<fieldset data-role="controlgroup" data-mini=true>
@@ -147,30 +150,6 @@
 <script type="text/javascript" src="js/jqWidgets/jqwidgets/jqxgrid.export.js"></script>
 <script type="text/javascript" src="js/jqWidgets/jqwidgets/jqxgrid.storage.js"></script>
 <script type="text/javascript" src="js/jqWidgets/scripts/gettheme.js"></script>
-
-<!-- Handle messages -->
-<script>
-  function _message(obj){
-	if (obj!='') {
-	  $.each(obj, function(k,v){
-		if(k=='error'){
-		  $('#message').html('<div class="error">'+v+'</div>').fadeIn(1000);
-		}
-		if(k=='warning'){
-		  $('#message').html('<div class="warning">'+v+'</div>').fadeIn(1000);
-		}
-		if(k=='info'){
-		  $('#message').html('<div class="info">'+v+'</div>').fadeIn(1000);
-		}
-		if(k=='success'){
-		  $('#message').html('<div class="success">'+v+'</div>').fadeIn(1000);
-		}
-	  });
-	} else {
-	  $('#message').html('<div class="warning">Empty response for request</div>').fadeIn(1000);
-	}
-  }
-</script>
 
 <!-- Handle loading/unloading of all inventory items -->
 <script src="js/current-inventory.js"></script>

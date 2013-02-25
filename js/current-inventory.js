@@ -218,6 +218,31 @@ $(document).ready(function(){
 			});
 		}
 
+		function _message(obj){
+			if (obj!='') {
+				$.each(obj, function(key,value){
+					$.each(value, function(k,v){
+						if(k=='error'){
+							$('#message').html('<div class="error">'+v+'</div>').fadeIn(1000);
+						}
+						if(k=='warning'){
+							$('#message').html('<div class="warning">'+v+'</div>').fadeIn(1000);
+						}
+						if(k=='info'){
+							$('#message').html('<div class="info">'+v+'</div>').fadeIn(1000);
+						}
+						if(k=='success'){
+							$('#message').html('<div class="success">'+v+'</div>').fadeIn(1000);
+						}
+					});
+				});
+			} else {
+				$('#message').html('<div class="warning">Empty response for request</div>').fadeIn(1000);
+			}
+		}
+
+		setTimeout(function() {	$('#message').fadeOut(); }, 2000);
+
 		/* Helper function to inspect objects recursively */
 		function _inspect(obj){
 			$.each(obj, function(x, y){
