@@ -53,7 +53,10 @@
 					Search Inventory
 				</h3>
 				<div data-role="content">
-					<form action="?do=search" id="search">
+					<div id='jqxWidget'>
+						<div id="jqxgrid-search"></div>
+					</div>
+					<form action="http://new-inventory.scl.utah.edu?do=search" id="search-computer" name="search-computer" method="post">
 						<div data-role="fieldcontain">
 							<fieldset data-role="controlgroup" data-mini="true" method="post">
 								<label for="search">
@@ -62,6 +65,7 @@
 								<input name="search" placeholder="Search inventory" value="" type="search">
 							</fieldset>
 						</div>
+						<input data-theme="c" data-icon="arrow-r" data-iconpos="right" value="Submit" type="submit">
 					</form>
 				</div>
 			</div>
@@ -178,6 +182,9 @@
 
 <!-- Handle loading/unloading of all inventory items -->
 <script src="js/current-inventory.js"></script>
+
+<!-- Handle searching inventory items -->
+<script src="js/search-inventory.js"></script>
 
 <!-- Handle new records -->
 <script src="js/add-inventory.js"></script>
