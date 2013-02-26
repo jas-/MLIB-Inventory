@@ -7,7 +7,7 @@ $(document).ready(function(){
 
 	/* On expand load current inventory from server, generate grid & populate */
 	$("#current-inventory").bind('expand', function(event, ui) {
-		$("#jqxWidget").html('<div id="jqxgrid-search"></div>');
+		$("#jqxWidget-search").html('<div id="jqxgrid-search"></div>');
 	});
 
 	$('#search-computer').offline({
