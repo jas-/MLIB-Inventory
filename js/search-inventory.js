@@ -1,15 +1,5 @@
 $(document).ready(function(){
 
-	/* Unload current grid on collapse */
-	$("#main #add").on('pagecreate', function(event, ui) {
-		$("#jqxgrid-search").jqxGrid('destroy');
-	});
-
-	/* On expand load current inventory from server, generate grid & populate */
-	$("#search").on('pagecreate', function(event, ui) {
-		$("#jqxWidget-search").html('<div id="jqxgrid-search"></div>');
-	});
-
 	$('#search-computer').offline({
 		appID:'MLIB-Inventory',
 		callback: function(){
