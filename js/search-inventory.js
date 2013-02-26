@@ -1,12 +1,12 @@
 $(document).ready(function(){
 
 	/* Unload current grid on collapse */
-	$("#current-inventory").bind('collapse', function(event, ui) {
+	$("#main #add").on('pagecreate', function(event, ui) {
 		$("#jqxgrid-search").jqxGrid('destroy');
 	});
 
 	/* On expand load current inventory from server, generate grid & populate */
-	$("#current-inventory").bind('expand', function(event, ui) {
+	$("#search").on('pagecreate', function(event, ui) {
 		$("#jqxWidget-search").html('<div id="jqxgrid-search"></div>');
 	});
 
