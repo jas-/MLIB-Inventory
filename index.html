@@ -4,24 +4,21 @@
     <meta charset="utf-8">
     <title>Mariott Library Inventory Management</title>
 
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
+	  <meta charset="utf-8">
+	  <meta name="viewport" content="width=device-width, initial-scale=1">
 
-		<!-- CSS enabling mobile frome work (jQuery Mobile) -->
-		<link rel="stylesheet"  href="css/themes/default/jquery.mobile-1.2.0.css" />
-		<link rel="stylesheet"  href="css/themes/custom/custom.min.css" />
+	  <!-- CSS enabling mobile frome work (jQuery Mobile) -->
+	  <link rel="stylesheet"  href="css/themes/default/jquery.mobile-1.2.0.css" />
+	  <link rel="stylesheet"  href="css/themes/custom/custom.min.css" />
 
-		<!-- CSS for handling AJAX responses -->
-		<link rel="stylesheet"  href="css/main.css" />
+	  <!-- CSS for handling AJAX responses -->
+	  <link rel="stylesheet"  href="css/main.css" />
 
-		<!-- jQuery libraries -->
-		<script src="js/jquery.js"></script>
-		<script src="js/jquery.mobile-1.2.0.min.js"></script>
-
+	  <!-- jQuery libraries -->
+	  <script src="js/jquery.js"></script>
+	  <script src="js/jquery.mobile-1.2.0.min.js"></script>
   </head>
-
 <body>
-
   <div data-role="page" id="main">
     <div data-theme="c" data-role="header">
       <h3>
@@ -32,9 +29,6 @@
 		  <li>
 			<a href="#main" data-transition="fade" data-theme="c" data-icon="home" class="ui-btn-active ui-state-persist">Main</a>
 		  </li>
-		  <!--li>
-			<a href="#inventory" data-transition="fade" data-theme="c" data-icon="gear">Inventory</a>
-		  </li-->
 		  <li>
 			<a href="#search" data-transition="fade" data-theme="c" data-icon="search">Search</a>
 		  </li>
@@ -45,36 +39,7 @@
 	  </div>
 	</div>
 	<div data-role="content">
-	  <h3>MLIB Inventory Management</h3>
-	</div>
-	<div style="text-align: center; padding-bottom: 1%">
-	  <span style="font-size: .7em;font-weight: normal">&copy; University Of Utah - Marriott Library 2013</span>
-	</div>
-  </div>
-
-  <!--div data-role="page" id="inventory">
-    <div data-theme="c" data-role="header">
-      <h3>
-		<span align="left"><a href=""><img src="images/inventory_categories.png" alt="Inventory Management" title="Inventory Management" height="56" /></a><a href="http://www.utah.edu/"><img src="images/marriottHeader-U.gif" alt="The University of Utah" title="The University of Utah" /></a><a href="index.php"><img src="images/marriottHeader-title.gif" alt="J. Willard Marriott Library, The University of Utah" title="J. Willard Marriott Library, The University of Utah" /></a></span>
-	  </h3>
-	  <div data-role="navbar" data-iconpos="left">
-		<ul>
-		  <li>
-			<a href="#main" data-transition="fade" data-theme="c" data-icon="home" class="ui-btn-active ui-state-persist">Main</a>
-		  </li>
-		  <li>
-			<a href="#inventory" data-transition="fade" data-theme="c" data-icon="gear">Inventory</a>
-		  </li>
-		  <li>
-			<a href="#search" data-transition="fade" data-theme="c" data-icon="search">Search</a>
-		  </li>
-		  <li>
-			<a href="#add" data-transition="fade" data-theme="c" data-icon="plus">Add</a>
-		  </li>
-		</ul>
-	  </div>
-	</div>
-	<div data-role="content">
+	  <h3>Current inventory records</h3>
 	  <div>
 		<div id="message"></div>
 		<div id='jqxWidget'>
@@ -82,10 +47,10 @@
 		</div>
 	  </div>
 	</div>
-	<div style="text-align: center; padding-bottom: 1%">
+	<div data-role="footer" style="text-align: center; padding-bottom: 1%">
 	  <span style="font-size: .7em;font-weight: normal">&copy; University Of Utah - Marriott Library 2013</span>
 	</div>
-  </div-->
+  </div>
 
   <div data-role="page" id="search">
     <div data-theme="c" data-role="header">
@@ -97,9 +62,6 @@
 		  <li>
 			<a href="#main" data-transition="fade" data-theme="c" data-icon="home" class="ui-btn-active ui-state-persist">Main</a>
 		  </li>
-		  <!--li>
-			<a href="#inventory" data-transition="fade" data-theme="c" data-icon="gear">Inventory</a>
-		  </li-->
 		  <li>
 			<a href="#search" data-transition="fade" data-theme="c" data-icon="search">Search</a>
 		  </li>
@@ -110,6 +72,7 @@
 	  </div>
 	</div>
 	<div data-role="content">
+	  <h3>Search inventory records</h3>
 	  <div id='jqxWidget-search'>
 		<div id="jqxgrid-search"></div>
 	  </div>
@@ -123,7 +86,7 @@
 		<input id="search" data-theme="c" data-icon="arrow-r" data-iconpos="right" value="Submit" type="submit">
 	  </form>
 	</div>
-	<div style="text-align: center; padding-bottom: 1%">
+	<div data-role="footer" style="text-align: center; padding-bottom: 1%">
 	  <span style="font-size: .7em;font-weight: normal">&copy; University Of Utah - Marriott Library 2013</span>
 	</div>
   </div>
@@ -138,9 +101,6 @@
 		  <li>
 			<a href="#main" data-transition="fade" data-theme="c" data-icon="home" class="ui-btn-active ui-state-persist">Main</a>
 		  </li>
-		  <!--li>
-			<a href="#inventory" data-transition="fade" data-theme="c" data-icon="gear">Inventory</a>
-		  </li-->
 		  <li>
 			<a href="#search" data-transition="fade" data-theme="c" data-icon="search">Search</a>
 		  </li>
@@ -151,6 +111,7 @@
 	  </div>
 	</div>
 	<div data-role="content">
+	  <h3>Add new inventory record</h3>
 	  <div id="message-add"></div>
 	  <form action="http://new-inventory.scl.utah.edu?do=add" id="add-computer" name="add-computer" method="post">
 		<div data-role="fieldcontain">
@@ -199,7 +160,7 @@
 		<input data-theme="c" data-icon="arrow-r" data-iconpos="right" value="Submit" type="submit">
 	  </form>
 	</div>
-	<div style="text-align: center; padding-bottom: 1%">
+	<div data-role="footer" style="text-align: center; padding-bottom: 1%">
 	  <span style="font-size: .7em;font-weight: normal">&copy; University Of Utah - Marriott Library 2013</span>
 	</div>
   </div>

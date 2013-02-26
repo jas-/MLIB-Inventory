@@ -1,15 +1,18 @@
 $(document).ready(function(){
 
 	/* Unload current grid on collapse */
-	$("#current-inventory").bind('collapse', function(event, ui) {
+	$("#search #add").bind('click', function(event, ui) {
 		$("#jqxgrid").jqxGrid('destroy');
 	});
 
 	/* On expand load current inventory from server, generate grid & populate */
-	$("#current-inventory").bind('expand', function(event, ui) {
+	$("#main").on('pagecreate', function(event, ui) {
+		$("#jqxgrid").jqxGrid('destroy');
 		$("#jqxWidget").html('<div id="jqxgrid"></div>');
 		_load();
 	});
+
+	_load();
 
 	/* retrieve current inventory, setup handlers, options & render grid */
 	function _load(){
