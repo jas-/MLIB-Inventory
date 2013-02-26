@@ -22,170 +22,219 @@
 
 <body>
 
-<div data-role="page" id="main">
-
-	<!-- Header -->
-	<div data-theme="c" data-role="header">
-		<h3>
-			<span align="left"><a href=""><img src="images/inventory_categories.png" alt="Inventory Management" title="Inventory Management" height="56" /></a><a href="http://www.utah.edu/"><img src="images/marriottHeader-U.gif" alt="The University of Utah" title="The University of Utah" /></a><a href="index.php"><img src="images/marriottHeader-title.gif" alt="J. Willard Marriott Library, The University of Utah" title="J. Willard Marriott Library, The University of Utah" /></a></span>
-		</h3>
-
-		<div data-role="collapsible-set" data-theme="c" data-content-theme="c" data-mini="true">
-
-			<!-- Current inventory (remote) -->
-			<div data-role="collapsible" id="current-inventory">
-				<h3>
-					Current Inventory
-				</h3>
-				<div data-role="content">
-					<div>
-						<div id="message"></div>
-						<div id='jqxWidget'>
-							<div id="jqxgrid"></div>
-						</div>
-					</div>
-				</div>
-			</div>
-
-			<!-- Search inventory -->
-			<div data-role="collapsible">
-				<h3>
-					Search Inventory
-				</h3>
-				<div data-role="content">
-					<div id='jqxWidget-search'>
-						<div id="jqxgrid-search"></div>
-					</div>
-					<form action="http://new-inventory.scl.utah.edu?do=search" id="search-computer" name="search-computer" method="post">
-						<div data-role="fieldcontain">
-							<fieldset data-role="controlgroup" data-mini="true" method="post">
-								<label for="search">
-									Search
-								</label>
-								<input name="search" placeholder="Search inventory" value="" type="search">
-							</fieldset>
-						</div>
-						<input id="search" data-theme="c" data-icon="arrow-r" data-iconpos="right" value="Submit" type="submit">
-					</form>
-				</div>
-			</div>
-
-			<!-- Manage inventory -->
-			<div data-role="collapsible">
-				<h3>
-					Add / Edit / Delete Inventory
-				</h3>
-				<div data-role="content">
-					<div id="message-add"></div>
-					<form action="http://new-inventory.scl.utah.edu?do=add" id="add-computer" name="add-computer" method="post">
-						<div data-role="fieldcontain">
-							<fieldset data-role="controlgroup" data-mini=true>
-								<label for="hostname">
-									Hostname
-								</label>
-								<input id="hostname" name="hostname" placeholder="Computer name" type="text">
-							</fieldset>
-						</div>
-						<div data-role="fieldcontain">
-							<fieldset data-role="controlgroup" data-mini=true>
-								<label for="sku">
-									SKU
-								</label>
-								<input id="sku" name="sku" placeholder="SKU (white barcode)" type="text">
-							</fieldset>
-						</div>
-						<div data-role="fieldcontain">
-							<fieldset data-role="controlgroup" data-mini=true>
-								<label for="uuic">
-									UUIC
-								</label>
-								<input id="uuic" name="uuic" placeholder="UUIC (yellow sticker)" type="text">
-							</fieldset>
-						</div>
-						<div data-role="fieldcontain">
-							<fieldset data-role="controlgroup" data-mini=true>
-								<label for="serial">
-									Serial
-								</label>
-								<input id="serial" name="serial" placeholder="Serial (Red label)" type="text">
-							</fieldset>
-						</div>
-						<hr/>
-						<div data-role="fieldcontain">
-							<fieldset data-role="controlgroup" data-mini=true>
-								<label for="monitor">
-								  Monitor
-								</label>
-								<input id="monitor" name="monitor" placeholder="Monitor name" type="text">
-							</fieldset>
-						</div>
-						<div data-role="fieldcontain">
-							<fieldset data-role="controlgroup" data-mini=true>
-								<label for="mserial">
-								  Monitor serial
-								</label>
-								<input id="mserial" name="mserial" placeholder="Monitor serial" type="text">
-							</fieldset>
-						</div>
-						<div data-role="fieldcontain">
-							<fieldset data-role="controlgroup" data-mini=true>
-								<label for="msku">
-								  Monitor SKU
-								</label>
-								<input id="msku" name="msku" placeholder="Monitor SKU" type="text">
-							</fieldset>
-						</div>
-						<input data-theme="c" data-icon="arrow-r" data-iconpos="right" value="Submit" type="submit">
-					</form>
-				</div>
-			</div>
-
-			<!-- Manually force update -->
-			<div data-role="collapsible">
-				<h3>
-					Update changes
-				</h3>
-			</div>
-		</div>
-		<div style="text-align: center; padding-bottom: 1%">
-			<span style="font-size: .7em;font-weight: normal">
-				&copy; University Of Utah - Marriott Library 2013
-			</span>
-		</div>
+  <div data-role="page" id="main">
+    <div data-theme="c" data-role="header">
+      <h3>
+		<span align="left"><a href=""><img src="images/inventory_categories.png" alt="Inventory Management" title="Inventory Management" height="56" /></a><a href="http://www.utah.edu/"><img src="images/marriottHeader-U.gif" alt="The University of Utah" title="The University of Utah" /></a><a href="index.php"><img src="images/marriottHeader-title.gif" alt="J. Willard Marriott Library, The University of Utah" title="J. Willard Marriott Library, The University of Utah" /></a></span>
+	  </h3>
+	  <div data-role="navbar" data-iconpos="left">
+		<ul>
+		  <li>
+			<a href="#main" data-transition="fade" data-theme="c" data-icon="home" class="ui-btn-active ui-state-persist">Main</a>
+		  </li>
+		  <!--li>
+			<a href="#inventory" data-transition="fade" data-theme="c" data-icon="gear">Inventory</a>
+		  </li-->
+		  <li>
+			<a href="#search" data-transition="fade" data-theme="c" data-icon="search">Search</a>
+		  </li>
+		  <li>
+			<a href="#add" data-transition="fade" data-theme="c" data-icon="plus">Add</a>
+		  </li>
+		</ul>
+	  </div>
 	</div>
-</div>
+	<div data-role="content">
+	  <h3>MLIB Inventory Management</h3>
+	</div>
+	<div style="text-align: center; padding-bottom: 1%">
+	  <span style="font-size: .7em;font-weight: normal">&copy; University Of Utah - Marriott Library 2013</span>
+	</div>
+  </div>
 
-<!-- jQuery.offline for storage, pulling & pushing data -->
-<script src="js/jquery.offline.js"></script>
+  <!--div data-role="page" id="inventory">
+    <div data-theme="c" data-role="header">
+      <h3>
+		<span align="left"><a href=""><img src="images/inventory_categories.png" alt="Inventory Management" title="Inventory Management" height="56" /></a><a href="http://www.utah.edu/"><img src="images/marriottHeader-U.gif" alt="The University of Utah" title="The University of Utah" /></a><a href="index.php"><img src="images/marriottHeader-title.gif" alt="J. Willard Marriott Library, The University of Utah" title="J. Willard Marriott Library, The University of Utah" /></a></span>
+	  </h3>
+	  <div data-role="navbar" data-iconpos="left">
+		<ul>
+		  <li>
+			<a href="#main" data-transition="fade" data-theme="c" data-icon="home" class="ui-btn-active ui-state-persist">Main</a>
+		  </li>
+		  <li>
+			<a href="#inventory" data-transition="fade" data-theme="c" data-icon="gear">Inventory</a>
+		  </li>
+		  <li>
+			<a href="#search" data-transition="fade" data-theme="c" data-icon="search">Search</a>
+		  </li>
+		  <li>
+			<a href="#add" data-transition="fade" data-theme="c" data-icon="plus">Add</a>
+		  </li>
+		</ul>
+	  </div>
+	</div>
+	<div data-role="content">
+	  <div>
+		<div id="message"></div>
+		<div id='jqxWidget'>
+		  <div id="jqxgrid"></div>
+		</div>
+	  </div>
+	</div>
+	<div style="text-align: center; padding-bottom: 1%">
+	  <span style="font-size: .7em;font-weight: normal">&copy; University Of Utah - Marriott Library 2013</span>
+	</div>
+  </div-->
 
-<!-- jqwidgets css file -->
-<link rel="stylesheet" href="js/jqWidgets/jqwidgets/styles/jqx.base.css" type="text/css" />
+  <div data-role="page" id="search">
+    <div data-theme="c" data-role="header">
+      <h3>
+		<span align="left"><a href=""><img src="images/inventory_categories.png" alt="Inventory Management" title="Inventory Management" height="56" /></a><a href="http://www.utah.edu/"><img src="images/marriottHeader-U.gif" alt="The University of Utah" title="The University of Utah" /></a><a href="index.php"><img src="images/marriottHeader-title.gif" alt="J. Willard Marriott Library, The University of Utah" title="J. Willard Marriott Library, The University of Utah" /></a></span>
+	  </h3>
+	  <div data-role="navbar" data-iconpos="left">
+		<ul>
+		  <li>
+			<a href="#main" data-transition="fade" data-theme="c" data-icon="home" class="ui-btn-active ui-state-persist">Main</a>
+		  </li>
+		  <!--li>
+			<a href="#inventory" data-transition="fade" data-theme="c" data-icon="gear">Inventory</a>
+		  </li-->
+		  <li>
+			<a href="#search" data-transition="fade" data-theme="c" data-icon="search">Search</a>
+		  </li>
+		  <li>
+			<a href="#add" data-transition="fade" data-theme="c" data-icon="plus">Add</a>
+		  </li>
+		</ul>
+	  </div>
+	</div>
+	<div data-role="content">
+	  <div id='jqxWidget-search'>
+		<div id="jqxgrid-search"></div>
+	  </div>
+	  <form action="http://new-inventory.scl.utah.edu?do=search" id="search-computer" name="search-computer" method="post">
+		<div data-role="fieldcontain">
+		  <fieldset data-role="controlgroup" data-mini="true" method="post">
+			<label for="search">Search</label>
+			  <input name="search" placeholder="Search inventory" value="" type="search">
+		  </fieldset>
+		</div>
+		<input id="search" data-theme="c" data-icon="arrow-r" data-iconpos="right" value="Submit" type="submit">
+	  </form>
+	</div>
+	<div style="text-align: center; padding-bottom: 1%">
+	  <span style="font-size: .7em;font-weight: normal">&copy; University Of Utah - Marriott Library 2013</span>
+	</div>
+  </div>
 
-<!-- jqwidgets required libs -->
-<script type="text/javascript" src="js/jqWidgets/jqwidgets/jqxcore.js"></script>
-<script type="text/javascript" src="js/jqWidgets/jqwidgets/jqxdata.js"></script>
-<script type="text/javascript" src="js/jqWidgets/jqwidgets/jqxbuttons.js"></script>
-<script type="text/javascript" src="js/jqWidgets/jqwidgets/jqxscrollbar.js"></script>
-<script type="text/javascript" src="js/jqWidgets/jqwidgets/jqxlistbox.js"></script>
-<script type="text/javascript" src="js/jqWidgets/jqwidgets/jqxdropdownlist.js"></script>
-<script type="text/javascript" src="js/jqWidgets/jqwidgets/jqxmenu.js"></script>
-<script type="text/javascript" src="js/jqWidgets/jqwidgets/jqxgrid.js"></script>
-<script type="text/javascript" src="js/jqWidgets/jqwidgets/jqxgrid.sort.js"></script>
-<script type="text/javascript" src="js/jqWidgets/jqwidgets/jqxgrid.pager.js"></script>
-<script type="text/javascript" src="js/jqWidgets/jqwidgets/jqxgrid.columnsresize.js"></script>
-<script type="text/javascript" src="js/jqWidgets/jqwidgets/jqxgrid.selection.js"></script>
-<script type="text/javascript" src="js/jqWidgets/jqwidgets/jqxgrid.edit.js"></script>
-<script type="text/javascript" src="js/jqWidgets/jqwidgets/jqxdata.export.js"></script>
-<script type="text/javascript" src="js/jqWidgets/jqwidgets/jqxgrid.export.js"></script>
-<script type="text/javascript" src="js/jqWidgets/jqwidgets/jqxgrid.storage.js"></script>
-<script type="text/javascript" src="js/jqWidgets/scripts/gettheme.js"></script>
+  <div data-role="page" id="add">
+    <div data-theme="c" data-role="header">
+      <h3>
+		<span align="left"><a href=""><img src="images/inventory_categories.png" alt="Inventory Management" title="Inventory Management" height="56" /></a><a href="http://www.utah.edu/"><img src="images/marriottHeader-U.gif" alt="The University of Utah" title="The University of Utah" /></a><a href="index.php"><img src="images/marriottHeader-title.gif" alt="J. Willard Marriott Library, The University of Utah" title="J. Willard Marriott Library, The University of Utah" /></a></span>
+	  </h3>
+	  <div data-role="navbar" data-iconpos="left">
+		<ul>
+		  <li>
+			<a href="#main" data-transition="fade" data-theme="c" data-icon="home" class="ui-btn-active ui-state-persist">Main</a>
+		  </li>
+		  <!--li>
+			<a href="#inventory" data-transition="fade" data-theme="c" data-icon="gear">Inventory</a>
+		  </li-->
+		  <li>
+			<a href="#search" data-transition="fade" data-theme="c" data-icon="search">Search</a>
+		  </li>
+		  <li>
+			<a href="#add" data-transition="fade" data-theme="c" data-icon="plus">Add</a>
+		  </li>
+		</ul>
+	  </div>
+	</div>
+	<div data-role="content">
+	  <div id="message-add"></div>
+	  <form action="http://new-inventory.scl.utah.edu?do=add" id="add-computer" name="add-computer" method="post">
+		<div data-role="fieldcontain">
+		  <fieldset data-role="controlgroup" data-mini=true>
+			<label for="hostname">Hostname</label>
+			  <input id="hostname" name="hostname" placeholder="Computer name" type="text">
+		  </fieldset>
+		</div>
+		<div data-role="fieldcontain">
+		  <fieldset data-role="controlgroup" data-mini=true>
+			<label for="sku">SKU</label>
+			  <input id="sku" name="sku" placeholder="SKU (white barcode)" type="text">
+		  </fieldset>
+		</div>
+		<div data-role="fieldcontain">
+		  <fieldset data-role="controlgroup" data-mini=true>
+			<label for="uuic">UUIC</label>
+			  <input id="uuic" name="uuic" placeholder="UUIC (yellow sticker)" type="text">
+		  </fieldset>
+		</div>
+		<div data-role="fieldcontain">
+		  <fieldset data-role="controlgroup" data-mini=true>
+			<label for="serial">Serial</label>
+			  <input id="serial" name="serial" placeholder="Serial (Red label)" type="text">
+		  </fieldset>
+		</div>
+		<hr/>
+		<div data-role="fieldcontain">
+		  <fieldset data-role="controlgroup" data-mini=true>
+			<label for="monitor">Monitor</label>
+			  <input id="monitor" name="monitor" placeholder="Monitor name" type="text">
+		  </fieldset>
+		</div>
+		<div data-role="fieldcontain">
+		  <fieldset data-role="controlgroup" data-mini=true>
+			<label for="mserial">Monitor serial</label>
+			  <input id="mserial" name="mserial" placeholder="Monitor serial" type="text">
+		  </fieldset>
+		</div>
+		<div data-role="fieldcontain">
+		  <fieldset data-role="controlgroup" data-mini=true>
+			<label for="msku">Monitor SKU</label>
+			  <input id="msku" name="msku" placeholder="Monitor SKU" type="text">
+		  </fieldset>
+		</div>
+		<input data-theme="c" data-icon="arrow-r" data-iconpos="right" value="Submit" type="submit">
+	  </form>
+	</div>
+	<div style="text-align: center; padding-bottom: 1%">
+	  <span style="font-size: .7em;font-weight: normal">&copy; University Of Utah - Marriott Library 2013</span>
+	</div>
+  </div>
 
-<!-- Handle loading/unloading of all inventory items -->
-<script src="js/current-inventory.js"></script>
+  <!-- jQuery.offline for storage, pulling & pushing data -->
+  <script src="js/jquery.offline.js"></script>
 
-<!-- Handle searching inventory items -->
-<script src="js/search-inventory.js"></script>
+  <!-- jqwidgets css file -->
+  <link rel="stylesheet" href="js/jqWidgets/jqwidgets/styles/jqx.base.css" type="text/css" />
 
-<!-- Handle new records -->
-<script src="js/add-inventory.js"></script>
+  <!-- jqwidgets required libs -->
+  <script type="text/javascript" src="js/jqWidgets/jqwidgets/jqxcore.js"></script>
+  <script type="text/javascript" src="js/jqWidgets/jqwidgets/jqxdata.js"></script>
+  <script type="text/javascript" src="js/jqWidgets/jqwidgets/jqxbuttons.js"></script>
+  <script type="text/javascript" src="js/jqWidgets/jqwidgets/jqxscrollbar.js"></script>
+  <script type="text/javascript" src="js/jqWidgets/jqwidgets/jqxlistbox.js"></script>
+  <script type="text/javascript" src="js/jqWidgets/jqwidgets/jqxdropdownlist.js"></script>
+  <script type="text/javascript" src="js/jqWidgets/jqwidgets/jqxmenu.js"></script>
+  <script type="text/javascript" src="js/jqWidgets/jqwidgets/jqxgrid.js"></script>
+  <script type="text/javascript" src="js/jqWidgets/jqwidgets/jqxgrid.sort.js"></script>
+  <script type="text/javascript" src="js/jqWidgets/jqwidgets/jqxgrid.pager.js"></script>
+  <script type="text/javascript" src="js/jqWidgets/jqwidgets/jqxgrid.columnsresize.js"></script>
+  <script type="text/javascript" src="js/jqWidgets/jqwidgets/jqxgrid.selection.js"></script>
+  <script type="text/javascript" src="js/jqWidgets/jqwidgets/jqxgrid.edit.js"></script>
+  <script type="text/javascript" src="js/jqWidgets/jqwidgets/jqxdata.export.js"></script>
+  <script type="text/javascript" src="js/jqWidgets/jqwidgets/jqxgrid.export.js"></script>
+  <script type="text/javascript" src="js/jqWidgets/jqwidgets/jqxgrid.storage.js"></script>
+  <script type="text/javascript" src="js/jqWidgets/scripts/gettheme.js"></script>
+
+  <!-- Handle loading/unloading of all inventory items -->
+  <script src="js/current-inventory.js"></script>
+
+  <!-- Handle searching inventory items -->
+  <script src="js/search-inventory.js"></script>
+
+  <!-- Handle new records -->
+  <script src="js/add-inventory.js"></script>
 </body>
