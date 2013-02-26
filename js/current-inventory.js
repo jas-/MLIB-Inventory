@@ -1,7 +1,7 @@
 $(document).ready(function(){
 
 	/* Unload current grid on collapse */
-	$("#search #add").bind('click', function(event, ui) {
+	$("#search #add").on('pagecreate', function(event, ui) {
 		$("#jqxgrid").jqxGrid('destroy');
 	});
 
