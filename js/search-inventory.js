@@ -13,6 +13,8 @@ $(document).ready(function(){
 	$('#search-computer').offline({
 		appID:'MLIB-Inventory',
 		callback: function(){
+			$("#jqxgrid-search").jqxGrid('destroy');
+			$("#jqxWidget-search").html('<div id="jqxgrid-search"></div>');
 			_display($(this));
 		}
 	});
