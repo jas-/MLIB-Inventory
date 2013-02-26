@@ -197,7 +197,7 @@ $(document).ready(function(){
 				width: '100%',
 				altrows: true,
 				pagerrenderer: pagerrenderer,
-				pagesize: (_detect())?5:30,
+				pagesize: (_detect())?5:20,
 				pagesizeoptions: ['5', '10', '20', '30', '40', '50'],
 				source: dataAdapter,
 				theme: theme,
