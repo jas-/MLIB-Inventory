@@ -1,6 +1,5 @@
 $(document).ready(function(){
 
-/*
 	$("#search").live('pagecreate',function(event){
 		$("#jqxgrid-search").jqxGrid('destroy');
 		$("#jqxWidget").html('<div id="jqxgrid-search"></div>');
@@ -10,17 +9,15 @@ $(document).ready(function(){
 		$("#jqxgrid-search").jqxGrid('destroy');
 		$("#jqxWidget").html('<div id="jqxgrid-search"></div>');
 	});
-*/
-	setTimeout(function(){
-		$('#search-computer').offline({
-			appID:'MLIB-Inventory',
-			callback: function(){
-				$("#jqxgrid-search").jqxGrid('destroy');
-				$("#jqxWidget-search").html('<div id="jqxgrid-search"></div>');
-				_display($(this));
-			}
-		});
-	}, 10);
+
+	$('#search-computer').offline({
+		appID:'MLIB-Inventory',
+		callback: function(){
+			$("#jqxgrid-search").jqxGrid('destroy');
+			$("#jqxWidget-search").html('<div id="jqxgrid-search"></div>');
+			_display($(this));
+		}
+	});
 
 	/* Handle grid init, options, sorting, paging & editing within grid */
 	function _display(obj){
