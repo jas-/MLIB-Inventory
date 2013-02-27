@@ -1,10 +1,12 @@
 $(document).ready(function(){
 
-	$('#add-computer').offline({
-		appID:'MLIB-Inventory',
-		callback: function(){
-			_message($(this));
-		}
+	$("#add").live('pagecreate pageshow',function(event){
+		$('#add-computer').offline({
+			appID:'MLIB-Inventory',
+			callback: function(){
+				_message($(this));
+			}
+		});
 	});
 
 	function _message(obj){
