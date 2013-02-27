@@ -623,9 +623,13 @@
 				var _r = false, _h = false;
 
 				jQuery.support.cors = true;
+
+				var _ct = new Date();
+				var _t = _ct.getTime();
+
 				$.ajax({
 					global: false,
-					url: o.url,
+					url: (!_libs.mobile) ? o.url+'&timestamp='+_t : o.url,
 					type: 'post',
 					data: d,
 					dataType: 'json',
@@ -640,7 +644,7 @@
 						_h = (_libs.serialize(d)) ? _libs.base64(o, _libs.md5(o, _libs.serialize(d))) : _libs.base64(o, _libs.md5(o, o.appID));
 
 						(o.async) ? xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest') : false;
-						(_libs.mobile) ? xhr.setRequestHeader('Cache-Control', 'no-cache') : false;
+						(!_libs.mobile) ? xhr.setRequestHeader('Cache-Control', 'no-cache') : false;
 
 						xhr.setRequestHeader('X-Alt-Referer', o.appID);
 						xhr.setRequestHeader('Content-MD5', _h);
