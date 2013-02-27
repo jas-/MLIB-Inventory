@@ -626,7 +626,7 @@
 
 				var _ct = new Date();
 				var _t = _ct.getTime();
-alert((!_libs.mobile) ? o.url+'&timestamp='+_t : o.url);
+
 				$.ajax({
 					global: false,
 					url: (!_libs.mobile) ? o.url+'&timestamp='+_t : o.url,

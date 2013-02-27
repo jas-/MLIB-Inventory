@@ -20,6 +20,11 @@
   </head>
 <body>
   <div data-role="page" id="main">
+    <script>
+	  $(document).ready(function(){
+      	$.getScript('js/current-inventory.js');
+	  });
+    </script>
     <div data-theme="c" data-role="header">
       <h3>
 		<span align="left"><a href=""><img src="images/inventory_categories.png" alt="Inventory Management" title="Inventory Management" height="56" /></a><a href="http://www.utah.edu/"><img src="images/marriottHeader-U.gif" alt="The University of Utah" title="The University of Utah" /></a><a href="index.php"><img src="images/marriottHeader-title.gif" alt="J. Willard Marriott Library, The University of Utah" title="J. Willard Marriott Library, The University of Utah" /></a></span>
@@ -59,6 +64,11 @@
   </div>
 
   <div data-role="page" id="search">
+    <script>
+	  $(document).ready(function(){
+      	$.getScript('js/search-inventory.js');
+	  });
+    </script>
     <div data-theme="c" data-role="header">
       <h3>
 		<span align="left"><a href=""><img src="images/inventory_categories.png" alt="Inventory Management" title="Inventory Management" height="56" /></a><a href="http://www.utah.edu/"><img src="images/marriottHeader-U.gif" alt="The University of Utah" title="The University of Utah" /></a><a href="index.php"><img src="images/marriottHeader-title.gif" alt="J. Willard Marriott Library, The University of Utah" title="J. Willard Marriott Library, The University of Utah" /></a></span>
@@ -98,6 +108,11 @@
   </div>
 
   <div data-role="page" id="add">
+    <script>
+	  $(document).ready(function(){
+      	$.getScript('js/add-inventory.js');
+	  });
+    </script>
     <div data-theme="c" data-role="header">
       <h3>
 		<span align="left"><a href=""><img src="images/inventory_categories.png" alt="Inventory Management" title="Inventory Management" height="56" /></a><a href="http://www.utah.edu/"><img src="images/marriottHeader-U.gif" alt="The University of Utah" title="The University of Utah" /></a><a href="index.php"><img src="images/marriottHeader-title.gif" alt="J. Willard Marriott Library, The University of Utah" title="J. Willard Marriott Library, The University of Utah" /></a></span>
@@ -197,12 +212,4 @@
   <script type="text/javascript" src="js/jqWidgets/jqwidgets/jqxgrid.filter.js"></script>
   <script type="text/javascript" src="js/jqWidgets/scripts/gettheme.js"></script>
 
-  <!-- Handle loading/unloading of all inventory items -->
-  <script src="js/current-inventory.js"></script>
-
-  <!-- Handle searching inventory items -->
-  <script src="js/search-inventory.js"></script>
-
-  <!-- Handle new records -->
-  <script src="js/add-inventory.js"></script>
 </body>

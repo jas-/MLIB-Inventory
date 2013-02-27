@@ -12,7 +12,7 @@ $(document).ready(function(){
 		_load();
 	});
 
-	_load();
+	($.mobile.activePage.attr('id') == 'main') ? _load() : false;
 
 	/* retrieve current inventory, setup handlers, options & render grid */
 	function _load(){
