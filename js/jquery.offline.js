@@ -147,12 +147,12 @@
 					(o.debug) ? _log.debug(o.logID, '_setup.get: Currently bound to form') : false;
 					$(d).on('submit', function(e){
 						alert('Submitting data');
-						e.preventDefault();
 						_d = _libs.form(o, d);
 						o.data = _d;
 						o.url = o.element[0]['action'];
 						_storage.save(o, _libs.guid(), _d);
 						_setup.go(o);
+						e.preventDefault();
 					});
 				} else {
 					_d = (/object|array/.test(o.data)) ? _storage.save(o, _libs.guid(), o.data) : false;
