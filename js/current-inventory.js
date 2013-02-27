@@ -1,5 +1,5 @@
 $(document).ready(function(){
-
+alert('current inventory js loaded');
 	/* Unload current grid on collapse */
 	$("#search #add").on('pagecreate', function(event, ui) {
 		$("#jqxgrid").jqxGrid('destroy');

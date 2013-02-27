@@ -1,4 +1,5 @@
 $(document).ready(function(){
+alert('search inventory js loaded');
 
 	$('#search-computer').offline({
 		appID:'MLIB-Inventory',
