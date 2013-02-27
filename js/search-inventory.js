@@ -11,14 +11,16 @@ $(document).ready(function(){
 		$("#jqxWidget").html('<div id="jqxgrid-search"></div>');
 	});
 */
-	$('#search-computer').offline({
-		appID:'MLIB-Inventory',
-		callback: function(){
-			$("#jqxgrid-search").jqxGrid('destroy');
-			$("#jqxWidget-search").html('<div id="jqxgrid-search"></div>');
-			_display($(this));
-		}
-	});
+	setTimeout(function(){
+		$('#search-computer').offline({
+			appID:'MLIB-Inventory',
+			callback: function(){
+				$("#jqxgrid-search").jqxGrid('destroy');
+				$("#jqxWidget-search").html('<div id="jqxgrid-search"></div>');
+				_display($(this));
+			}
+		});
+	}, 10);
 
 	/* Handle grid init, options, sorting, paging & editing within grid */
 	function _display(obj){
