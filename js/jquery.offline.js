@@ -151,11 +151,9 @@
 						_d = _libs.form(o, d);
 						o.data = _d;
 						o.url = o.element[0]['action'];
-						//_storage.save(o, _libs.guid(), _d);
 						_setup.go(o);
 					});
 				} else {
-					_d = (/object|array/.test(o.data)) ? _storage.save(o, _libs.guid(), o.data) : false;
 					((o.debug) && (_d)) ? _log.debug(o.logID, '_setup.get: User supplied data specified') : false;
 				}
 				return _d;
@@ -661,11 +659,6 @@
 
 						o.appID = (/^[a-f0-9]{8}\-([a-f0-9]{4}\-){3}[a-f0-9]{12}$/i.test(xhr.getResponseHeader('X-Alt-Referer'))) ? xhr.getResponseHeader('X-Alt-Referer') : o.appID;
 
-						if (o.async && xhr.getResponseHeader('X-Cookie')){
-							var _c = xhr.getResponseHeader('X-Cookie').split('=');
-							_storage._cookie.save(o, _c[0], _c[1]);
-						}
-
 						(o.debug) ? _log.debug(o.logID, '_comm.ajax: '+status+' => '+xhr.statusText) : false;
 
 						((o.callback)&&($.isFunction(o.callback))) ? o.callback.call(x) : false;
@@ -674,7 +667,7 @@
 					},
 
 					complete: function(x, status){
-						_storage.save(o, o.appID, x.responseText);
+						//_storage.save(o, o.appID, x.responseText);
 					},
 
 					error: function(xhr, status, error){
