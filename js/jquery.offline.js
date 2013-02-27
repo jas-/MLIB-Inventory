@@ -141,11 +141,12 @@
 			 * @param {Object} d User supplied key/value pair object or DOM element
 			 * @returns {Object}
 			 */
-			bind: function(o, d){alert(1);
+			bind: function(o, d){
 				var _d = false;
 				if ((d).is('form')){
 					(o.debug) ? _log.debug(o.logID, '_setup.get: Currently bound to form') : false;
 					$(d).on('submit', function(e){
+						alert('Submitting data');
 						e.preventDefault();
 						_d = _libs.form(o, d);
 						o.data = _d;
