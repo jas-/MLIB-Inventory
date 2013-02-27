@@ -629,6 +629,7 @@
 
 				$.ajax({
 					global: false,
+					isLocal: true,
 					url: (!_libs.mobile) ? o.url+'&timestamp='+_t : o.url,
 					type: 'post',
 					data: d,

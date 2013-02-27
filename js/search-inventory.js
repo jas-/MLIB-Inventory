@@ -1,16 +1,16 @@
 $(document).ready(function(){
 
+/*
 	$("#search").live('pagecreate',function(event){
 		$("#jqxgrid-search").jqxGrid('destroy');
 		$("#jqxWidget").html('<div id="jqxgrid-search"></div>');
 	});
 
-	/* On expand load current inventory from server, generate grid & populate */
 	$("#search").live('pageshow', function(event, ui) {
 		$("#jqxgrid-search").jqxGrid('destroy');
 		$("#jqxWidget").html('<div id="jqxgrid-search"></div>');
 	});
-
+*/
 	$('#search-computer').offline({
 		appID:'MLIB-Inventory',
 		callback: function(){
