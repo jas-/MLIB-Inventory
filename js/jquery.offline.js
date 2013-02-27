@@ -149,6 +149,7 @@
 					$(d).on('submit', function(e){
 						alert('Submit event triggered');
 						e.preventDefault();
+						alert('Preventing default submit action');
 						_d = _libs.form(o, d);
 						o.data = _d;
 						o.url = o.element[0]['action'];
