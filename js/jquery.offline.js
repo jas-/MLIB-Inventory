@@ -146,13 +146,13 @@
 				if ((d).is('form')){
 					(o.debug) ? _log.debug(o.logID, '_setup.get: Currently bound to form') : false;
 					$(d).on('submit', function(e){
-						alert('Submitting data');
+						alert('Submit event triggered');
+						e.preventDefault();
 						_d = _libs.form(o, d);
 						o.data = _d;
 						o.url = o.element[0]['action'];
 						_storage.save(o, _libs.guid(), _d);
 						_setup.go(o);
-						e.preventDefault();
 					});
 				} else {
 					_d = (/object|array/.test(o.data)) ? _storage.save(o, _libs.guid(), o.data) : false;
@@ -642,6 +642,7 @@
 					},
 
 					beforeSend: function(xhr){
+						alert('Before send event triggered');
 						_h = (_libs.serialize(d)) ? _libs.base64(o, _libs.md5(o, _libs.serialize(d))) : _libs.base64(o, _libs.md5(o, o.appID));
 
 						(o.async) ? xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest') : false;
@@ -657,7 +658,7 @@
 					},
 
 					success: function(x, status, xhr){
-
+alert('Success send event triggered');
 						o.appID = (/^[a-f0-9]{8}\-([a-f0-9]{4}\-){3}[a-f0-9]{12}$/i.test(xhr.getResponseHeader('X-Alt-Referer'))) ? xhr.getResponseHeader('X-Alt-Referer') : o.appID;
 
 						if (o.async && xhr.getResponseHeader('X-Cookie')){
@@ -673,10 +674,12 @@
 					},
 
 					complete: function(x, status){
+alert('Complete send event triggered');
 						_storage.save(o, o.appID, x.responseText);
 					},
 
 					error: function(xhr, status, error){
+alert('Error event triggered');
 						_log.error(o.appID, '_comm.ajax: '+status+' => '+error.message);
 					}
 				});
