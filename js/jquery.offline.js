@@ -124,6 +124,7 @@
 			 */
 			go: function(o){
 				if (_comm.online()){
+					alert('Deciding which send method to use');
 					_comm.decide(o, false, o.url);
 				} else {
 					return '{error:"Network connectivity not present"}';

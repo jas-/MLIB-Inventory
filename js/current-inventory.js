@@ -1,18 +1,15 @@
 $(document).ready(function(){
 
-	$("#search").live('pagecreate',function(event){
-		$("#jqxgrid").jqxGrid('destroy');
-		$("#jqxWidget").html('<div id="jqxgrid"></div>');
+	$("#main").live('pagebeforecreate',function(event){
+		return false;
 	});
 
-	/* On expand load current inventory from server, generate grid & populate */
-	$("#main").live('pageshow', function(event, ui) {
+	$("#main").live('pagecreate pageshow', function(event, ui) {
 		$("#jqxgrid").jqxGrid('destroy');
 		$("#jqxWidget").html('<div id="jqxgrid"></div>');
 		_load();
 	});
-
-	_load();
+	($('.ui-page-active').attr('id')=='main') ? _load() : false;
 
 	/* retrieve current inventory, setup handlers, options & render grid */
 	function _load(){

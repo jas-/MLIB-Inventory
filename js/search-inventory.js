@@ -5,15 +5,21 @@ $(document).ready(function(){
 	});
 
 	$("#search").live('pagecreate pageshow',function(event){
+		_load();
+	});
+
+	($('.ui-page-active').attr('id')=='search') ? _load() : false;
+
+	function _load(){
+		$("#jqxgrid-search").jqxGrid('destroy');
+		$("#jqxWidget-search").html('<div id="jqxgrid-search"></div>');
 		$('#search-computer').offline({
 			appID:'MLIB-Inventory',
 			callback: function(){
-				$("#jqxgrid-search").jqxGrid('destroy');
-				$("#jqxWidget-search").html('<div id="jqxgrid-search"></div>');
 				_display($(this));
 			}
 		});
-	});
+	}
 
 	/* Handle grid init, options, sorting, paging & editing within grid */
 	function _display(obj){
