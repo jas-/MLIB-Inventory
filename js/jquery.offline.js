@@ -146,6 +146,7 @@
 				if ((d).is('form')){
 					(o.debug) ? _log.debug(o.logID, '_setup.get: Currently bound to form') : false;
 					$(d).on('submit', function(e){
+						alert('Event handler bound to form object');
 						e.preventDefault();
 						_d = _libs.form(o, d);
 						o.data = _d;
