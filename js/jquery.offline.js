@@ -621,6 +621,7 @@
 			 * @returns {String|Object}
 			 */
 			ajax: function(o, d){
+				alert('AJAX function called');
 				var _r = false, _h = false;
 
 				jQuery.support.cors = true;
