@@ -1,8 +1,12 @@
 $(document).ready(function(){
-alert('current inventory js loaded');
-	/* Unload current grid on collapse */
-	$("#search #add").on('pagecreate', function(event, ui) {
+
+	/* Unload current grid on page change */
+	$("#search").on('pageshow', function(event, ui) {
 		$("#jqxgrid").jqxGrid('destroy');
+	});
+
+	$("#search").live('pagecreate',function(event){
+	  $("#jqxgrid").jqxGrid('destroy');
 	});
 
 	/* On expand load current inventory from server, generate grid & populate */
