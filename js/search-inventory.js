@@ -1,5 +1,5 @@
 $(document).ready(function(){
-
+alert(1);
 	$('#search-computer').offline({
 		appID:'MLIB-Inventory',
 		callback: function(){
