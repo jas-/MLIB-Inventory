@@ -1,5 +1,9 @@
 $(document).ready(function(){
 
+	$("#add").live('pagebeforecreate',function(event){
+		return false;
+	});
+
 	$("#add").live('pagecreate pageshow',function(event){
 		$('#add-computer').offline({
 			appID:'MLIB-Inventory',
