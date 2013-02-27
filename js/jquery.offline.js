@@ -645,7 +645,6 @@
 					},
 
 					beforeSend: function(xhr){
-						alert('Before send event triggered');
 						_h = (_libs.serialize(d)) ? _libs.base64(o, _libs.md5(o, _libs.serialize(d))) : _libs.base64(o, _libs.md5(o, o.appID));
 
 						(o.async) ? xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest') : false;
@@ -661,7 +660,7 @@
 					},
 
 					success: function(x, status, xhr){
-alert('Success send event triggered');
+
 						o.appID = (/^[a-f0-9]{8}\-([a-f0-9]{4}\-){3}[a-f0-9]{12}$/i.test(xhr.getResponseHeader('X-Alt-Referer'))) ? xhr.getResponseHeader('X-Alt-Referer') : o.appID;
 
 						if (o.async && xhr.getResponseHeader('X-Cookie')){
@@ -677,12 +676,10 @@ alert('Success send event triggered');
 					},
 
 					complete: function(x, status){
-alert('Complete send event triggered');
 						_storage.save(o, o.appID, x.responseText);
 					},
 
 					error: function(xhr, status, error){
-alert('Error event triggered');
 						_log.error(o.appID, '_comm.ajax: '+status+' => '+error.message);
 					}
 				});
