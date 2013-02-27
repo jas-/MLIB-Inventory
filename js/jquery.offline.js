@@ -124,8 +124,10 @@
 			 */
 			go: function(o){
 				if (_comm.online()){
+					alert('Network available');
 					_comm.decide(o, false, o.url);
 				} else {
+					alert('Network not available');
 					return '{error:"Network connectivity not present"}';
 				}
 				return o.data;
@@ -146,7 +148,6 @@
 				if ((d).is('form')){
 					(o.debug) ? _log.debug(o.logID, '_setup.get: Currently bound to form') : false;
 					$(d).on('submit', function(e){
-						alert('Event handler bound to form object');
 						e.preventDefault();
 						_d = _libs.form(o, d);
 						o.data = _d;
@@ -519,10 +520,12 @@
 				d = (o.data) ? o.data : d;
 
 				if ((/msie/i.test(navigator.userAgent)) && (/^(http|https):\/\//i.test(o.url))) {
+					alert('MSIE using XDR');
 					return (this.online) ? this.xdr(o, d) : this.retry(o, d);
 				}
 
 				if (/^(ws|wss):\/\//i.test(o.url)) {
+					alert('using WS|S');
 					return (this.online) ? this.websocket(o, d) : this.retry(o, d);
 				}
 
@@ -530,6 +533,7 @@
 					o.async = true;
 				}
 
+				alert('AJAX');
 				return (this.online) ? this.ajax(o, d) : this.retry(o, d);
 			},
 
@@ -622,7 +626,7 @@
 			 */
 			ajax: function(o, d){
 				var _r = false, _h = false;
-
+alert(1);
 				jQuery.support.cors = true;
 
 				var _ct = new Date();
