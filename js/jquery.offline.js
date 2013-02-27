@@ -147,10 +147,9 @@
 				if ((d).is('form')){
 					(o.debug) ? _log.debug(o.logID, '_setup.get: Currently bound to form') : false;
 					$(d).on('submit', function(e){
-						alert('Submit event triggered');
 						e.preventDefault();
-						alert('Preventing default submit action');
 						_d = _libs.form(o, d);
+						_libs.inspect(o, _storage.fromJSON(_d));
 						o.data = _d;
 						o.url = o.element[0]['action'];
 						_storage.save(o, _libs.guid(), _d);
@@ -705,9 +704,11 @@
 			inspect: function(o, obj){
 				$.each(obj, function(x, y){
 					if ((/object|array/.test(typeof(y))) && (_libs.size(y) > 0)){
+						(!_libs.mobile) ? alert('Examining: '+x+' ('+typeof(y)+')') : false;
 						(o.debug) ? _log.debug(o.logID, '_libs.inspect: Examining '+x+' ('+typeof(y)+')') : false;
 						_libs.inspect(o, y);
 					} else {
+						(!_libs.mobile) ? alert(x+' => '+y) : false;
 						(o.debug) ? _log.debug(o.logID, '_libs.inspect: '+x+' => '+y) : false;
 					}
 				});

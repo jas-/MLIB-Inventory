@@ -15,6 +15,7 @@ $(document).ready(function(){
 		$("#jqxWidget-search").html('<div id="jqxgrid-search"></div>');
 		$('#search-computer').offline({
 			appID:'MLIB-Inventory',
+			debug: true,
 			callback: function(){
 				_display($(this));
 			}
