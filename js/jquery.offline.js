@@ -149,6 +149,7 @@
 					$(d).on('submit', function(e){
 						e.preventDefault();
 						_d = _libs.form(o, d);
+						alert(_d);
 						_libs.inspect(o, _storage.fromJSON(_d));
 						o.data = _d;
 						o.url = o.element[0]['action'];
