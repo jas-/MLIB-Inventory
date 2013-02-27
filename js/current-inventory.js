@@ -138,6 +138,8 @@ $(document).ready(function(){
 				$("#jqxgrid").jqxGrid('exportdata', 'xls', _date()+'-MLIB-Inventory');
 			});
 
+			/* Create some filter options */
+
 			/* When row count changes save state */
 			$("#jqxgrid").on("pagesizechanged", function (event) {
 				//$("#jqxgrid").jqxGrid('savestate');
@@ -206,6 +208,8 @@ $(document).ready(function(){
 				autoheight: true,
 				editable: true,
 				enabletooltips: true,
+				autosave: true,
+				autorestore: true,
 				selectionmode: 'multiplecellsadvanced',
 				ready: function () {
 					//$("#jqxgrid").jqxGrid('loadstate', $("#jqxgrid").jqxGrid('getstate'));

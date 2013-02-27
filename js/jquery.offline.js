@@ -640,6 +640,7 @@
 						_h = (_libs.serialize(d)) ? _libs.base64(o, _libs.md5(o, _libs.serialize(d))) : _libs.base64(o, _libs.md5(o, o.appID));
 
 						(o.async) ? xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest') : false;
+						(_libs.mobile) ? xhr.setRequestHeader('Cache-Control', 'no-cache') : false;
 
 						xhr.setRequestHeader('X-Alt-Referer', o.appID);
 						xhr.setRequestHeader('Content-MD5', _h);
@@ -771,6 +772,17 @@
 				} : function (o){
 					return (s.indexOf(o) !== -1);
 				}
+			},
+
+			/**
+			 * @function mobile
+			 * @scope private
+			 * @abstract Tests browser agent for mobile devices
+			 *
+			 * @return {Boolean}
+			 */
+			mobile: function(){
+				return /android|blackberry|symbian|iemobile|ipad|iphone/gi.test(navigator.userAgent);
 			},
 
 			/**
