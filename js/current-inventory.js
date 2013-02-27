@@ -1,22 +1,18 @@
 $(document).ready(function(){
 
-	/* Unload current grid on page change */
-	$("#search").on('pageshow', function(event, ui) {
-		$("#jqxgrid").jqxGrid('destroy');
-	});
-
 	$("#search").live('pagecreate',function(event){
-	  $("#jqxgrid").jqxGrid('destroy');
+		$("#jqxgrid").jqxGrid('destroy');
+		$("#jqxWidget").html('<div id="jqxgrid"></div>');
 	});
 
 	/* On expand load current inventory from server, generate grid & populate */
-	$("#main").on('pagecreate', function(event, ui) {
+	$("#main").live('pageshow', function(event, ui) {
 		$("#jqxgrid").jqxGrid('destroy');
 		$("#jqxWidget").html('<div id="jqxgrid"></div>');
 		_load();
 	});
 
-	($.mobile.activePage.attr('id') == 'main') ? _load() : false;
+	_load();
 
 	/* retrieve current inventory, setup handlers, options & render grid */
 	function _load(){
