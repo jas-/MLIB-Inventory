@@ -42,7 +42,7 @@
 	<div data-role="content">
 	  <h3>Current inventory records</h3>
 	  <div>
-		<div id="message"></div>
+		<div id="message-current"></div>
 		<div>
 		  Export: <a id="export-csv" data-mini="true" data-role="button" data-inline="true" href="#">CSV</a>&nbsp;<a id="export-pdf" data-mini="true" data-role="button" data-inline="true" href="#">PDF</a>
 		</div>
@@ -80,6 +80,7 @@
 	</div>
 	<div data-role="content">
 	  <h3>Search inventory records</h3>
+	  <div id="message-search"></div>
 	  <form action="http://new-inventory.scl.utah.edu?do=search" id="search-computer" name="search-computer" method="post">
 		<div data-role="fieldcontain">
 		  <fieldset data-role="controlgroup" data-mini="true" method="post">

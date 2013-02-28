@@ -1,24 +1,23 @@
 $(document).ready(function(){
 
-	$("#main #search #add").live('pagebeforecreate',function(event){
-		return false;
-	});
+	($('.ui-page-active').attr('id')=='main') ? _load('current', 'http://new-inventory.scl.utah.edu/?do=current', {'do':true}, true, 'inventory-current') : false;
 
-	($('.ui-page-active').attr('id')=='main') ? _load('current', 'http://new-inventory.scl.utah.edu/?do=current', {'do':true}, false, true) : false;
+	($('.ui-page-active').attr('id')=='search') ? _load('search', false, false, true, 'search-computer') : false;
 
-	($('.ui-page-active').attr('id')=='search') ? _load('search', false, false, true, true) : false;
+	($('.ui-page-active').attr('id')=='add') ? _load('add-computer', false, false, false, 'add-computer') : false;
 
 	$("#main").live('pagecreate pageshow', function(event, ui) {
 		_destroy('current');
-		_load('current', 'http://new-inventory.scl.utah.edu/?do=current', {'do':true}, false, true);
+		_load('current', 'http://new-inventory.scl.utah.edu/?do=current', {'do':true}, true, 'inventory-current');
 	});
 
 	$("#search").live('pagecreate pageshow',function(event){
-		_load('search', false, false, true, true);
+		_destroy('search');
+		_load('search', false, false, true, true, 'search-computer');
 	});
 
 	$("#add").live('pagecreate pageshow',function(event){
-		_load('add-computer', false, false, false, false);
+		_load('add-computer', false, false, false, 'add-computer');
 	});
 
 	function _destroy(ele){
@@ -26,14 +25,14 @@ $(document).ready(function(){
 		$("#jqxWidget-"+ele).html('<div id="jqxgrid-'+ele+'"></div>');
 	}
 
-	function _load(ele, url, data, destroy, grid){
-		$('#'+ele).comm({
-			debug: true,
+	function _load(ele, url, data, grid, name){
+		$('#'+name).comm({
 			appID:'MLIB-Inventory',
 			url: (url) ? url : false,
 			data: (data) ? data : false,
 			callback: function(){
-				(destroy) ? _destroy(ele) : false;
+				_message($(this), ele);
+				_destroy(ele);
 				(grid) ? _display($(this), ele) : false;
 				_message($(this), ele);
 			}
