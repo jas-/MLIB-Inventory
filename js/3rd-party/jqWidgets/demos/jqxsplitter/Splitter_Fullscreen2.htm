@@ -1,0 +1,141 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title id='Description'>In this sample is demonstrated how to add a Vertical Splitter
+        inside a split panel of a Horizontal Splitter</title>
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <style type="text/css">
+        html, body
+        {
+            height: 100%;
+            width: 100%;
+            margin: 0px;
+            padding: 0px;
+            overflow: hidden;
+        }
+    </style>
+    <script type="text/javascript" src="../../scripts/jquery-1.8.2.min.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxsplitter.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxmenu.js"></script>
+<script type="text/javascript" src="../../jqwidgets/jqxtabs.js"></script>
+
+    <script type="text/javascript" src="../../scripts/gettheme.js"></script>
+ 
+	
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+
+            var theme = getTheme();
+            $('#mainSplitter').jqxSplitter({ theme: theme, width: '100%', height: '100%', orientation: 'horizontal', panels: [{ size: '5%' }, { size: '89%' }] });
+            $('#firstNested').jqxSplitter({ theme: theme, width: '100%', orientation: 'vertical', panels: [{ size: '15%' }, { size: '70%' }, { size: '15%' }]});
+            $("#jqxmenu").jqxMenu({ width: '100%', height: '35px', autoSizeMainItems: false });
+
+
+            //Adding Tabs 
+            $('#menu1').click(function () {
+
+                $('#jqxTabs').jqxTabs('addLast', '<div id="newTab">DocumentsTab</div>', '<div id="DocumentsContent"> Test content to see if the scrollbar appears, Test content to seeontent to see if the scrollbar appears,Test content to see if the scrollbar appears,Test content to see if the scrollbar appears, Test content to see if the scrollbarpears, Test content to see if the scrollbar appears, Test content to see if the scrollbar appears, Test content to see if the scrollbar appears, Test content to see if the scrollbar appears, Test content to see if the scrollbar appears, Test content to see if the scrollbar appears,Test content to see if the scrollbar </div>');
+
+            });
+
+
+
+            $('#jqxTabs').jqxTabs({ width: '100%', height: '100%', theme: 'classic', autoHeight: true, selectionTracker: true, animationType: 'fade', showCloseButtons: true });
+            $('#jqxTabs').jqxTabs('hideCloseButtonAt', 0);
+
+
+
+
+        });
+
+
+
+    </script>
+	
+    <style type="text/css">
+    html, body 
+    {
+        height: 100%;
+        width: 100%;
+		margin:0px;
+        padding: 0px;
+        overflow:hidden;
+		background-color:#f8f9fb;
+	}
+
+
+    </style>
+
+
+</head>
+
+
+<body class='default'>
+   <div id="mainSplitter">
+   
+        <div class="splitter-panel">
+        
+            <div style="background-color:#112d54;">
+            	
+    			
+            <div id='jqxmenu' style=" background:none; border:hidden; height:40px; margin-left:300px; text-align:center; vertical-align:middle; color:#FFF; overflow:auto;">
+                <ul>
+                    <li><div class="DivImageMenu"></div><div class="DivTextMenu"> <a href="#" id="menu1">Add New Tab</a></div></li>
+ 					<li><div class="DivImageMenu"></div><div class="DivTextMenu"> <a href="#" id="menu2">Test Sub Menu</a></div>
+                    	 <ul>
+                             <li><div class="DivImageMenu"></div><div class="DivTextMenu"> <a href="#" id="Submenu1">Sub Menu1</a></div></li>
+                             <li><div class="DivImageMenu"></div><div class="DivTextMenu"> <a href="#" id="Submenu2">Sub Menu2</a></div></li>
+                    	 </ul>
+                    </li>
+                </ul>
+            </div>
+		
+                
+            </div>
+        </div>
+         <div class="splitter-panel" id="firstNested">
+            <div class="splitter-panel">
+        	
+            	West     		
+   
+            </div>
+            
+            
+            <div class="splitter-panel" id="secondNested" style="overflow:hidden;">
+                
+                <div id='jqxTabs'>
+                    <ul style='margin-left: 10px;'>
+                        <li>Welcome Page Tab</li>
+                    </ul>
+                    <div id="milieuIcom">
+                      Test content to see if the scrollbar appears, Test content to see if the scrollbar appears, Test content to see if the scrollbar appears, Test content to see if the scrollbar appears, Test content to see if the scrollbar appears, Test content to see if the scrollbar appears, Test content to see if the scrollbar appears, 
+                    </div>
+                    
+                </div>
+                
+               
+            </div>
+            
+            
+            <div class="splitter-panel" style="overflow:auto;">
+                
+          		East
+                
+            </div>
+            
+            
+        </div>
+        
+        <div class="splitter-panel" id="thirdNested" style="overflow:auto;">
+            South
+        </div>
+        
+        
+    </div>
+
+</body>
+
+
+</html>
