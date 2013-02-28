@@ -1,5 +1,31 @@
 $(document).ready(function(){
 
+	$("#main").live('pagebeforecreate',function(event){
+		return false;
+	});
+
+	$("#main").live('pagecreate pageshow', function(event, ui) {
+		$("#jqxgrid").jqxGrid('destroy');
+		$("#jqxWidget").html('<div id="jqxgrid"></div>');
+		_load();
+	});
+
+	($('.ui-page-active').attr('id')=='main') ? _load_main() : false;
+
+	/* retrieve current inventory, setup handlers, options & render grid */
+	function _load_main(){
+
+		/* Query server for JSON formatted inventory data */
+		$('#current-inventory').offline({
+			appID:'MLIB-Inventory',
+			url: 'http://new-inventory.scl.utah.edu/?do=current',
+			data: {'do':true},
+			callback: function(){
+				_display($(this));
+			}
+		});
+	}
+
 	$("#search").live('pagebeforecreate',function(event){
 		return false;
 	});
@@ -8,18 +34,37 @@ $(document).ready(function(){
 		_load();
 	});
 
-	($('.ui-page-active').attr('id')=='search') ? _load() : false;
+	($('.ui-page-active').attr('id')=='search') ? _load_search() : false;
 
-	function _load(){
+	function _load_search(){
+		_destroy('jqxgrid-search');
 		$('#search-computer').offline({
 			appID:'MLIB-Inventory',
 			debug: true,
 			callback: function(){
-				$("#jqxgrid-search").jqxGrid('destroy');
-				$("#jqxWidget-search").html('<div id="jqxgrid-search"></div>');
+				_destroy('jqxgrid-search');
 				_display($(this));
 			}
 		});
+	}
+
+	$("#add").live('pagebeforecreate',function(event){
+		return false;
+	});
+
+	$("#add").live('pagecreate pageshow',function(event){
+		$('#add-computer').offline({
+			appID:'MLIB-Inventory',
+			callback: function(){
+				_message($(this));
+			}
+		});
+	});
+
+	/* Destroy grid element */
+	function _destroy(ele){
+		$("#"+ele).jqxGrid('destroy');
+		$("#"+ele).html('<div id="'+ele+'"></div>');
 	}
 
 	/* Handle grid init, options, sorting, paging & editing within grid */
