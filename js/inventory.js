@@ -1,11 +1,11 @@
 $(document).ready(function(){
 
+	/* Force binding on page focus */
 	($('.ui-page-active').attr('id')=='main') ? _load('current', 'http://new-inventory.scl.utah.edu/?do=current', {'do':true}, true, 'inventory-current') : false;
-
 	($('.ui-page-active').attr('id')=='search') ? _load('search', false, false, true, 'search-computer') : false;
-
 	($('.ui-page-active').attr('id')=='add') ? _load('add-computer', false, false, false, 'add-computer') : false;
 
+	/* Set event handlers for pagecreate & pageshow events */
 	$("#main").live('pagecreate pageshow', function(event, ui) {
 		_destroy('current');
 		_load('current', 'http://new-inventory.scl.utah.edu/?do=current', {'do':true}, true, 'inventory-current');
@@ -20,11 +20,13 @@ $(document).ready(function(){
 		_load('add-computer', false, false, false, 'add-computer');
 	});
 
+	/* Destroy current grid element */
 	function _destroy(ele){
 		$("#jqxgrid-"+ele).jqxGrid('destroy');
 		$("#jqxWidget-"+ele).html('<div id="jqxgrid-'+ele+'"></div>');
 	}
 
+	/* Call $.comm() with specified params */
 	function _load(ele, url, data, grid, name){
 		$('#'+name).comm({
 			appID:'MLIB-Inventory',
@@ -39,6 +41,7 @@ $(document).ready(function(){
 		});
 	}
 
+	/* Workhorse grid function */
 	function _display(obj, ele){
 
 		var theme = getDemoTheme();
@@ -111,28 +114,93 @@ $(document).ready(function(){
 
 		/* Handle editing of record elements */
 		$("#jqxgrid-"+ele).on({
-			cellvaluechanged: function(event){
+			rowclick: function(event){
 				var _d = $('#jqxgrid-'+ele).jqxGrid('getrowdata', args.rowindex);
-
-				var _c = '{"hostname":"'+_d.Computer+'","sku":"'+_d.SKU+'","uuic":"'+_d.UUIC+'","serial":"'+_d.Serial+'"}';
-				var _m = '{"hostname":"'+_d.Computer+'","sku":"'+_d.MSKU+'","serial":"'+_d.MSerial+'"}';
-
-				$('#current-inventory').comm({
-				appID:'MLIB-Inventory',
-				url: 'http://new-inventory.scl.utah.edu/?do=add',
-					data: _c,
-					callback: function(){
-						_message($(this));
-					}
-				});
-
-				$('#current-inventory').comm({
-					appID:'MLIB-Inventory',
-					url: 'http://new-inventory.scl.utah.edu/?do=add-monitor',
-					data: _m,
-					callback: function(){
-						_message($(this));
-					}
+				var _dis = ((_d.SKU)&&(_d.UUIC)&&(_d.Serial)) ? 'disabled="true"' : false;
+				$('<div>').simpledialog2({
+					mode: 'blank',
+					headerText: '&nbsp;&nbsp;Edit record',
+					dialogAllow: true,
+					dialogForce: true,
+					fullScreen: true,
+					blankContent :
+						"<form action='http://new-inventory.scl.utah.edu?do=add' id='add-computer' name='add-computer' method='post'>"+
+						"<div data-role='fieldcontain'>"+
+						"<fieldset data-role='controlgroup' data-mini=true>"+
+						"<label for='hostname'>Hostname</label>"+
+						"<input id='hostname' name='hostname' placeholder='Computer name' type='text' value='"+_d.Computer+"'>"+
+						"</fieldset>"+
+						"</div>"+
+						"<div data-role='fieldcontain'>"+
+						"<fieldset data-role='controlgroup' data-mini=true>"+
+						"<label for='model'>Model</label>"+
+						"<input id='model' name='model' placeholder='Model type' type='text'>"+
+						"</fieldset>"+
+						"</div>"+
+						"<div data-role='fieldcontain'>"+
+						"<fieldset data-role='controlgroup' data-mini=true>"+
+						"<label for='sku'>SKU</label>"+
+						"<input id='sku' name='sku' placeholder='SKU (white barcode)' type='text' value='"+_d.SKU+"' "+_dis+">"+
+						"</fieldset>"+
+						"</div>"+
+						"<div data-role='fieldcontain'>"+
+						"<fieldset data-role='controlgroup' data-mini=true>"+
+						"<label for='uuic'>UUIC</label>"+
+						"<input id='uuic' name='uuic' placeholder='UUIC (yellow sticker)' type='text' value='"+_d.UUIC+"' "+_dis+">"+
+						"</fieldset>"+
+						"</div>"+
+						"<div data-role='fieldcontain'>"+
+						"<fieldset data-role='controlgroup' data-mini=true>"+
+						"<label for='serial'>Serial</label>"+
+						"<input id='serial' name='serial' placeholder='Serial (Red label)' type='text' value='"+_d.Serial+"' "+_dis+">"+
+						"</fieldset>"+
+						"</div>"+
+						"<div data-role='fieldcontain'>"+
+						"<fieldset data-role='controlgroup' data-mini=true>"+
+						"<label for='location'>Location</label>"+
+						"<input id='location' name='location' placeholder='Room number' type='text'>"+
+						"</fieldset>"+
+						"</div>"+
+						"<div data-role='fieldcontain'>"+
+						"<fieldset data-role='controlgroup' data-mini=true>"+
+						"<label for='eowd'>EOWD</label>"+
+						"<input id='eowd' name='eowd' placeholder='End of warranty date' type='text'>"+
+						"</fieldset>"+
+						"</div>"+
+						"<div data-role='fieldcontain'>"+
+						"<fieldset data-role='controlgroup' data-mini=true>"+
+						"<label for='opd'>OPD</label>"+
+						"<input id='opd' name='opd' placeholder='Original purchase date' type='text'>"+
+						"</fieldset>"+
+						"</div>"+
+						"<div data-role='fieldcontain'>"+
+						"<fieldset data-role='controlgroup' data-mini=true>"+
+						"<label for='notes'>Notes</label>"+
+						"<input id='notes' name='notes' placeholder='Notes' type='text'>"+
+						"</fieldset>"+
+						"</div>"+
+						"<hr/>"+
+						"<div data-role='fieldcontain'>"+
+						"<fieldset data-role='controlgroup' data-mini=true>"+
+						"<label for='monitor'>Monitor</label>"+
+						"<input id='monitor' name='monitor' placeholder='Monitor name' type='text' value='"+_d.Computer+"'>"+
+						"</fieldset>"+
+						"</div>"+
+						"<div data-role='fieldcontain'>"+
+						"<fieldset data-role='controlgroup' data-mini=true>"+
+						"<label for='mserial'>Monitor serial</label>"+
+						"<input id='mserial' name='mserial' placeholder='Monitor serial' type='text' value='"+_d.MSerial+"'>"+
+						"</fieldset>"+
+						"</div>"+
+						"<div data-role='fieldcontain'>"+
+						"<fieldset data-role='controlgroup' data-mini=true>"+
+						"<label for='msku'>Monitor SKU</label>"+
+						"<input id='msku' name='msku' placeholder='Monitor SKU' type='text' value='"+_d.SKU+"'>"+
+						"</fieldset>"+
+						"</div>"+
+						"<a rel='close' data-icon='delete' data-iconpos='right' data-inline='true' data-role='button' data-mini='true' href='#'>Close</a>"+
+						"<input data-inline='true' data-mini='true' data-theme='c' data-icon='arrow-r' data-iconpos='right' value='Save changes' type='submit'>"+
+						"</form>"
 				});
 			}
 		});
@@ -216,8 +284,8 @@ $(document).ready(function(){
 			sortable: true,
 			pageable: true,
 			autoheight: true,
-			editable: true,
-			enabletooltips: true,
+			//editable: true,
+			//enabletooltips: true,
 			autosave: true,
 			autorestore: true,
 			selectionmode: 'multiplecellsadvanced',
