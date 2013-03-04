@@ -71,7 +71,7 @@ $(document).ready(function(){
 			}
 			source.localdata = sortdata;
 			$("#jqxgrid-"+ele).jqxGrid('databind', source, 'sort');
-			//$("#jqxgrid").jqxGrid('savestate');
+			$("#jqxgrid").jqxGrid('savestate');
 			Object.prototype.toString = tmpToString;
 		};
 
@@ -119,12 +119,22 @@ $(document).ready(function(){
 				var _dis = ((_d.SKU)&&(_d.UUIC)&&(_d.Serial)) ? 'disabled="true"' : false;
 				$('<div>').simpledialog2({
 					mode: 'blank',
-					headerText: '&nbsp;&nbsp;Edit record',
+					headerText: '&nbsp;&nbsp;Edit inventory record',
 					dialogAllow: true,
 					dialogForce: true,
 					fullScreen: true,
+					onCreated: function(){
+						$('#edit-record').comm({
+							appID:'MLIB-Inventory'
+						});
+					},
+					onOpen: function(){
+						$('#edit-record').comm({
+							appID:'MLIB-Inventory'
+						});
+					},
 					blankContent :
-						"<form action='http://new-inventory.scl.utah.edu?do=add' id='add-computer' name='add-computer' method='post'>"+
+						"<form action='http://new-inventory.scl.utah.edu?do=add' id='edit-record' name='edit-record' method='post'>"+
 						"<div data-role='fieldcontain'>"+
 						"<fieldset data-role='controlgroup' data-mini=true>"+
 						"<label for='hostname'>Hostname</label>"+
@@ -199,7 +209,7 @@ $(document).ready(function(){
 						"</fieldset>"+
 						"</div>"+
 						"<a rel='close' data-icon='delete' data-iconpos='right' data-inline='true' data-role='button' data-mini='true' href='#'>Close</a>"+
-						"<input data-inline='true' data-mini='true' data-theme='c' data-icon='arrow-r' data-iconpos='right' value='Save changes' type='submit'>"+
+						"<input id='edit' data-inline='true' data-mini='true' data-theme='c' data-icon='arrow-r' data-iconpos='right' value='Save changes' type='submit'>"+
 						"</form>"
 				});
 			}
@@ -290,7 +300,7 @@ $(document).ready(function(){
 			autorestore: true,
 			selectionmode: 'multiplecellsadvanced',
 			ready: function () {
-				//$("#jqxgrid").jqxGrid('loadstate', $("#jqxgrid").jqxGrid('getstate'));
+				$("#jqxgrid").jqxGrid('loadstate', $("#jqxgrid").jqxGrid('getstate'));
 				$("#jqxgrid-"+ele).jqxGrid('sortby', 'Hostname', 'asc');
 			},
 			columns: [
