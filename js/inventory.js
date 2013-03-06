@@ -261,6 +261,9 @@ $(document).ready(function(){
 
 	/* populate form helper */
 	function _populate(obj){
+		// disable some elements
+		((!obj.SKU)&&(!obj.UUIC)&&(!obj.Serial)) ? _disable(false) : _disable(true);
+
 		$('#chostname').val(obj.Computer);
 		$('#csku').val(obj.SKU);
 		$('#cuuic').val(obj.UUIC);
@@ -270,6 +273,10 @@ $(document).ready(function(){
 		$('#ceowd').val(obj.EOWD);
 		$('#copd').val(obj.OPD);
 		$('#cnotes').val(obj.Notes);
+	}
+
+	function _disable(bool){
+		(bool) ? $('#csku').textinput('disable') && $('#cuuic').textinput('disable') && $('#cserial').textinput('disable') : $('#csku').textinput('enable') && $('#cuuic').textinput('enable') && $('#cserial').textinput('enable')
 	}
 
 	/* Helper function to inspect objects recursively */
