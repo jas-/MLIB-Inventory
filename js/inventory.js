@@ -116,6 +116,7 @@ $(document).ready(function(){
 		/* Handle editing of record elements */
 		$("#jqxgrid-"+ele).on({
 			rowclick: function(event){
+				//alert(JSON.stringify(obj[$('#jqxgrid-'+ele).jqxGrid('getrowid', args.rowindex)]));
 				var _d = $('#jqxgrid-'+ele).jqxGrid('getrowdata', args.rowindex);
 				var _dis = ((_d.SKU)&&(_d.UUIC)&&(_d.Serial)) ? 'disabled="true"' : false;
 				$('<div>').simpledialog2({
@@ -124,6 +125,9 @@ $(document).ready(function(){
 					safeNuke: true,
 					blankContentAdopt: true,
 					blankContent :
+						"<div id='record' data-role='collapsible-set' data-theme='d' data-content-theme='d'>"+
+						"<div data-role='collapsible' data-collapsed='false'>"+
+						"<h3>Computer details</h3>"+
 						"<form action='http://new-inventory.scl.utah.edu?do=add' id='edit-record' name='edit-record' method='post'>"+
 						"<div data-role='fieldcontain'>"+
 						"<fieldset data-role='controlgroup' data-mini=true>"+
@@ -176,10 +180,15 @@ $(document).ready(function(){
 						"<div data-role='fieldcontain'>"+
 						"<fieldset data-role='controlgroup' data-mini=true>"+
 						"<label for='notes'>Notes</label>"+
-						"<input id='notes' name='notes' placeholder='Notes' type='text'>"+
+						"<textarea id='notes' name='notes' placeholder='Notes'></textarea>"+
 						"</fieldset>"+
 						"</div>"+
-						"<hr/>"+
+						"<a rel='close' data-icon='delete' data-iconpos='right' data-inline='true' data-role='button' data-mini='true' href='#'>Close</a>"+
+						"<input id='edit' data-inline='true' data-mini='true' data-theme='c' data-icon='arrow-r' data-iconpos='right' value='Save changes' type='submit'>"+
+						"</form></div>"+
+						"<div data-role='collapsible'>"+
+						"<h3>Monitor(s) details</h3>"+
+						"<form action='http://new-inventory.scl.utah.edu?do=add-monitor' id='edit-record' name='edit-record' method='post'>"+
 						"<div data-role='fieldcontain'>"+
 						"<fieldset data-role='controlgroup' data-mini=true>"+
 						"<label for='monitor'>Monitor</label>"+
@@ -200,7 +209,7 @@ $(document).ready(function(){
 						"</div>"+
 						"<a rel='close' data-icon='delete' data-iconpos='right' data-inline='true' data-role='button' data-mini='true' href='#'>Close</a>"+
 						"<input id='edit' data-inline='true' data-mini='true' data-theme='c' data-icon='arrow-r' data-iconpos='right' value='Save changes' type='submit'>"+
-						"</form>"
+						"</form></div>"
 				});
 			}
 		});

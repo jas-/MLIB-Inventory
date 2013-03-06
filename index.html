@@ -44,11 +44,41 @@
 	  <div>
 		<div id="message-current"></div>
 		<div>
+		  <div data-role="fieldcontain">
+            <label for="selectmenu1">
+                Location:
+            </label>
+            <select name="areas" data-theme="d" data-mini="true" data-inline="true">
+                <option value="benchmark">
+                    Benchmark
+                </option>
+                <option value="knowledge-commons">
+                    Knowledge Commons
+                </option>
+                <option value="public-level-1">
+                    Public Lvl 1
+                </option>
+                <option value="public-level-2">
+                    Public Lvl 2
+                </option>
+                <option value="sage">
+                    Sage Point
+                </option>
+                <option value="storage">
+                    Storage
+                </option>
+                <option value="repls">
+                    Replacements
+                </option>
+                <option value="teaching-labs">
+                    Teaching Labs
+                </option>
+                <option value="union">
+                    Union Lab
+                </option>
+            </select>
 		  Export: <a id="export-csv" data-mini="true" data-role="button" data-inline="true" href="#">CSV</a>&nbsp;<a id="export-pdf" data-mini="true" data-role="button" data-inline="true" href="#">PDF</a>
 		</div>
-		<!--div>
-		  Filter: <a id="knowledge-commons" data-mini="true" data-role="button" data-inline="true" href="#">Knowledge Commons</a>&nbsp;<a id="union" data-mini="true" data-role="button" data-inline="true" href="#">Union</a>&nbsp;<a id="residence" data-mini="true" data-role="button" data-inline="true" href="#">Heritage Center</a>&nbsp;<a id="sage" data-mini="true" data-role="button" data-inline="true" href="#">Sage Point</a>
-		</div-->
 		<div id='jqxWidget-current'>
 		  <div id="jqxgrid-current"></div>
 		</div>
