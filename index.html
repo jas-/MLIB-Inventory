@@ -20,6 +20,8 @@
   </head>
 
 <body>
+
+  <!-- Main content page -->
   <div data-role="page" id="main">
     <div data-theme="c" data-role="header">
       <h3>
@@ -89,6 +91,7 @@
 	</div>
   </div>
 
+  <!-- Search inventory records page -->
   <div data-role="page" id="search">
     <div data-theme="c" data-role="header">
       <h3>
@@ -129,6 +132,7 @@
 	</div>
   </div>
 
+  <!-- Quick add record page -->
   <div data-role="page" id="add">
     <div data-theme="c" data-role="header">
       <h3>
@@ -200,6 +204,116 @@
 	</div>
 	<div style="text-align: center; padding-bottom: 1%">
 	  <span style="font-size: .7em;font-weight: normal">&copy; University Of Utah - Marriott Library 2013</span>
+	</div>
+  </div>
+
+  <!-- Edit inventory item details form(s) -->
+  <div id="record-details" style="display: none;" data-options='{"mode":"blank","blankContent":true,"blankContentAdopt":true,"headerText":"Select language","headerClose":false}'>
+	<div id='record' data-role='collapsible-set' data-theme='d' data-content-theme='d'>
+	  <div data-role='collapsible' data-collapsed='false'>
+		<h3>Computer details</h3>
+		<form action='http://new-inventory.scl.utah.edu?do=add' id='edit-computer' name='edit-computer' method='post'>
+		  <div data-role='fieldcontain'>
+			<fieldset data-role='controlgroup' data-mini=true>
+			  <label for='chostname'>Hostname</label>
+				<input id='chostname' name='chostname' placeholder='Computer name' type='text'>
+			</fieldset>
+		  </div>
+		  <div data-role='fieldcontain'>
+			<fieldset data-role='controlgroup' data-mini=true>
+			  <label for='cmodel'>Model</label>
+				<input id='cmodel' name='cmodel' placeholder='Model type' type='text'>
+			</fieldset>
+		  </div>
+		  <div data-role='fieldcontain'>
+			<fieldset data-role='controlgroup' data-mini=true>
+			  <label for='csku'>SKU</label>
+				<input id='csku' name='csku' placeholder='SKU (white barcode)' type='text'>
+			</fieldset>
+		  </div>
+		  <div data-role='fieldcontain'>
+			<fieldset data-role='controlgroup' data-mini=true>
+			  <label for='cuuic'>UUIC</label>
+				<input id='cuuic' name='cuuic' placeholder='UUIC (yellow sticker)' type='text'>
+			</fieldset>
+		  </div>
+		  <div data-role='fieldcontain'>
+			<fieldset data-role='controlgroup' data-mini=true>
+			  <label for='cserial'>Serial</label>
+				<input id='cserial' name='cserial' placeholder='Serial (Red label)' type='text'>
+			</fieldset>
+		  </div>
+		  <div data-role='fieldcontain'>
+			<fieldset data-role='controlgroup' data-mini=true>
+			  <label for='clocation'>Location</label>
+				<input id='clocation' name='clocation' placeholder='Room number' type='text'>
+			</fieldset>
+		  </div>
+		  <div data-role='fieldcontain'>
+			<fieldset data-role='controlgroup' data-mini=true>
+			  <label for='ceowd'>EOWD</label>
+				<input id='ceowd' name='ceowd' placeholder='End of warranty date' type='text'>
+			</fieldset>
+		  </div>
+		  <div data-role='fieldcontain'>
+			<fieldset data-role='controlgroup' data-mini=true>
+			  <label for='copd'>OPD</label>
+				<input id='copd' name='copd' placeholder='Original purchase date' type='text'>
+			</fieldset>
+		  </div>
+		  <div data-role='fieldcontain'>
+			<fieldset data-role='controlgroup' data-mini=true>
+			  <label for='cnotes'>Notes</label>
+				<textarea id='cnotes' name='cnotes' placeholder='Notes'></textarea>
+			</fieldset>
+		  </div>
+		  <a rel='close' data-icon='delete' data-iconpos='right' data-inline='true' data-role='button' data-mini='true' href='#'>Close</a>
+		  <input id='edit' data-inline='true' data-mini='true' data-theme='c' data-icon='arrow-r' data-iconpos='right' value='Save changes' type='submit'>
+		</form>
+	  </div>
+	  <div data-role='collapsible'>
+		<h3>Monitor(s) details</h3>
+		<form action='http://new-inventory.scl.utah.edu?do=add-monitor' id='edit-monitor' name='edit-monitor' method='post'>
+		  <div data-role='fieldcontain'>
+			<fieldset data-role='controlgroup' data-mini=true>
+			  <label for='monitor'>Monitor</label>
+				<input id='monitor' name='monitor' placeholder='Monitor name' type='text'>
+			</fieldset>
+		  </div>
+		  <div data-role='fieldcontain'>
+			<fieldset data-role='controlgroup' data-mini=true>
+			  <label for='mmodel'>Model</label>
+				<input id='mmodel' name='mmodel' placeholder='Model type' type='text'>
+			</fieldset>
+		  </div>
+		  <div data-role='fieldcontain'>
+			<fieldset data-role='controlgroup' data-mini=true>
+			  <label for='mserial'>Monitor serial</label>
+				<input id='mserial' name='mserial' placeholder='Monitor serial' type='text'>
+			</fieldset>
+		  </div>
+		  <div data-role='fieldcontain'>
+			<fieldset data-role='controlgroup' data-mini=true>
+			  <label for='msku'>Monitor SKU</label>
+				<input id='msku' name='msku' placeholder='Monitor SKU' type='text'>
+			</fieldset>
+		  </div>
+		  <div data-role='fieldcontain'>
+			<fieldset data-role='controlgroup' data-mini=true>
+			  <label for='meowd'>EOWD</label>
+				<input id='meowd' name='meowd' placeholder='End of warranty date' type='text'>
+			</fieldset>
+		  </div>
+		  <div data-role='fieldcontain'>
+			<fieldset data-role='controlgroup' data-mini=true>
+			  <label for='mlocation'>Location</label>
+				<input id='mlocation' name='mlocation' placeholder='Room number' type='text'>
+			</fieldset>
+		  </div>
+		  <a rel='close' data-icon='delete' data-iconpos='right' data-inline='true' data-role='button' data-mini='true' href='#'>Close</a>
+		  <input id='edit' data-inline='true' data-mini='true' data-theme='c' data-icon='arrow-r' data-iconpos='right' value='Save changes' type='submit'>
+		</form>
+	  </div>
 	</div>
   </div>
 

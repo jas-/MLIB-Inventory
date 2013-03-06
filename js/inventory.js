@@ -116,118 +116,14 @@ $(document).ready(function(){
 		/* Handle editing of record elements */
 		$("#jqxgrid-"+ele).on({
 			rowclick: function(event){
-				//alert(JSON.stringify(obj[$('#jqxgrid-'+ele).jqxGrid('getrowid', args.rowindex)]));
-				var _d = $('#jqxgrid-'+ele).jqxGrid('getrowdata', args.rowindex);
-				var _dis = ((_d.SKU)&&(_d.UUIC)&&(_d.Serial)) ? 'disabled="true"' : false;
-				$('<div>').simpledialog2({
+
+				_populate(obj[$('#jqxgrid-'+ele).jqxGrid('getrowid', args.rowindex)]);
+
+				$('#record-details').simpledialog2({
 					headerText: 'Edit inventory record',
 					dialogForce: true,
 					safeNuke: true,
-					blankContentAdopt: true,
-					blankContent :
-						"<div id='record' data-role='collapsible-set' data-theme='d' data-content-theme='d'>"+
-						"<div data-role='collapsible' data-collapsed='false'>"+
-						"<h3>Computer details</h3>"+
-						"<form action='http://new-inventory.scl.utah.edu?do=add' id='edit-record' name='edit-record' method='post'>"+
-						"<div data-role='fieldcontain'>"+
-						"<fieldset data-role='controlgroup' data-mini=true>"+
-						"<label for='hostname'>Hostname</label>"+
-						"<input id='hostname' name='hostname' placeholder='Computer name' type='text' value='"+_d.Computer+"'>"+
-						"</fieldset>"+
-						"</div>"+
-						"<div data-role='fieldcontain'>"+
-						"<fieldset data-role='controlgroup' data-mini=true>"+
-						"<label for='model'>Model</label>"+
-						"<input id='model' name='model' placeholder='Model type' type='text'>"+
-						"</fieldset>"+
-						"</div>"+
-						"<div data-role='fieldcontain'>"+
-						"<fieldset data-role='controlgroup' data-mini=true>"+
-						"<label for='sku'>SKU</label>"+
-						"<input id='sku' name='sku' placeholder='SKU (white barcode)' type='text' value='"+_d.SKU+"' "+_dis+">"+
-						"</fieldset>"+
-						"</div>"+
-						"<div data-role='fieldcontain'>"+
-						"<fieldset data-role='controlgroup' data-mini=true>"+
-						"<label for='uuic'>UUIC</label>"+
-						"<input id='uuic' name='uuic' placeholder='UUIC (yellow sticker)' type='text' value='"+_d.UUIC+"' "+_dis+">"+
-						"</fieldset>"+
-						"</div>"+
-						"<div data-role='fieldcontain'>"+
-						"<fieldset data-role='controlgroup' data-mini=true>"+
-						"<label for='serial'>Serial</label>"+
-						"<input id='serial' name='serial' placeholder='Serial (Red label)' type='text' value='"+_d.Serial+"' "+_dis+">"+
-						"</fieldset>"+
-						"</div>"+
-						"<div data-role='fieldcontain'>"+
-						"<fieldset data-role='controlgroup' data-mini=true>"+
-						"<label for='location'>Location</label>"+
-						"<input id='location' name='location' placeholder='Room number' type='text'>"+
-						"</fieldset>"+
-						"</div>"+
-						"<div data-role='fieldcontain'>"+
-						"<fieldset data-role='controlgroup' data-mini=true>"+
-						"<label for='eowd'>EOWD</label>"+
-						"<input id='eowd' name='eowd' placeholder='End of warranty date' type='text'>"+
-						"</fieldset>"+
-						"</div>"+
-						"<div data-role='fieldcontain'>"+
-						"<fieldset data-role='controlgroup' data-mini=true>"+
-						"<label for='opd'>OPD</label>"+
-						"<input id='opd' name='opd' placeholder='Original purchase date' type='text'>"+
-						"</fieldset>"+
-						"</div>"+
-						"<div data-role='fieldcontain'>"+
-						"<fieldset data-role='controlgroup' data-mini=true>"+
-						"<label for='notes'>Notes</label>"+
-						"<textarea id='notes' name='notes' placeholder='Notes'></textarea>"+
-						"</fieldset>"+
-						"</div>"+
-						"<a rel='close' data-icon='delete' data-iconpos='right' data-inline='true' data-role='button' data-mini='true' href='#'>Close</a>"+
-						"<input id='edit' data-inline='true' data-mini='true' data-theme='c' data-icon='arrow-r' data-iconpos='right' value='Save changes' type='submit'>"+
-						"</form></div>"+
-						"<div data-role='collapsible'>"+
-						"<h3>Monitor(s) details</h3>"+
-						"<form action='http://new-inventory.scl.utah.edu?do=add-monitor' id='edit-record' name='edit-record' method='post'>"+
-						"<div data-role='fieldcontain'>"+
-						"<fieldset data-role='controlgroup' data-mini=true>"+
-						"<label for='monitor'>Monitor</label>"+
-						"<input id='monitor' name='monitor' placeholder='Monitor name' type='text' value='"+_d.Computer+"'>"+
-						"</fieldset>"+
-						"</div>"+
-						"<div data-role='fieldcontain'>"+
-						"<fieldset data-role='controlgroup' data-mini=true>"+
-						"<label for='model'>Model</label>"+
-						"<input id='model' name='model' placeholder='Model type' type='text'>"+
-						"</fieldset>"+
-						"</div>"+
-						"<div data-role='fieldcontain'>"+
-						"<fieldset data-role='controlgroup' data-mini=true>"+
-						"<label for='mserial'>Monitor serial</label>"+
-						"<input id='mserial' name='mserial' placeholder='Monitor serial' type='text' value='"+_d.MSerial+"'>"+
-						"</fieldset>"+
-						"</div>"+
-						"<div data-role='fieldcontain'>"+
-						"<fieldset data-role='controlgroup' data-mini=true>"+
-						"<label for='msku'>Monitor SKU</label>"+
-						"<input id='msku' name='msku' placeholder='Monitor SKU' type='text' value='"+_d.MSKU+"'>"+
-						"</fieldset>"+
-						"</div>"+
-						"<div data-role='fieldcontain'>"+
-						"<fieldset data-role='controlgroup' data-mini=true>"+
-						"<label for='eowd'>EOWD</label>"+
-						"<input id='eowd' name='eowd' placeholder='End of warranty date' type='text'>"+
-						"</fieldset>"+
-						"</div>"+
-						"<div data-role='fieldcontain'>"+
-						"<fieldset data-role='controlgroup' data-mini=true>"+
-						"<label for='location'>Location</label>"+
-						"<input id='location' name='location' placeholder='Room number' type='text'>"+
-						"</fieldset>"+
-						"</div>"+
-						"<a rel='close' data-icon='delete' data-iconpos='right' data-inline='true' data-role='button' data-mini='true' href='#'>Close</a>"+
-						"<input id='edit' data-inline='true' data-mini='true' data-theme='c' data-icon='arrow-r' data-iconpos='right' value='Save changes' type='submit'>"+
-						"</form></div>"
+					blankContentAdopt: true
 				});
 			}
 		});
@@ -321,7 +217,7 @@ $(document).ready(function(){
 			//enabletooltips: true,
 			autosave: true,
 			autorestore: true,
-			selectionmode: 'multiplecellsadvanced',
+			selectionmode: 'singlerow',
 			ready: function () {
 				$("#jqxgrid").jqxGrid('loadstate', $("#jqxgrid").jqxGrid('getstate'));
 				$("#jqxgrid-"+ele).jqxGrid('sortby', 'Hostname', 'asc');
@@ -361,6 +257,19 @@ $(document).ready(function(){
 		setTimeout(function() {
 			$('#message'+ele).fadeOut();
 		}, 2000);
+	}
+
+	/* populate form helper */
+	function _populate(obj){
+		$('#chostname').val(obj.Computer);
+		$('#csku').val(obj.SKU);
+		$('#cuuic').val(obj.UUIC);
+		$('#cserial').val(obj.Serial);
+		$('#cmodel').val(obj.Model);
+		$('#clocation').val(obj.Location);
+		$('#ceowd').val(obj.EOWD);
+		$('#copd').val(obj.OPD);
+		$('#cnotes').val(obj.Notes);
 	}
 
 	/* Helper function to inspect objects recursively */
