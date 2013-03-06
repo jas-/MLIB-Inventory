@@ -129,7 +129,6 @@ $(document).ready(function(){
 
 		$('#edit-computer').comm({
 			appID:'MLIB-Inventory',
-			debug:true,
 			callback: function(){
 				_message($(this), 'edit-computer');
 			}
@@ -137,7 +136,6 @@ $(document).ready(function(){
 
 		$('#edit-monitor').comm({
 			appID:'MLIB-Inventory',
-			debug:true,
 			callback: function(){
 				_message($(this), 'edit-monitor');
 			}
@@ -245,25 +243,22 @@ $(document).ready(function(){
 			$.each(obj, function(key,value){
 				$.each(value, function(k,v){
 					if(k=='error'){
-						$('#message-'+ele).html('<div class="error">'+v+'</div>').fadeIn(1000);
+						$('#message-'+ele).html('<div class="error">'+v+'</div>').fadeIn(2000).delay(3500).fadeOut('slow');
 					}
 					if(k=='warning'){
-						$('#message-'+ele).html('<div class="warning">'+v+'</div>').fadeIn(1000);
+						$('#message-'+ele).html('<div class="warning">'+v+'</div>').fadeIn(2000).delay(3500).fadeOut('slow');
 					}
 					if(k=='info'){
-						$('#message-'+ele).html('<div class="info">'+v+'</div>').fadeIn(1000);
+						$('#message-'+ele).html('<div class="info">'+v+'</div>').fadeIn(2000).delay(3500).fadeOut('slow');
 					}
 					if(k=='success'){
-						$('#message-'+ele).html('<div class="success">'+v+'</div>').fadeIn(1000);
+						$('#message-'+ele).html('<div class="success">'+v+'</div>').fadeIn(2000).delay(3500).fadeOut('slow');
 					}
 				});
 			});
 		} else {
-			$('#message-'+ele).html('<div class="warning">Empty response for request</div>').fadeIn(1000);
+			$('#message-'+ele).html('<div class="warning">Empty response for request</div>').fadeIn(2000).delay(3500).fadeOut('slow');
 		}
-		setTimeout(function() {
-			$('#message'+ele).fadeOut();
-		}, 2000);
 	}
 
 	/* populate form helper */
