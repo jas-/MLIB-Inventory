@@ -13,7 +13,7 @@ $(document).ready(function(){
 
 	$("#search").live('pagecreate pageshow',function(event){
 		_destroy('search');
-		_load('search', false, false, true, true, 'search-computer');
+		_load('search', false, false, true, 'search-computer');
 	});
 
 	$("#add").live('pagecreate pageshow',function(event){
@@ -32,6 +32,7 @@ $(document).ready(function(){
 			appID:'MLIB-Inventory',
 			url: (url) ? url : false,
 			data: (data) ? data : false,
+			debug: true,
 			callback: function(){
 				_message($(this), ele);
 				_destroy(ele);
@@ -118,21 +119,10 @@ $(document).ready(function(){
 				var _d = $('#jqxgrid-'+ele).jqxGrid('getrowdata', args.rowindex);
 				var _dis = ((_d.SKU)&&(_d.UUIC)&&(_d.Serial)) ? 'disabled="true"' : false;
 				$('<div>').simpledialog2({
-					mode: 'blank',
-					headerText: '&nbsp;&nbsp;Edit inventory record',
-					dialogAllow: true,
+					headerText: 'Edit inventory record',
 					dialogForce: true,
-					fullScreen: true,
-					onCreated: function(){
-						$('#edit-record').comm({
-							appID:'MLIB-Inventory'
-						});
-					},
-					onOpen: function(){
-						$('#edit-record').comm({
-							appID:'MLIB-Inventory'
-						});
-					},
+					safeNuke: true,
+					blankContentAdopt: true,
 					blankContent :
 						"<form action='http://new-inventory.scl.utah.edu?do=add' id='edit-record' name='edit-record' method='post'>"+
 						"<div data-role='fieldcontain'>"+
@@ -213,6 +203,12 @@ $(document).ready(function(){
 						"</form>"
 				});
 			}
+		});
+
+		/* attempt to bind to modal window form */
+		$('#edit-record').comm({
+			appID:'MLIB-Inventory',
+			debug:true
 		});
 
 		/* Create some export options */
