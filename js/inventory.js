@@ -32,7 +32,6 @@ $(document).ready(function(){
 			appID:'MLIB-Inventory',
 			url: (url) ? url : false,
 			data: (data) ? data : false,
-			debug: true,
 			callback: function(){
 				_message($(this), ele);
 				_destroy(ele);
@@ -128,10 +127,20 @@ $(document).ready(function(){
 			}
 		});
 
-		/* attempt to bind to modal window form */
-		$('#edit-record').comm({
+		$('#edit-computer').comm({
 			appID:'MLIB-Inventory',
-			debug:true
+			debug:true,
+			callback: function(){
+				_message($(this), 'edit-computer');
+			}
+		});
+
+		$('#edit-monitor').comm({
+			appID:'MLIB-Inventory',
+			debug:true,
+			callback: function(){
+				_message($(this), 'edit-monitor');
+			}
 		});
 
 		/* Create some export options */
@@ -149,7 +158,7 @@ $(document).ready(function(){
 
 		/* When row count changes save state */
 		$("#jqxgrid-"+ele).on("pagesizechanged", function (event) {
-			//$("#jqxgrid").jqxGrid('savestate');
+			$("#jqxgrid").jqxGrid('savestate');
 		});
 
 		if (_detect()){
@@ -213,8 +222,6 @@ $(document).ready(function(){
 			sortable: true,
 			pageable: true,
 			autoheight: true,
-			//editable: true,
-			//enabletooltips: true,
 			autosave: true,
 			autorestore: true,
 			selectionmode: 'singlerow',
@@ -261,7 +268,7 @@ $(document).ready(function(){
 
 	/* populate form helper */
 	function _populate(obj){
-		// disable some elements
+
 		((!obj.SKU)&&(!obj.UUIC)&&(!obj.Serial)) ? _disable(false) : _disable(true);
 
 		$('#chostname').val(obj.Computer);
