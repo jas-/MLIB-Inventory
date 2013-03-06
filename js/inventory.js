@@ -197,6 +197,12 @@ $(document).ready(function(){
 						"</div>"+
 						"<div data-role='fieldcontain'>"+
 						"<fieldset data-role='controlgroup' data-mini=true>"+
+						"<label for='model'>Model</label>"+
+						"<input id='model' name='model' placeholder='Model type' type='text'>"+
+						"</fieldset>"+
+						"</div>"+
+						"<div data-role='fieldcontain'>"+
+						"<fieldset data-role='controlgroup' data-mini=true>"+
 						"<label for='mserial'>Monitor serial</label>"+
 						"<input id='mserial' name='mserial' placeholder='Monitor serial' type='text' value='"+_d.MSerial+"'>"+
 						"</fieldset>"+
@@ -204,7 +210,19 @@ $(document).ready(function(){
 						"<div data-role='fieldcontain'>"+
 						"<fieldset data-role='controlgroup' data-mini=true>"+
 						"<label for='msku'>Monitor SKU</label>"+
-						"<input id='msku' name='msku' placeholder='Monitor SKU' type='text' value='"+_d.SKU+"'>"+
+						"<input id='msku' name='msku' placeholder='Monitor SKU' type='text' value='"+_d.MSKU+"'>"+
+						"</fieldset>"+
+						"</div>"+
+						"<div data-role='fieldcontain'>"+
+						"<fieldset data-role='controlgroup' data-mini=true>"+
+						"<label for='eowd'>EOWD</label>"+
+						"<input id='eowd' name='eowd' placeholder='End of warranty date' type='text'>"+
+						"</fieldset>"+
+						"</div>"+
+						"<div data-role='fieldcontain'>"+
+						"<fieldset data-role='controlgroup' data-mini=true>"+
+						"<label for='location'>Location</label>"+
+						"<input id='location' name='location' placeholder='Room number' type='text'>"+
 						"</fieldset>"+
 						"</div>"+
 						"<a rel='close' data-icon='delete' data-iconpos='right' data-inline='true' data-role='button' data-mini='true' href='#'>Close</a>"+
