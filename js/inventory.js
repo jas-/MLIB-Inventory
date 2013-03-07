@@ -116,14 +116,12 @@ $(document).ready(function(){
 		$("#jqxgrid-"+ele).on({
 			rowclick: function(event){
 
-				_populate(obj[$('#jqxgrid-'+ele).jqxGrid('getrowid', args.rowindex)]);
-
 				$('#record-details').simpledialog2({
 					headerText: 'Edit inventory record',
-					dialogForce: true,
-					safeNuke: true,
-					blankContentAdopt: true
+					dialogForce: true
 				});
+				_populate(obj[$('#jqxgrid-'+ele).jqxGrid('getrowid', args.rowindex)]);
+
 			}
 		});
 
@@ -139,6 +137,11 @@ $(document).ready(function(){
 			callback: function(){
 				_message($(this), 'edit-monitor');
 			}
+		});
+
+		/* add new monitor element(s) */
+		$('#add-monitor-fields').on('click', function(event){
+			$('#clone-monitor').clone().appendTo("#additional-monitors");
 		});
 
 		/* Create some export options */

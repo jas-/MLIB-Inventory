@@ -47,11 +47,9 @@
 		<div id="message-current"></div>
 		<div>
 		  <div data-role="fieldcontain">
-            <label for="selectmenu1">
-                Location:
-            </label>
-            <select name="areas" data-theme="d" data-mini="true" data-inline="true">
-                <option value="benchmark">
+            <label for="selectmenu1">Location:</label>
+			  <select name="areas" data-theme="d" data-mini="true" data-inline="true">
+				<option value="benchmark">
                     Benchmark
                 </option>
                 <option value="knowledge-commons">
@@ -79,7 +77,8 @@
                     Union Lab
                 </option>
             </select>
-		  Export: <a id="export-csv" data-mini="true" data-role="button" data-inline="true" href="#">CSV</a>&nbsp;<a id="export-pdf" data-mini="true" data-role="button" data-inline="true" href="#">PDF</a>
+			Export: <a id="export-csv" data-mini="true" data-role="button" data-inline="true" href="#">CSV</a>&nbsp;<a id="export-pdf" data-mini="true" data-role="button" data-inline="true" href="#">PDF</a>
+		  </div>
 		</div>
 		<div id='jqxWidget-current'>
 		  <div id="jqxgrid-current"></div>
@@ -118,7 +117,7 @@
 		<div data-role="fieldcontain">
 		  <fieldset data-role="controlgroup" data-mini="true" method="post">
 			<label for="search-records">Search</label>
-			  <input name="search-records" placeholder="Search inventory" value="" type="search">
+			  <input name="search" placeholder="Search inventory" value="" type="search">
 		  </fieldset>
 		</div>
 	   <input id="search-btn" data-inline="true" data-mini="true" data-theme="c" data-icon="arrow-r" data-iconpos="right" value="Search" type="submit">
@@ -208,7 +207,7 @@
   </div>
 
   <!-- Edit inventory item details form(s) -->
-  <div id="record-details" style="display: none;" data-options='{"mode":"blank","blankContent":true,"blankContentAdopt":true,"headerText":"Select language","headerClose":false}'>
+  <div id="record-details" style="display: none;" data-options='{"mode":"blank","blankContent":true,"blankContentAdopt":true,"headerText":"Edit inventory record","headerClose":false}'>
 	<div id='record' data-role='collapsible-set' data-theme='d' data-content-theme='d'>
 	  <div data-role='collapsible' data-collapsed='false'>
 		<h3>Computer details</h3>
@@ -276,6 +275,7 @@
 		<h3>Monitor(s) details</h3>
 		<div id="message-edit-monitor"></div>
 		<form action='http://new-inventory.scl.utah.edu?do=add-monitor' id='edit-monitor' name='edit-monitor' method='post'>
+		  <div id="clone-monitor">
 		  <div data-role='fieldcontain'>
 			<fieldset data-role='controlgroup' data-mini=true>
 			  <label for='monitor'>Monitor</label>
@@ -312,6 +312,8 @@
 				<input id='mlocation' name='mlocation' placeholder='Room number' type='text'>
 			</fieldset>
 		  </div>
+		  </div>
+		  <div id="additional-monitors"></div>
 		  <a rel='close' data-icon='delete' data-iconpos='right' data-inline='true' data-role='button' data-mini='true' href='#'>Close</a>
 		  <a id="add-monitor-fields" data-mini='true' data-role="button" data-inline="true" data-theme="d" href="#" data-icon="plus" data-iconpos="right">Add</a>
 		  <input id='edit' data-inline='true' data-mini='true' data-theme='c' data-icon='arrow-r' data-iconpos='right' value='Save changes' type='submit'>
