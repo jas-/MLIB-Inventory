@@ -207,8 +207,10 @@
   </div>
 
   <!-- Edit inventory item details form(s) -->
-  <div id="record-details" style="display: none;" data-options='{"mode":"blank","blankContent":true,"blankContentAdopt":true,"headerText":"Edit inventory record","headerClose":false}'>
-	<div id='record' data-role='collapsible-set' data-theme='d' data-content-theme='d'>
+  <div id="record-details" style="display: none;" data-options='{"mode":"blank","blankContent":true,"blankContentAdopt":true,"headerText":"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Edit inventory record","headerClose":true}'>
+	<div id='record' data-role='collapsible-set' data-theme='d' data-content-theme='d' data-mini='true'>
+
+	  <!-- Computer details -->
 	  <div data-role='collapsible' data-collapsed='false'>
 		<h3>Computer details</h3>
 		<div id="message-edit-computer"></div>
@@ -271,11 +273,12 @@
 		  <input id='edit' data-inline='true' data-mini='true' data-theme='c' data-icon='arrow-r' data-iconpos='right' value='Save changes' type='submit'>
 		</form>
 	  </div>
+
+	  <!-- Editing monitor record(s) -->
 	  <div data-role='collapsible'>
 		<h3>Monitor(s) details</h3>
 		<div id="message-edit-monitor"></div>
 		<form action='http://new-inventory.scl.utah.edu?do=add-monitor' id='edit-monitor' name='edit-monitor' method='post'>
-		  <div id="clone-monitor">
 		  <div data-role='fieldcontain'>
 			<fieldset data-role='controlgroup' data-mini=true>
 			  <label for='monitor'>Monitor</label>
@@ -312,10 +315,8 @@
 				<input id='mlocation' name='mlocation' placeholder='Room number' type='text'>
 			</fieldset>
 		  </div>
-		  </div>
 		  <div id="additional-monitors"></div>
 		  <a rel='close' data-icon='delete' data-iconpos='right' data-inline='true' data-role='button' data-mini='true' href='#'>Close</a>
-		  <a id="add-monitor-fields" data-mini='true' data-role="button" data-inline="true" data-theme="d" href="#" data-icon="plus" data-iconpos="right">Add</a>
 		  <input id='edit' data-inline='true' data-mini='true' data-theme='c' data-icon='arrow-r' data-iconpos='right' value='Save changes' type='submit'>
 		</form>
 	  </div>

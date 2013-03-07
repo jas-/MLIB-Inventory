@@ -112,56 +112,6 @@ $(document).ready(function(){
 		};
 		var dataAdapter = new $.jqx.dataAdapter(source);
 
-		/* Handle editing of record elements */
-		$("#jqxgrid-"+ele).on({
-			rowclick: function(event){
-
-				$('#record-details').simpledialog2({
-					headerText: 'Edit inventory record',
-					dialogForce: true
-				});
-				_populate(obj[$('#jqxgrid-'+ele).jqxGrid('getrowid', args.rowindex)]);
-
-			}
-		});
-
-		$('#edit-computer').comm({
-			appID:'MLIB-Inventory',
-			callback: function(){
-				_message($(this), 'edit-computer');
-			}
-		});
-
-		$('#edit-monitor').comm({
-			appID:'MLIB-Inventory',
-			callback: function(){
-				_message($(this), 'edit-monitor');
-			}
-		});
-
-		/* add new monitor element(s) */
-		$('#add-monitor-fields').on('click', function(event){
-			$('#clone-monitor').clone().appendTo("#additional-monitors");
-		});
-
-		/* Create some export options */
-		$('#export-csv').on('click', function(){
-			$("#jqxgrid").jqxGrid('exportdata', 'csv', _date()+'-MLIB-Inventory');
-		});
-		$('#export-pdf').on('click', function(){
-			$("#jqxgrid").jqxGrid('exportdata', 'pdf', _date()+'-MLIB-Inventory');
-		});
-		$('#export-xls').on('click', function(){
-			$("#jqxgrid").jqxGrid('exportdata', 'xls', _date()+'-MLIB-Inventory');
-		});
-
-		/* Create some filter options */
-
-		/* When row count changes save state */
-		$("#jqxgrid-"+ele).on("pagesizechanged", function (event) {
-			$("#jqxgrid").jqxGrid('savestate');
-		});
-
 		if (_detect()){
 			/* handle the pager (since the default can't be adjusted) */
 			var pagerrenderer = function () {
@@ -239,6 +189,53 @@ $(document).ready(function(){
 				{ text: 'Monitor SKU', datafield: 'MSKU', width: '10%' }
 			]
 		});
+
+		/* Handle editing of record elements */
+		$("#jqxgrid-"+ele).on({
+			rowclick: function(event){
+
+				$('#record-details').simpledialog2({
+					headerText: 'Edit inventory record',
+					dialogForce: true,
+					safeNuke: true
+				});
+				_populate(obj[$('#jqxgrid-'+ele).jqxGrid('getrowid', args.rowindex)]);
+
+			}
+		});
+
+		$('#edit-computer').comm({
+			appID:'MLIB-Inventory',
+			callback: function(){
+				_message($(this), 'edit-computer');
+			}
+		});
+
+		$('#edit-monitor').comm({
+			appID:'MLIB-Inventory',
+			callback: function(){
+				_message($(this), 'edit-monitor');
+			}
+		});
+
+		/* Create some export options */
+		$('#export-csv').on('click', function(){
+			$("#jqxgrid").jqxGrid('exportdata', 'csv', _date()+'-MLIB-Inventory');
+		});
+		$('#export-pdf').on('click', function(){
+			$("#jqxgrid").jqxGrid('exportdata', 'pdf', _date()+'-MLIB-Inventory');
+		});
+		$('#export-xls').on('click', function(){
+			$("#jqxgrid").jqxGrid('exportdata', 'xls', _date()+'-MLIB-Inventory');
+		});
+
+		/* Create some filter options */
+
+		/* When row count changes save state */
+		$("#jqxgrid-"+ele).on("pagesizechanged", function (event) {
+			$("#jqxgrid").jqxGrid('savestate');
+		});
+
 	}
 
 	function _message(obj, ele){
