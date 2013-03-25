@@ -266,6 +266,7 @@ $(document).ready(function(){
 
 		((!obj.SKU)&&(!obj.UUIC)&&(!obj.Serial)) ? _disable(false) : _disable(true);
 
+		/* computer values */
 		$('#chostname').val(obj.Computer);
 		$('#csku').val(obj.SKU);
 		$('#cuuic').val(obj.UUIC);
@@ -275,6 +276,16 @@ $(document).ready(function(){
 		$('#ceowd').val(obj.EOWD);
 		$('#copd').val(obj.OPD);
 		$('#cnotes').val(obj.Notes);
+
+		/* monitor values */
+		$('#monitor').val(obj.Computer);
+		$('#msku').val(obj.MSKU);
+		$('#mserial').val(obj.MSerial);
+		$('#mmodel').val(obj.MModel);
+		$('#mlocation').val(obj.Location);
+		$('#meowd').val(obj.EOWD);
+		$('#mopd').val(obj.OPD);
+		$('#mnotes').val(obj.Notes);
 	}
 
 	function _disable(bool){
