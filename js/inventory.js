@@ -205,6 +205,20 @@ $(document).ready(function(){
 			}
 		});
 
+		$('#add-computer').comm({
+			appID:'MLIB-Inventory',
+			callback: function(){
+				_message($(this), 'add-computer');
+			}
+		});
+
+		$('#add-monitor').comm({
+			appID:'MLIB-Inventory',
+			callback: function(){
+				_message($(this), 'add-monitor');
+			}
+		});
+
 		$('#edit-computer').comm({
 			appID:'MLIB-Inventory',
 			callback: function(){
@@ -293,6 +307,7 @@ $(document).ready(function(){
 				$('#meowd').val(obj.Monitor[0].EOWD);
 				$('#mlocation').val(obj.Monitor[0].Location);
 			} else {
+				_disable('m', false);
 				$('#monitor').val('');
 				$('#mmodel').val('');
 				$('#msku').val('');
