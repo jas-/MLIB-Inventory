@@ -166,13 +166,13 @@ $(document).ready(function(){
 			width: '100%',
 			altrows: true,
 			pagerrenderer: pagerrenderer,
-			pagesize: (_detect())?5:20,
+			pagesize: (_detect()) ? 5 : 20,
 			pagesizeoptions: ['5', '10', '20', '30', '40', '50'],
 			source: dataAdapter,
 			theme: theme,
 			sortable: true,
 			pageable: true,
-			autoheight: true,
+			//autoheight: true,
 			autosave: true,
 			autorestore: true,
 			selectionmode: 'singlerow',
@@ -278,7 +278,7 @@ $(document).ready(function(){
 
 	/* populate form helper */
 	function _populate(obj){
-
+_inspect(obj);
 		if (_size(obj) > 0){
 			/* disable editing of SKU, UUIC & Serial if data exists for computer record */
 			((!obj.SKU)&&(!obj.UUIC)&&(!obj.Serial)) ? _disable('c', false) : _disable('c', true);
@@ -307,13 +307,24 @@ $(document).ready(function(){
 				$('#meowd').val(obj.Monitor[0].EOWD);
 				$('#mlocation').val(obj.Monitor[0].Location);
 			} else {
-				_disable('m', false);
-				$('#monitor').val('');
-				$('#mmodel').val('');
-				$('#msku').val('');
-				$('#mserial').val('');
-				$('#meowd').val('');
-				$('#mlocation').val('');
+
+				if (!obj.Monitor) {
+					_disable('m', false);
+					$('#monitor').val('');
+					$('#mmodel').val('');
+					$('#msku').val('');
+					$('#mserial').val('');
+					$('#meowd').val('');
+					$('#mlocation').val('');
+				} else {
+					((!obj.MSKU)&&(!obj.MSerial)) ? _disable('m', false) : _disable('m', true);
+					$('#monitor').val(obj.Monitor);
+					$('#mmodel').val(obj.MModel);
+					$('#msku').val(obj.MSKU);
+					$('#mserial').val(obj.MSerial);
+					$('#meowd').val(obj.MEOWD);
+					$('#mlocation').val(obj.MLocation);
+				}
 			}
 		}
 	}
