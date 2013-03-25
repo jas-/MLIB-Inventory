@@ -196,11 +196,12 @@ $(document).ready(function(){
 
 				$('#record-details').simpledialog2({
 					headerText: 'Edit inventory record',
+					dialogAllow: true,
 					dialogForce: true,
-					safeNuke: true
+					safeNuke: true,
+					blankContentAdopt: true
 				});
 				_populate(obj[$('#jqxgrid-'+ele).jqxGrid('getrowid', args.rowindex)]);
-
 			}
 		});
 
@@ -233,7 +234,7 @@ $(document).ready(function(){
 
 		/* When row count changes save state */
 		$("#jqxgrid-"+ele).on("pagesizechanged", function (event) {
-			$("#jqxgrid").jqxGrid('savestate');
+			//$("#jqxgrid").jqxGrid('savestate');
 		});
 
 	}
@@ -264,30 +265,42 @@ $(document).ready(function(){
 	/* populate form helper */
 	function _populate(obj){
 
-		/* disable editing of SKU, UUIC & Serial if data exists for computer record */
-		((!obj.SKU)&&(!obj.UUIC)&&(!obj.Serial)) ? _disable('c', false) : _disable('c', true);
+		if (_size(obj) > 0){
+			/* disable editing of SKU, UUIC & Serial if data exists for computer record */
+			((!obj.SKU)&&(!obj.UUIC)&&(!obj.Serial)) ? _disable('c', false) : _disable('c', true);
 
-		/* disable editing of SKU, UUIC & Serial if data exists for monitor record */
-		((!obj.Monitor[0].SKU)&&(!obj.Monitor[0].Serial)) ? _disable('m', false) : _disable('m', true);
+			/* computer values */
+			$('#chostname').val(obj.Computer);
+			$('#csku').val(obj.SKU);
+			$('#cuuic').val(obj.UUIC);
+			$('#cserial').val(obj.Serial);
+			$('#cmodel').val(obj.Model);
+			$('#clocation').val(obj.Location);
+			$('#ceowd').val(obj.EOWD);
+			$('#copd').val(obj.OPD);
+			$('#cnotes').val(obj.Notes);
 
-		/* computer values */
-		$('#chostname').val(obj.Computer);
-		$('#csku').val(obj.SKU);
-		$('#cuuic').val(obj.UUIC);
-		$('#cserial').val(obj.Serial);
-		$('#cmodel').val(obj.Model);
-		$('#clocation').val(obj.Location);
-		$('#ceowd').val(obj.EOWD);
-		$('#copd').val(obj.OPD);
-		$('#cnotes').val(obj.Notes);
+			/* monitor values */
+			if (_size(obj.Monitor) > 0){
 
-		/* monitor values */
-		$('#monitor').val(obj.Monitor[0].Monitor);
-		$('#mmodel').val(obj.Monitor[0].Model);
-		$('#msku').val(obj.Monitor[0].SKU);
-		$('#mserial').val(obj.Monitor[0].Serial);
-		$('#meowd').val(obj.Monitor[0].EOWD);
-		$('#mlocation').val(obj.Monitor[0].Location);
+				/* disable editing of SKU, UUIC & Serial if data exists for monitor record */
+				((!obj.Monitor[0].SKU)&&(!obj.Monitor[0].Serial)) ? _disable('m', false) : _disable('m', true);
+
+				$('#monitor').val(obj.Monitor[0].Monitor);
+				$('#mmodel').val(obj.Monitor[0].Model);
+				$('#msku').val(obj.Monitor[0].SKU);
+				$('#mserial').val(obj.Monitor[0].Serial);
+				$('#meowd').val(obj.Monitor[0].EOWD);
+				$('#mlocation').val(obj.Monitor[0].Location);
+			} else {
+				$('#monitor').val('');
+				$('#mmodel').val('');
+				$('#msku').val('');
+				$('#mserial').val('');
+				$('#meowd').val('');
+				$('#mlocation').val('');
+			}
+		}
 	}
 
 	function _disable(t, bool){
