@@ -264,7 +264,11 @@ $(document).ready(function(){
 	/* populate form helper */
 	function _populate(obj){
 
-		((!obj.SKU)&&(!obj.UUIC)&&(!obj.Serial)) ? _disable(false) : _disable(true);
+		/* disable editing of SKU, UUIC & Serial if data exists for computer record */
+		((!obj.SKU)&&(!obj.UUIC)&&(!obj.Serial)) ? _disable('c', false) : _disable('c', true);
+
+		/* disable editing of SKU, UUIC & Serial if data exists for monitor record */
+		((!obj.Monitor[0].SKU)&&(!obj.Monitor[0].Serial)) ? _disable('m', false) : _disable('m', true);
 
 		/* computer values */
 		$('#chostname').val(obj.Computer);
@@ -278,18 +282,21 @@ $(document).ready(function(){
 		$('#cnotes').val(obj.Notes);
 
 		/* monitor values */
-		$('#monitor').val(obj.Computer);
-		$('#msku').val(obj.MSKU);
-		$('#mserial').val(obj.MSerial);
-		$('#mmodel').val(obj.MModel);
-		$('#mlocation').val(obj.Location);
-		$('#meowd').val(obj.EOWD);
-		$('#mopd').val(obj.OPD);
-		$('#mnotes').val(obj.Notes);
+		$('#monitor').val(obj.Monitor[0].Monitor);
+		$('#mmodel').val(obj.Monitor[0].Model);
+		$('#msku').val(obj.Monitor[0].SKU);
+		$('#mserial').val(obj.Monitor[0].Serial);
+		$('#meowd').val(obj.Monitor[0].EOWD);
+		$('#mlocation').val(obj.Monitor[0].Location);
 	}
 
-	function _disable(bool){
-		(bool) ? $('#csku').textinput('disable') && $('#cuuic').textinput('disable') && $('#cserial').textinput('disable') : $('#csku').textinput('enable') && $('#cuuic').textinput('enable') && $('#cserial').textinput('enable')
+	function _disable(t, bool){
+		if (t == 'c'){
+			(bool) ? $('#csku').textinput('disable') && $('#cuuic').textinput('disable') && $('#cserial').textinput('disable') : $('#csku').textinput('enable') && $('#cuuic').textinput('enable') && $('#cserial').textinput('enable');
+		}
+		if (t == 'm'){
+			(bool) ? $('#msku').textinput('disable') && $('#mserial').textinput('disable') : $('#msku').textinput('enable') && $('#mserial').textinput('enable');
+		}
 	}
 
 	/* Helper function to inspect objects recursively */
