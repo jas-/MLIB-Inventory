@@ -172,7 +172,7 @@ $(document).ready(function(){
 			theme: theme,
 			sortable: true,
 			pageable: true,
-			//autoheight: true,
+			autoheight: true,
 			autosave: true,
 			autorestore: true,
 			selectionmode: 'singlerow',
@@ -199,7 +199,11 @@ $(document).ready(function(){
 					dialogAllow: true,
 					dialogForce: true,
 					safeNuke: true,
-					blankContentAdopt: true
+					blankContentAdopt: true,
+					callbackOpen: function(){
+						$('#message-edit-computer').html('');
+						$('#message-edit-monitor').html('');
+					}
 				});
 				_populate(obj[$('#jqxgrid-'+ele).jqxGrid('getrowid', args.rowindex)]);
 			}
@@ -281,7 +285,7 @@ $(document).ready(function(){
 _inspect(obj);
 		if (_size(obj) > 0){
 			/* disable editing of SKU, UUIC & Serial if data exists for computer record */
-			((!obj.SKU)&&(!obj.UUIC)&&(!obj.Serial)) ? _disable('c', false) : _disable('c', true);
+			((!obj.SKU)&&(!obj.UUIC)&&(!obj.Serial)&&(!obj.EOWD)) ? _disable('c', false) : _disable('c', true);
 
 			/* computer values */
 			$('#chostname').val(obj.Computer);
