@@ -282,10 +282,10 @@ $(document).ready(function(){
 
 	/* populate form helper */
 	function _populate(obj){
-_inspect(obj);
+
 		if (_size(obj) > 0){
 			/* disable editing of SKU, UUIC & Serial if data exists for computer record */
-			((!obj.SKU)&&(!obj.UUIC)&&(!obj.Serial)&&(!obj.EOWD)) ? _disable('c', false) : _disable('c', true);
+			((!obj.SKU)&&(!obj.UUIC)&&(!obj.Serial)&&(!obj.EOWD)&&(!obj.OPD)) ? _disable('c', false) : _disable('c', true);
 
 			/* computer values */
 			$('#chostname').val(obj.Computer);
@@ -302,7 +302,7 @@ _inspect(obj);
 			if (_size(obj.Monitor) > 0){
 
 				/* disable editing of SKU, UUIC & Serial if data exists for monitor record */
-				((!obj.Monitor[0].SKU)&&(!obj.Monitor[0].Serial)) ? _disable('m', false) : _disable('m', true);
+				((!obj.Monitor[0].SKU)&&(!obj.Monitor[0].Serial)&&(!obj.Monitor[0].EOWD)) ? _disable('m', false) : _disable('m', true);
 
 				$('#monitor').val(obj.Monitor[0].Monitor);
 				$('#mmodel').val(obj.Monitor[0].Model);
@@ -335,10 +335,31 @@ _inspect(obj);
 
 	function _disable(t, bool){
 		if (t == 'c'){
-			(bool) ? $('#csku').textinput('disable') && $('#cuuic').textinput('disable') && $('#cserial').textinput('disable') : $('#csku').textinput('enable') && $('#cuuic').textinput('enable') && $('#cserial').textinput('enable');
+			if (bool) {
+				$('#csku').textinput('disable');
+				$('#cuuic').textinput('disable');
+				$('#cserial').textinput('disable');
+				$('#cserial').textinput('disable');
+				$('#ceowd').textinput('disable');
+				$('#copd').textinput('disable');
+			} else {
+				$('#csku').textinput('enable');
+				$('#cuuic').textinput('enable');
+				$('#cserial').textinput('enable');
+				$('#ceowd').textinput('enable');
+				$('#copd').textinput('enable');
+			}
 		}
 		if (t == 'm'){
-			(bool) ? $('#msku').textinput('disable') && $('#mserial').textinput('disable') : $('#msku').textinput('enable') && $('#mserial').textinput('enable');
+			if (bool) {
+				$('#msku').textinput('disable');
+				$('#mserial').textinput('disable');
+				$('#meowd').textinput('disable');
+			} else {
+				$('#msku').textinput('enable');
+				$('#mserial').textinput('enable');
+				$('#meowd').textinput('enable');
+			}
 		}
 	}
 
