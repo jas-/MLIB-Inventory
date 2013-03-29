@@ -172,6 +172,7 @@ $(document).ready(function(){
 			theme: theme,
 			sortable: true,
 			pageable: true,
+			scrollmode: 'logical',
 			autoheight: true,
 			autosave: true,
 			autorestore: true,
