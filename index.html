@@ -45,41 +45,6 @@
 	  <h3>Current inventory records</h3>
 	  <div>
 		<div id="message-current"></div>
-		<!--div>
-		  <div data-role="fieldcontain">
-            <label for="selectmenu1">Location:</label>
-			  <select name="areas" data-theme="d" data-mini="true" data-inline="true">
-				<option value="benchmark">
-                    Benchmark
-                </option>
-                <option value="knowledge-commons">
-                    Knowledge Commons
-                </option>
-                <option value="public-level-1">
-                    Public Lvl 1
-                </option>
-                <option value="public-level-2">
-                    Public Lvl 2
-                </option>
-                <option value="sage">
-                    Sage Point
-                </option>
-                <option value="storage">
-                    Storage
-                </option>
-                <option value="repls">
-                    Replacements
-                </option>
-                <option value="teaching-labs">
-                    Teaching Labs
-                </option>
-                <option value="union">
-                    Union Lab
-                </option>
-            </select>
-			Export: <a id="export-csv" data-mini="true" data-role="button" data-inline="true" href="#">CSV</a>&nbsp;<a id="export-pdf" data-mini="true" data-role="button" data-inline="true" href="#">PDF</a>
-		  </div>
-		</div-->
 		<div id='jqxWidget-current'>
 		  <div id="jqxgrid-current"></div>
 		</div>
@@ -161,56 +126,56 @@
 		<form action='http://new-inventory.scl.utah.edu?do=add-computer' id='add-computer' name='add-computer' method='post'>
 		  <div data-role='fieldcontain'>
 			<fieldset data-role='controlgroup' data-mini=true>
-			  <label for='achostname'>Hostname</label>
-				<input id='achostname' name='achostname' placeholder='Computer name' type='text'>
+			  <label for='hostname'>Hostname</label>
+				<input id='hostname' name='hostname' placeholder='Computer name' type='text'>
 			</fieldset>
 		  </div>
 		  <div data-role='fieldcontain'>
 			<fieldset data-role='controlgroup' data-mini=true>
-			  <label for='acmodel'>Model</label>
-				<input id='acmodel' name='acmodel' placeholder='Model type' type='text'>
+			  <label for='model'>Model</label>
+				<input id='model' name='model' placeholder='Model type' type='text'>
 			</fieldset>
 		  </div>
 		  <div data-role='fieldcontain'>
 			<fieldset data-role='controlgroup' data-mini=true>
-			  <label for='acsku'>SKU</label>
-				<input id='acsku' name='acsku' placeholder='SKU (white barcode)' type='text'>
+			  <label for='sku'>SKU</label>
+				<input id='sku' name='acsku' placeholder='SKU (white barcode)' type='text'>
 			</fieldset>
 		  </div>
 		  <div data-role='fieldcontain'>
 			<fieldset data-role='controlgroup' data-mini=true>
-			  <label for='acuuic'>UUIC</label>
-				<input id='acuuic' name='acuuic' placeholder='UUIC (yellow sticker)' type='text'>
+			  <label for='uuic'>UUIC</label>
+				<input id='uuic' name='uuic' placeholder='UUIC (yellow sticker)' type='text'>
 			</fieldset>
 		  </div>
 		  <div data-role='fieldcontain'>
 			<fieldset data-role='controlgroup' data-mini=true>
-			  <label for='acserial'>Serial</label>
-				<input id='acserial' name='acserial' placeholder='Serial (Red label)' type='text'>
+			  <label for='serial'>Serial</label>
+				<input id='serial' name='serial' placeholder='Serial (Red label)' type='text'>
 			</fieldset>
 		  </div>
 		  <div data-role='fieldcontain'>
 			<fieldset data-role='controlgroup' data-mini=true>
-			  <label for='aclocation'>Location</label>
-				<input id='aclocation' name='aclocation' placeholder='Room number' type='text'>
+			  <label for='location'>Location</label>
+				<input id='location' name='location' placeholder='Room number' type='text'>
 			</fieldset>
 		  </div>
 		  <div data-role='fieldcontain'>
 			<fieldset data-role='controlgroup' data-mini=true>
-			  <label for='aceowd'>EOWD</label>
-				<input id='aceowd' name='aceowd' placeholder='End of warranty date' type='text'>
+			  <label for='eowd'>EOWD</label>
+				<input id='eowd' name='eowd' placeholder='End of warranty date' type='text'>
 			</fieldset>
 		  </div>
 		  <div data-role='fieldcontain'>
 			<fieldset data-role='controlgroup' data-mini=true>
-			  <label for='acopd'>OPD</label>
-				<input id='acopd' name='acopd' placeholder='Original purchase date' type='text'>
+			  <label for='opd'>OPD</label>
+				<input id='opd' name='opd' placeholder='Original purchase date' type='text'>
 			</fieldset>
 		  </div>
 		  <div data-role='fieldcontain'>
 			<fieldset data-role='controlgroup' data-mini=true>
-			  <label for='acnotes'>Notes</label>
-				<textarea id='acnotes' name='acnotes' placeholder='Notes'></textarea>
+			  <label for='notes'>Notes</label>
+				<textarea id='notes' name='notes' placeholder='Notes'></textarea>
 			</fieldset>
 		  </div>
 		  <input id='edit' data-inline='true' data-mini='true' data-theme='c' data-icon='arrow-r' data-iconpos='right' value='Save changes' type='submit'>
@@ -224,38 +189,38 @@
 		<form action='http://new-inventory.scl.utah.edu?do=add-monitor' id='add-monitor' name='add-monitor' method='post'>
 		  <div data-role='fieldcontain'>
 			<fieldset data-role='controlgroup' data-mini=true>
-			  <label for='amonitor'>Monitor</label>
-				<input id='amonitor' name='amonitor' placeholder='Monitor name' type='text'>
+			  <label for='monitor'>Monitor</label>
+				<input id='monitor' name='monitor' placeholder='Monitor name' type='text'>
 			</fieldset>
 		  </div>
 		  <div data-role='fieldcontain'>
 			<fieldset data-role='controlgroup' data-mini=true>
-			  <label for='ammodel'>Model</label>
-				<input id='ammodel' name='ammodel' placeholder='Model type' type='text'>
+			  <label for='mmodel'>Model</label>
+				<input id='mmodel' name='mmodel' placeholder='Model type' type='text'>
 			</fieldset>
 		  </div>
 		  <div data-role='fieldcontain'>
 			<fieldset data-role='controlgroup' data-mini=true>
-			  <label for='amserial'>Monitor serial</label>
-				<input id='amserial' name='amserial' placeholder='Monitor serial' type='text'>
+			  <label for='mserial'>Monitor serial</label>
+				<input id='mserial' name='mserial' placeholder='Monitor serial' type='text'>
 			</fieldset>
 		  </div>
 		  <div data-role='fieldcontain'>
 			<fieldset data-role='controlgroup' data-mini=true>
-			  <label for='amsku'>Monitor SKU</label>
-				<input id='amsku' name='amsku' placeholder='Monitor SKU' type='text'>
+			  <label for='msku'>Monitor SKU</label>
+				<input id='msku' name='msku' placeholder='Monitor SKU' type='text'>
 			</fieldset>
 		  </div>
 		  <div data-role='fieldcontain'>
 			<fieldset data-role='controlgroup' data-mini=true>
-			  <label for='ameowd'>EOWD</label>
-				<input id='ameowd' name='ameowd' placeholder='End of warranty date' type='text'>
+			  <label for='meowd'>EOWD</label>
+				<input id='meowd' name='meowd' placeholder='End of warranty date' type='text'>
 			</fieldset>
 		  </div>
 		  <div data-role='fieldcontain'>
 			<fieldset data-role='controlgroup' data-mini=true>
-			  <label for='amlocation'>Location</label>
-				<input id='amlocation' name='amlocation' placeholder='Room number' type='text'>
+			  <label for='mlocation'>Location</label>
+				<input id='mlocation' name='mlocation' placeholder='Room number' type='text'>
 			</fieldset>
 		  </div>
 		  <div id="additional-monitors"></div>
@@ -279,56 +244,56 @@
 		<form action='http://new-inventory.scl.utah.edu?do=add-computer' id='edit-computer' name='edit-computer' method='post'>
 		  <div data-role='fieldcontain'>
 			<fieldset data-role='controlgroup' data-mini=true>
-			  <label for='chostname'>Hostname</label>
-				<input id='chostname' name='chostname' placeholder='Computer name' type='text'>
+			  <label for='hostname'>Hostname</label>
+				<input id='hostname' name='hostname' placeholder='Computer name' type='text'>
 			</fieldset>
 		  </div>
 		  <div data-role='fieldcontain'>
 			<fieldset data-role='controlgroup' data-mini=true>
-			  <label for='cmodel'>Model</label>
-				<input id='cmodel' name='cmodel' placeholder='Model type' type='text'>
+			  <label for='model'>Model</label>
+				<input id='model' name='model' placeholder='Model type' type='text'>
 			</fieldset>
 		  </div>
 		  <div data-role='fieldcontain'>
 			<fieldset data-role='controlgroup' data-mini=true>
-			  <label for='csku'>SKU</label>
-				<input id='csku' name='csku' placeholder='SKU (white barcode)' type='text'>
+			  <label for='sku'>SKU</label>
+				<input id='sku' name='sku' placeholder='SKU (white barcode)' type='text'>
 			</fieldset>
 		  </div>
 		  <div data-role='fieldcontain'>
 			<fieldset data-role='controlgroup' data-mini=true>
-			  <label for='cuuic'>UUIC</label>
-				<input id='cuuic' name='cuuic' placeholder='UUIC (yellow sticker)' type='text'>
+			  <label for='uuic'>UUIC</label>
+				<input id='uuic' name='uuic' placeholder='UUIC (yellow sticker)' type='text'>
 			</fieldset>
 		  </div>
 		  <div data-role='fieldcontain'>
 			<fieldset data-role='controlgroup' data-mini=true>
-			  <label for='cserial'>Serial</label>
-				<input id='cserial' name='cserial' placeholder='Serial (Red label)' type='text'>
+			  <label for='serial'>Serial</label>
+				<input id='serial' name='serial' placeholder='Serial (Red label)' type='text'>
 			</fieldset>
 		  </div>
 		  <div data-role='fieldcontain'>
 			<fieldset data-role='controlgroup' data-mini=true>
-			  <label for='clocation'>Location</label>
-				<input id='clocation' name='clocation' placeholder='Room number' type='text'>
+			  <label for='location'>Location</label>
+				<input id='location' name='location' placeholder='Room number' type='text'>
 			</fieldset>
 		  </div>
 		  <div data-role='fieldcontain'>
 			<fieldset data-role='controlgroup' data-mini=true>
-			  <label for='ceowd'>EOWD</label>
-				<input id='ceowd' name='ceowd' placeholder='End of warranty date' type='text'>
+			  <label for='eowd'>EOWD</label>
+				<input id='eowd' name='eowd' placeholder='End of warranty date' type='text'>
 			</fieldset>
 		  </div>
 		  <div data-role='fieldcontain'>
 			<fieldset data-role='controlgroup' data-mini=true>
-			  <label for='copd'>OPD</label>
-				<input id='copd' name='copd' placeholder='Original purchase date' type='text'>
+			  <label for='opd'>OPD</label>
+				<input id='opd' name='opd' placeholder='Original purchase date' type='text'>
 			</fieldset>
 		  </div>
 		  <div data-role='fieldcontain'>
 			<fieldset data-role='controlgroup' data-mini=true>
-			  <label for='cnotes'>Notes</label>
-				<textarea id='cnotes' name='cnotes' placeholder='Notes'></textarea>
+			  <label for='notes'>Notes</label>
+				<textarea id='notes' name='notes' placeholder='Notes'></textarea>
 			</fieldset>
 		  </div>
 		  <a rel='close' data-icon='delete' data-iconpos='right' data-inline='true' data-role='button' data-mini='true' href='#'>Close</a>
