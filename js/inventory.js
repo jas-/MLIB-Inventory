@@ -20,6 +20,35 @@ $(document).ready(function(){
 		_load('add-computer', false, false, false, 'add-computer');
 	});
 
+	/* Bind forms to comm object */
+	$('#add-computer').comm({
+		appID:'MLIB-Inventory',
+		callback: function(){
+			_message($(this), 'add-computer');
+		}
+	});
+
+	$('#add-monitor').comm({
+		appID:'MLIB-Inventory',
+		callback: function(){
+			_message($(this), 'add-monitor');
+		}
+	});
+
+	$('#edit-computer').comm({
+		appID:'MLIB-Inventory',
+		callback: function(){
+			_message($(this), 'edit-computer');
+		}
+	});
+
+	$('#edit-monitor').comm({
+		appID:'MLIB-Inventory',
+		callback: function(){
+			_message($(this), 'edit-monitor');
+		}
+	});
+
 	/* Destroy current grid element */
 	function _destroy(ele){
 		$("#jqxgrid-"+ele).jqxGrid('destroy');
@@ -113,6 +142,7 @@ $(document).ready(function(){
 		var dataAdapter = new $.jqx.dataAdapter(source);
 
 		if (_detect()){
+
 			/* handle the pager (since the default can't be adjusted) */
 			var pagerrenderer = function () {
 				var element = $("<div style='margin-top: 5px; width: 100%; height: 100%;'></div>");
@@ -218,52 +248,6 @@ $(document).ready(function(){
 				_disable('edit-computer', _obj);
 				_disable('edit-monitor', _obj);
 			}
-		});
-
-		$('#add-computer').comm({
-			appID:'MLIB-Inventory',
-			callback: function(){
-				_message($(this), 'add-computer');
-			}
-		});
-
-		$('#add-monitor').comm({
-			appID:'MLIB-Inventory',
-			callback: function(){
-				_message($(this), 'add-monitor');
-			}
-		});
-
-		$('#edit-computer').comm({
-			appID:'MLIB-Inventory',
-			callback: function(){
-				_message($(this), 'edit-computer');
-			}
-		});
-
-		$('#edit-monitor').comm({
-			appID:'MLIB-Inventory',
-			callback: function(){
-				_message($(this), 'edit-monitor');
-			}
-		});
-
-		/* Create some export options */
-		$('#export-csv').on('click', function(){
-			$("#jqxgrid").jqxGrid('exportdata', 'csv', _date()+'-MLIB-Inventory');
-		});
-		$('#export-pdf').on('click', function(){
-			$("#jqxgrid").jqxGrid('exportdata', 'pdf', _date()+'-MLIB-Inventory');
-		});
-		$('#export-xls').on('click', function(){
-			$("#jqxgrid").jqxGrid('exportdata', 'xls', _date()+'-MLIB-Inventory');
-		});
-
-		/* Create some filter options */
-
-		/* When row count changes save state */
-		$("#jqxgrid-"+ele).on("pagesizechanged", function (event) {
-			//$("#jqxgrid").jqxGrid('savestate');
 		});
 
 	}
