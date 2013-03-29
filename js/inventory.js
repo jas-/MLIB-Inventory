@@ -284,8 +284,9 @@ $(document).ready(function(){
 	function _populate(obj){
 
 		if (_size(obj) > 0){
-			/* disable editing of SKU, UUIC & Serial if data exists for computer record */
-			((!obj.SKU)&&(!obj.UUIC)&&(!obj.Serial)&&(!obj.EOWD)&&(!obj.OPD)) ? _disable('c', false) : _disable('c', true);
+
+			/* disable editing of SKU, UUIC & Serial if data exists for monitor record */
+			_disable(obj);
 
 			/* computer values */
 			$('#chostname').val(obj.Computer);
@@ -301,9 +302,6 @@ $(document).ready(function(){
 			/* monitor values */
 			if (_size(obj.Monitor) > 0){
 
-				/* disable editing of SKU, UUIC & Serial if data exists for monitor record */
-				((!obj.Monitor[0].SKU)&&(!obj.Monitor[0].Serial)&&(!obj.Monitor[0].EOWD)) ? _disable('m', false) : _disable('m', true);
-
 				$('#monitor').val(obj.Monitor[0].Monitor);
 				$('#mmodel').val(obj.Monitor[0].Model);
 				$('#msku').val(obj.Monitor[0].SKU);
@@ -313,7 +311,6 @@ $(document).ready(function(){
 			} else {
 
 				if (!obj.Monitor) {
-					_disable('m', false);
 					$('#monitor').val('');
 					$('#mmodel').val('');
 					$('#msku').val('');
@@ -333,33 +330,17 @@ $(document).ready(function(){
 		}
 	}
 
-	function _disable(t, bool){
-		if (t == 'c'){
-			if (bool) {
-				$('#csku').textinput('disable');
-				$('#cuuic').textinput('disable');
-				$('#cserial').textinput('disable');
-				$('#cserial').textinput('disable');
-				$('#ceowd').textinput('disable');
-				$('#copd').textinput('disable');
-			} else {
-				$('#csku').textinput('enable');
-				$('#cuuic').textinput('enable');
-				$('#cserial').textinput('enable');
-				$('#ceowd').textinput('enable');
-				$('#copd').textinput('enable');
-			}
-		}
-		if (t == 'm'){
-			if (bool) {
-				$('#msku').textinput('disable');
-				$('#mserial').textinput('disable');
-				$('#meowd').textinput('disable');
-			} else {
-				$('#msku').textinput('enable');
-				$('#mserial').textinput('enable');
-				$('#meowd').textinput('enable');
-			}
+	function _disable(obj){
+		(obj.SKU) ? $('#csku').textinput('disable') : $('#csku').textinput('enable');
+		(obj.UUIC) ? $('#cuuic').textinput('disable') : $('#cuuic').textinput('enable');
+		(obj.Serial) ? $('#cserial').textinput('disable') : $('#cserial').textinput('enable');
+		(obj.EOWD) ? $('#ceowd').textinput('disable') : $('#ceowd').textinput('enable');
+		(obj.OPD) ? $('#copd').textinput('disable') : $('#copd').textinput('enable');
+
+		if (_size(obj.Monitor) > 0) {
+			(obj.Monitor[0].SKU) ? $('#msku').textinput('disable') : $('#msku').textinput('enable');
+			(obj.Monitor[0].Serial) ? $('#mserial').textinput('disable') : $('#mserial').textinput('enable');
+			(obj.Monitor[0].EOWD) ? $('#meowd').textinput('disable') : $('#meowd').textinput('enable');
 		}
 	}
 
