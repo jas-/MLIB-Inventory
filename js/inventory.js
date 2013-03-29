@@ -252,27 +252,45 @@ $(document).ready(function(){
 
 	}
 
+	/* handle server responses */
 	function _message(obj, ele){
 		if (obj!='') {
+			var _d = '';
+			if (obj['details']){
+				_d = _details(obj['details']);
+			}
 			$.each(obj, function(key,value){
 				$.each(value, function(k,v){
 					if(k=='error'){
-						$('#message-'+ele).html('<div class="error">'+v+'</div>').fadeIn(2000).delay(3500).fadeOut('slow');
+						$('#message-'+ele).html('<div class="error">'+v+_d+'</div>').fadeIn(2000).delay(3500).fadeOut('slow');
 					}
 					if(k=='warning'){
-						$('#message-'+ele).html('<div class="warning">'+v+'</div>').fadeIn(2000).delay(3500).fadeOut('slow');
+						$('#message-'+ele).html('<div class="warning">'+v+_d+'</div>').fadeIn(2000).delay(3500).fadeOut('slow');
 					}
 					if(k=='info'){
-						$('#message-'+ele).html('<div class="info">'+v+'</div>').fadeIn(2000).delay(3500).fadeOut('slow');
+						$('#message-'+ele).html('<div class="info">'+v+_d+'</div>').fadeIn(2000).delay(3500).fadeOut('slow');
 					}
 					if(k=='success'){
-						$('#message-'+ele).html('<div class="success">'+v+'</div>').fadeIn(2000).delay(3500).fadeOut('slow');
+						$('#message-'+ele).html('<div class="success">'+v+_d+'</div>').fadeIn(2000).delay(3500).fadeOut('slow');
 					}
 				});
 			});
 		} else {
 			$('#message-'+ele).html('<div class="warning">Empty response for request</div>').fadeIn(2000).delay(3500).fadeOut('slow');
 		}
+	}
+
+	/* message helper */
+	function _details(obj)
+	{
+		if (_size(obj) > 0){
+			var _m = '<div><b>Details:</b><ol>';
+			$.each(v, function(a, b){
+				_m = '<li><i>'+a+'</i>'+b+'</li>';
+			});
+			_m = '</ol></div>';
+		}
+		return _m;
 	}
 
 	/* populate form helper */
@@ -309,6 +327,7 @@ $(document).ready(function(){
 		}
 	}
 
+	/* clear all of the bullshit out */
 	function _clear(parent, ele)
 	{
 		if ($('#'+parent+' #'+ele).is('form')) {
@@ -320,6 +339,7 @@ $(document).ready(function(){
 		}
 	}
 
+	/* Disable editing of fields the bitch wants disabled */
 	function _disable(parent, obj){
 
 		(obj.SKU) ? $('#'+parent+' #sku').textinput('disable') : $('#'+parent+' #sku').textinput('enable');
