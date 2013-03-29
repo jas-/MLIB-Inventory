@@ -318,7 +318,6 @@ $(document).ready(function(){
 					$('#meowd').val('');
 					$('#mlocation').val('');
 				} else {
-					((!obj.MSKU)&&(!obj.MSerial)) ? _disable('m', false) : _disable('m', true);
 					$('#monitor').val(obj.Monitor);
 					$('#mmodel').val(obj.MModel);
 					$('#msku').val(obj.MSKU);
