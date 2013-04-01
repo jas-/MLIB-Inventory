@@ -319,8 +319,8 @@ $(document).ready(function(){
 			} else {
 				$('#'+parent+' #monitor').val(obj.Monitor);
 				$('#'+parent+' #mmodel').val(obj.MModel);
-				$('#'+parent+' #msku').val(obj.SKU);
-				$('#'+parent+' #mserial').val(obj.Serial);
+				$('#'+parent+' #msku').val(obj.MSKU);
+				$('#'+parent+' #mserial').val(obj.MSerial);
 				$('#'+parent+' #meowd').val(obj.MEOWD);
 				$('#'+parent+' #mlocation').val(obj.MLocation);
 			}
