@@ -256,8 +256,8 @@ $(document).ready(function(){
 	function _message(obj, ele){
 		if (obj!='') {
 			var _d = '';
-			if (obj['details']){
-				_d = _details(obj['details']);
+			if (obj[0]['details']){
+				_d = _details(obj[0]['details']);
 			}
 			$.each(obj, function(key,value){
 				$.each(value, function(k,v){
@@ -283,13 +283,11 @@ $(document).ready(function(){
 	/* message helper */
 	function _details(obj)
 	{
-		if (_size(obj) > 0){
-			var _m = '<div><b>Details:</b><ol>';
-			$.each(v, function(a, b){
-				_m = '<li><i>'+a+'</i>'+b+'</li>';
-			});
-			_m = '</ol></div>';
-		}
+		var _m = '<hr/><div>Details:<ul>';
+		$.each(obj, function(a, b){
+			_m += '<li><i>'+a+'</i>: '+b+'</li>';
+		});
+		_m += '</ul></div>';
 		return _m;
 	}
 
