@@ -3,7 +3,6 @@ $(document).ready(function(){
 	/* Force binding on page focus */
 	($('.ui-page-active').attr('id')=='main') ? _load('current', 'http://new-inventory.scl.utah.edu/?do=current', {'do':true}, true, 'inventory-current') : false;
 	($('.ui-page-active').attr('id')=='search') ? _load('search', false, false, true, 'search-computer') : false;
-	($('.ui-page-active').attr('id')=='add') ? _load('add-computer', false, false, false, 'add-computer') : false;
 
 	/* Set event handlers for pagecreate & pageshow events */
 	$("#main").live('pagecreate pageshow', function(event, ui) {
@@ -14,10 +13,6 @@ $(document).ready(function(){
 	$("#search").live('pagecreate pageshow',function(event){
 		_destroy('search');
 		_load('search', false, false, true, 'search-computer');
-	});
-
-	$("#add").live('pagecreate pageshow',function(event){
-		_load('add-computer', false, false, false, 'add-computer');
 	});
 
 	/* Bind forms to comm object */
