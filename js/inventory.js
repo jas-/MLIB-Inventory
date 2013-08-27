@@ -1,410 +1,209 @@
-$(document).ready(function(){
+/* Inventory RestFul API FQDN */
+var url = 'http://inventory.dev:8080';
 
-	/* Force binding on page focus */
-	($('.ui-page-active').attr('id')=='main') ? _load('current', 'http://new-inventory.scl.utah.edu/?do=current', {'do':true}, true, 'inventory-current') : false;
-	($('.ui-page-active').attr('id')=='search') ? _load('search', false, false, true, 'search-computer') : false;
+/* API end points */
+var api = {
+	computers: {
+		url:	url+'/computer',
+	},
+	monitors: {
+		url:	url+'/monitor',
+	},
+	rmas: {
+		url:	url+'/rma',
+	},
+	models: {
+		url:	url+'/model',
+	},
+	cors: {
+		url:		url+'/cors',
+	}
+}
 
-	/* Set event handlers for pagecreate & pageshow events */
-	$("#main").live('pagecreate pageshow', function(event, ui) {
-		_destroy('current');
-		_load('current', 'http://new-inventory.scl.utah.edu/?do=current', {'do':true}, true, 'inventory-current');
-	});
+/* API methods */
+var	methods = {
+	all:		'get',
+	search:	'get',
+	add:		'post',
+	update:	'put',
+	remove:	'delete'
+};
 
-	$("#search").live('pagecreate pageshow',function(event){
-		_destroy('search');
-		_load('search', false, false, true, 'search-computer');
-	});
-
-	/* Bind forms to comm object */
-	$('#add-computer').comm({
-		appID:'MLIB-Inventory',
-		callback: function(){
-			_message($(this), 'add-computer');
+/* Execute comm.js */
+function doRequest(id, url, method, data, cb)
+{
+	$(window).comm({
+		appID:			(id)			? id			: 'MLIB-Inventory',
+		url:				(url)			? url			: false,
+		method:			(method)	? method	: false,
+		data:				(data)		? data		: false,
+		callback:		function(){
+			cb($(this));
 		}
 	});
+}
 
-	$('#add-monitor').comm({
-		appID:'MLIB-Inventory',
-		callback: function(){
-			_message($(this), 'add-monitor');
-		}
+/* create jqxGrid for specified data */
+function doGrid(element, obj)
+{
+	var adapter = new $.jqx.dataAdapter(obj.source);
+
+	$("#"+element).jqxGrid({
+		altrows: true,
+		autoheight: true,
+		columns: obj.columns,
+		editable: true,
+		filterable: true,
+		groupable: true,
+		pageable: true,
+		pagesizeoptions: ['5', '10', '20', '30', '40', '50'],
+		renderstatusbar: function (statusbar) {
+			statusbar.append(getBtns(element, statusbar));
+		},
+		selectionmode: 'singlecell',
+		showfilterrow: true,
+		showstatusbar: true,
+		source: adapter,
+		sortable: true,
+		updaterow: function (rowid, rowdata, commit) {
+		/* update record */
+			commit(true);
+		},
+		width: '100%'
+	});
+}
+
+/* Extract model for drop down list */
+function model_obj2arr(obj)
+{
+	var a = [];
+	$.each(obj, function(k, v){
+		a.push(v.model);
+	});
+	return a;
+}
+
+function getBtns(element, obj)
+{
+	var AddBtn = genAddBtn();
+	var EditBtn = genEditBtn();
+	var DeleteBtn = genDeleteBtn();
+
+	var container = genBtnContainer();
+
+	container.append(AddBtn);
+	container.append(EditBtn);
+	container.append(DeleteBtn);
+
+	btnEvents(element, AddBtn, EditBtn, DeleteBtn);
+
+	return container;
+}
+
+function btnEvents(element, AddBtn, EditBtn, DeleteBtn)
+{
+	AddBtn.jqxButton({
+		width: 65,
+		height: 20
+	});
+	AddBtn.click(function(event) {
+		/* launch model add record window */
 	});
 
-	$('#edit-computer').comm({
-		appID:'MLIB-Inventory',
-		callback: function(){
-			_message($(this), 'edit-computer');
-		}
+	EditBtn.jqxButton({
+		width: 70,
+		height: 20
+	});
+	EditBtn.click(function(event) {
+		/* launch model edit record window */
 	});
 
-	$('#edit-monitor').comm({
-		appID:'MLIB-Inventory',
-		callback: function(){
-			_message($(this), 'edit-monitor');
-		}
+	DeleteBtn.jqxButton({
+		width: 85,
+		height: 20
+	});
+	DeleteBtn.click(function(event) {
+		/* launch model delete record window */
 	});
 
-	/* Destroy current grid element */
-	function _destroy(ele){
-		$("#jqxgrid-"+ele).jqxGrid('destroy');
-		$("#jqxWidget-"+ele).html('<div id="jqxgrid-'+ele+'"></div>');
-	}
+}
 
-	/* Call $.comm() with specified params */
-	function _load(ele, url, data, grid, name){
-		$('#'+name).comm({
-			appID:'MLIB-Inventory',
-			url: (url) ? url : false,
-			data: (data) ? data : false,
-			callback: function(){
-				_message($(this), ele);
-				_destroy(ele);
-				(grid) ? _display($(this), ele) : false;
-				_message($(this), ele);
-			}
-		});
-	}
+function genBtnContainer()
+{
+	return $("<div style='overflow: visible; position: relative; margin: 5px;'></div>");
+}
 
-	/* Workhorse grid function */
-	function _display(obj, ele){
+/* Add button */
+function genAddBtn()
+{
+	return $("<div style='float: left; margin-left: 5px;'>"+
+						"<img style='position: relative; margin-top: 2px;' src='../images/add.png'/>"+
+							"<span style='margin-left: 4px; position: relative; top: -3px;'>"+
+								"Add"+
+							"</span>"+
+						"</div>");
+}
 
-		var theme = getDemoTheme();
+/* Edit button */
+function genEditBtn()
+{
+	return $("<div style='float: left; margin-left: 5px;'>"+
+						"<img style='position: relative; margin-top: 2px;' src='../images/add.png'/>"+
+							"<span style='margin-left: 4px; position: relative; top: -3px;'>"+
+								"Edit"+
+							"</span>"+
+						"</div>");
+}
 
-		/* Here we handle sorting of all columns */
-		var customsortfunc = function (column, direction) {
-			var sortdata = new Array();
+/* Delete button */
+function genDeleteBtn()
+{
+	return $("<div style='float: left; margin-left: 5px;'>"+
+						"<img style='position: relative; margin-top: 2px;' src='../images/add.png'/>"+
+							"<span style='margin-left: 4px; position: relative; top: -3px;'>"+
+								"Delete"+
+							"</span>"+
+						"</div>");
+}
 
-			if (direction == 'ascending') direction = true;
-			if (direction == 'descending') direction = false;
+/* Validate hostname (RFC 1123) */
+function valHostname(obj)
+{
+	return (/([a-z0-9]([a-z0-9-]{1,61}[a-z0-9])?(\.[a-z0-9]([a-z0-9-]{1,61}[a-z0-9])?)*)([^a-z0-9-]|$)/i.test(obj)) ?
+		true : { result: false, message: 'Hostname must conform to RFC-1123' };
+}
 
-			if (direction != null) {
-				for (i = 0; i < obj.length; i++) {
-					sortdata.push(obj[i]);
-				}
-			} else {
-				sortdata = obj;
-			}
+/* Validate model */
+function valModel(obj)
+{
+	return (/^[a-z0-9-]{0,128}$/i.test(obj)) ?
+		true : { result: false, message: 'Model is invalid [a-z0-9-]{1,128}' }
+}
 
-			var tmpToString = Object.prototype.toString;
-			Object.prototype.toString = (typeof column == "function") ? column : function () { return this[column] };
-			if (direction != null) {
-				sortdata.sort(compare);
-				if (!direction) {
-					sortdata.reverse();
-				}
-			}
-			source.localdata = sortdata;
-			$("#jqxgrid-"+ele).jqxGrid('databind', source, 'sort');
-			$("#jqxgrid").jqxGrid('savestate');
-			Object.prototype.toString = tmpToString;
-		};
+/* Validate SKU */
+function valSKU(obj)
+{
+	return (/^[a-z0-9-]{1,128}$/i.test(obj)) ?
+		true : {result: false, message: 'SKU is invalid [a-z0-9-]{1,128}' }
+}
 
-		/* Here we perform comparision of strings */
-		var compare = function (value1, value2) {
-			value1 = String(value1).toLowerCase();
-			value2 = String(value2).toLowerCase();
+/* Validate UUIC */
+function valUUIC(obj)
+{
+	return (/^[a-z0-9-]{1,128}$/i.test(obj)) ?
+		true : {result: false, message: 'UUIC is invalid [a-z0-9-]{1,128}' }
+}
 
-			try {
-				var tmpvalue1 = parseFloat(value1);
-				if (isNaN(tmpvalue1)) {
-					if (value1 < value2) { return -1; }
-					if (value1 > value2) { return 1; }
-				} else {
-					var tmpvalue2 = parseFloat(value2);
-					if (tmpvalue1 < tmpvalue2) { return -1; }
-					if (tmpvalue1 > tmpvalue2) { return 1; }
-				}
-			} catch (error) {
-				var er = error;
-			}
-			return 0;
-		};
+/* Validate Serial */
+function valSerial(obj)
+{
+	return (/^[a-z0-9-]{1,128}$/i.test(obj)) ?
+		true : {result: false, message: 'Serial is invalid [a-z0-9-]{1,128}' }
+}
 
-		/* Map our JSON object to fields */
-		var source = {
-			localdata: obj,
-			sort: customsortfunc,
-			datafields:[
-				{ name: 'Computer', type: 'string' },
-				{ name: 'SKU', type: 'string' },
-				{ name: 'Serial', type: 'string' },
-				{ name: 'UUIC', type: 'string' },
-				{ name: 'MSerial', map: 'Monitor>0>Serial', type: 'string' },
-				{ name: 'MSKU', map: 'Monitor>0>SKU', type: 'string' }
-			],
-			datatype: "json"
-		};
-		var dataAdapter = new $.jqx.dataAdapter(source);
-
-		if (_detect()){
-
-			/* handle the pager (since the default can't be adjusted) */
-			var pagerrenderer = function () {
-				var element = $("<div style='margin-top: 5px; width: 100%; height: 100%;'></div>");
-				var datainfo = $("#jqxgrid-"+ele).jqxGrid('getdatainformation');
-				var paginginfo = datainfo.paginginformation;
-
-				// create navigation buttons.
-				var leftButton = $("<div style='padding: 1px; float: left;'><div style='margin-left: 9px; width: 16px; height: 16px;'></div></div>");
-				leftButton.find('div').addClass('icon-arrow-left');
-				leftButton.width(36);
-				leftButton.jqxButton();
-
-				var rightButton = $("<div style='padding: 1px; margin: 0px 3px; float: left;'><div style='margin-left: 9px; width: 16px; height: 16px;'></div></div>");
-				rightButton.find('div').addClass('icon-arrow-right');
-				rightButton.width(36);
-				rightButton.jqxButton();
-
-				// append the navigation buttons to the container DIV tag.
-				leftButton.appendTo(element);
-				rightButton.appendTo(element);
-
-				// create a page information label and append it to the container DIV tag.
-				var label = $("<div style='font-size: 11px; margin: 2px 3px; font-weight: bold; float: left;'></div>");
-				label.text("1-" + paginginfo.pagesize + ' of ' + datainfo.rowscount);
-				label.appendTo(element);
-
-				// navigate to the next page when the right navigation button is clicked.
-				rightButton.click(function () {
-					$("#jqxgrid").jqxGrid('gotonextpage');
-					var datainfo = $("#jqxgrid-"+ele).jqxGrid('getdatainformation');
-					var paginginfo = datainfo.paginginformation;
-					label.text(1 + paginginfo.pagenum * paginginfo.pagesize + "-" + Math.min(datainfo.rowscount, (paginginfo.pagenum + 1) * paginginfo.pagesize) + ' of ' + datainfo.rowscount);
-				});
-
-				// navigate to the previous page when the right navigation button is clicked.
-				leftButton.click(function () {
-					$("#jqxgrid-"+ele).jqxGrid('gotoprevpage');
-					var datainfo = $("#jqxgrid").jqxGrid('getdatainformation');
-					var paginginfo = datainfo.paginginformation;
-					label.text(1 + paginginfo.pagenum * paginginfo.pagesize + "-" + Math.min(datainfo.rowscount, (paginginfo.pagenum + 1) * paginginfo.pagesize) + ' of ' + datainfo.rowscount);
-				});
-				return element;
-			}
-		} else {
-			var pagerrenderer = false;
-		}
-
-		/* Initialize grid with options while binding events etc */
-		$("#jqxgrid-"+ele).jqxGrid({
-			autoshowloadelement: true,
-			width: '100%',
-			altrows: true,
-			pagerrenderer: pagerrenderer,
-			pagesize: (_detect()) ? 5 : 20,
-			pagesizeoptions: ['5', '10', '20', '30', '40', '50'],
-			source: dataAdapter,
-			theme: theme,
-			sortable: true,
-			pageable: true,
-			scrollmode: 'logical',
-			autoheight: true,
-			autosave: true,
-			autorestore: true,
-			selectionmode: 'singlerow',
-			ready: function () {
-				$("#jqxgrid").jqxGrid('loadstate', $("#jqxgrid").jqxGrid('getstate'));
-				$("#jqxgrid-"+ele).jqxGrid('sortby', 'Hostname', 'asc');
-			},
-			columns: [
-				{ text: 'Hostname', datafield: 'Computer', width: '20%' },
-				{ text: 'SKU', datafield: 'SKU', width: '20%' },
-				{ text: 'Serial', datafield: 'Serial', width: '20%' },
-				{ text: 'UUIC', datafield: 'UUIC', width: '10%' },
-				{ text: 'Monitor Serial', datafield: 'MSerial', width: '20%' },
-				{ text: 'Monitor SKU', datafield: 'MSKU', width: '10%' }
-			]
-		});
-
-		/* Handle editing of record elements */
-		$("#jqxgrid-"+ele).on({
-			rowclick: function(event){
-
-				$('#record-details').simpledialog2({
-					headerText: 'Edit inventory record',
-					dialogAllow: true,
-					dialogForce: true,
-					safeNuke: true,
-					blankContentAdopt: true,
-					callbackOpen: function(){
-						$('#message-edit-computer').html('');
-						$('#message-edit-monitor').html('');
-					}
-				});
-
-				var _obj = obj[$('#jqxgrid-'+ele).jqxGrid('getrowid', args.rowindex)];
-
-				_clear('edit-computer');
-				_clear('edit-monitor');
-
-				_populate('edit-computer', _obj);
-				_populate('edit-monitor', _obj);
-
-				_disable('edit-computer', _obj);
-				_disable('edit-monitor', _obj);
-			}
-		});
-
-	}
-
-	/* handle server responses */
-	function _message(obj, ele){
-		if (obj!='') {
-			var _d = '';
-			if (obj[0]['details']){
-				_d = _details(obj[0]['details']);
-			}
-			$.each(obj, function(key,value){
-				$.each(value, function(k,v){
-					if(k=='error'){
-						$('#message-'+ele).html('<div class="error">'+v+_d+'</div>').fadeIn(2000).delay(3500).fadeOut('slow');
-					}
-					if(k=='warning'){
-						$('#message-'+ele).html('<div class="warning">'+v+_d+'</div>').fadeIn(2000).delay(3500).fadeOut('slow');
-					}
-					if(k=='info'){
-						$('#message-'+ele).html('<div class="info">'+v+_d+'</div>').fadeIn(2000).delay(3500).fadeOut('slow');
-					}
-					if(k=='success'){
-						$('#message-'+ele).html('<div class="success">'+v+_d+'</div>').fadeIn(2000).delay(3500).fadeOut('slow');
-					}
-				});
-			});
-		} else {
-			$('#message-'+ele).html('<div class="warning">Empty response for request</div>').fadeIn(2000).delay(3500).fadeOut('slow');
-		}
-	}
-
-	/* message helper */
-	function _details(obj)
-	{
-		var _m = '<hr/><div>Details:<ul>';
-		$.each(obj, function(a, b){
-			_m += '<li><i>'+a+'</i>: '+b+'</li>';
-		});
-		_m += '</ul></div>';
-		return _m;
-	}
-
-	/* populate form helper */
-	function _populate(parent, obj){
-
-		if (_size(obj) > 0){
-
-			/* computer values */
-			$('#'+parent+' #hostname').val(obj.Computer);
-			$('#'+parent+' #sku').val(obj.SKU);
-			$('#'+parent+' #uuic').val(obj.UUIC);
-			$('#'+parent+' #serial').val(obj.Serial);
-			$('#'+parent+' #model').val(obj.Model);
-			$('#'+parent+' #location').val(obj.Location);
-			$('#'+parent+' #eowd').val(obj.EOWD);
-			$('#'+parent+' #opd').val(obj.OPD);
-			$('#'+parent+' #notes').val(obj.Notes);
-
-			if (_size(obj.Monitor) > 0) {
-				$('#'+parent+' #monitor').val(obj.Monitor[0].Monitor);
-				$('#'+parent+' #mmodel').val(obj.Monitor[0].MModel);
-				$('#'+parent+' #msku').val(obj.Monitor[0].SKU);
-				$('#'+parent+' #mserial').val(obj.Monitor[0].Serial);
-				$('#'+parent+' #meowd').val(obj.Monitor[0].MEOWD);
-				$('#'+parent+' #mlocation').val(obj.Monitor[0].MLocation);
-			} else {
-				$('#'+parent+' #monitor').val(obj.Monitor);
-				$('#'+parent+' #mmodel').val(obj.MModel);
-				$('#'+parent+' #msku').val(obj.MSKU);
-				$('#'+parent+' #mserial').val(obj.MSerial);
-				$('#'+parent+' #meowd').val(obj.MEOWD);
-				$('#'+parent+' #mlocation').val(obj.MLocation);
-			}
-		}
-	}
-
-	/* clear all of the bullshit out */
-	function _clear(parent, ele)
-	{
-		if ($('#'+parent+' #'+ele).is('form')) {
-			$.each($('#'+parent+' #'+ele), function(key, value){
-				$.each(value, function(k, v){
-					$(k).val('');
-				});
-			});
-		}
-	}
-
-	/* Disable editing of fields the bitch wants disabled */
-	function _disable(parent, obj){
-
-		(obj.SKU) ? $('#'+parent+' #sku').textinput('disable') : $('#'+parent+' #sku').textinput('enable');
-		(obj.UUIC) ? $('#'+parent+' #uuic').textinput('disable') : $('#'+parent+' #uuic').textinput('enable');
-		(obj.Serial) ? $('#'+parent+' #serial').textinput('disable') : $('#'+parent+' #serial').textinput('enable');
-		(obj.EOWD) ? $('#'+parent+' #eowd').textinput('disable') : $('#'+parent+' #eowd').textinput('enable');
-		(obj.OPD) ? $('#'+parent+' #opd').textinput('disable') : $('#'+parent+' #opd').textinput('enable');
-
-		if (_size(obj.Monitor) > 0) {
-			(obj.Monitor[0].SKU) ? $('#'+parent+' #msku').textinput('disable') : $('#'+parent+' #msku').textinput('enable');
-			(obj.Monitor[0].Serial) ? $('#'+parent+' #mserial').textinput('disable') : $('#'+parent+' #mserial').textinput('enable');
-			(obj.Monitor[0].EOWD) ? $('#'+parent+' #meowd').textinput('disable') : $('#'+parent+' #meowd').textinput('enable');
-		} else {
-			(obj.MSKU) ? $('#'+parent+' #msku').textinput('disable') : $('#'+parent+' #msku').textinput('enable');
-			(obj.MSerial) ? $('#'+parent+' #mserial').textinput('disable') : $('#'+parent+' #mserial').textinput('enable');
-			(obj.MEOWD) ? $('#'+parent+' #meowd').textinput('disable') : $('#'+parent+' #meowd').textinput('enable');
-		}
-	}
-
-	/* Helper function to inspect objects recursively */
-	function _inspect(obj){
-		$.each(obj, function(x, y){
-			if ((/object|array/.test(typeof(y))) && (_size(y) > 0)){
-				console.log('inspect: Examining '+x+' ('+typeof(y)+')');
-				_inspect(y);
-			} else {
-				console.log('inspect: '+x+' => '+y);
-			}
-		});
-	}
-
-	/* Calculate size of an object */
-	function _size(obj){
-		var n = 0;
-		if (/object/.test(typeof(obj))) {
-			$.each(obj, function(k, v){
-				if (obj.hasOwnProperty(k)) n++;
-			});
-		} else if (/array/.test(typeof(obj))) {
-			n = obj.length;
-		}
-		return n;
-	}
-
-	/* Perform serialization on object */
-	function _serialize(args){
-		if (_size(args) > 0) {
-			var x='';
-			$.each(args, function(a, b){
-				if (typeof(b) === 'object'){
-					$.each(b, function(c, d){
-						x+=a+'['+c+']'+'='+d+'&';
-					});
-				} else {
-					x+=a+'='+b+'&';
-				}
-			});
-			x = x.substring(0, x.length-1);
-		} else {
-			return false;
-		}
-		return x;
-	}
-
-	/* Check browser */
-	function _detect(){
-		return /android|blackberry|symbian|iemobile|ipad|iphone/gi.test(navigator.userAgent);
-	}
-
-	/* Return an ISO formatted date */
-	function _date(){
-		var _d = new Date();
-		return _d.toISOString();
-	}
-});
+/* Validate Date */
+function valDate(obj)
+{
+	return (/^[\d+]{1,2}\/[\d+]{1,2}\/[\d+]{4}$/.test(obj)) ?
+		true : {result: false, message: 'Date is invalid [mm/dd/yyyy]' }
+}
