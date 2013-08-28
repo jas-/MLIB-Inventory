@@ -1,5 +1,11 @@
 $(document).ready(function(){
 
+	/* DOM element storing dqxGrid */
+	var grid = 'jqxgrid-computers';
+
+	/* Name of client storage key */
+	var key = 'computers';
+
   /* Mappings for computer data source */
 	var computers = {
 		source: {
@@ -118,9 +124,7 @@ $(document).ready(function(){
 		]
 	};
 
-  /* Initialize computer record sets */
-	doRequest('computers', api.computers.url, methods.all, false, function(obj){
-		computers.source.localdata = obj;
-		doGrid('jqxgrid-computers', computers);
-	});
+  /* Initialize computer record set */
+	doIt(key, grid, api.computers.url, methods.all, computers)
+
 });

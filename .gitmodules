@@ -1,6 +1,9 @@
 [submodule "js/3rd-party/comm.js"]
 	path = js/3rd-party/comm.js
-	url = git@github.com:jas-/comm.js.git
+	url = https://github.com/jas-/comm.js.git
 [submodule "js/3rd-party/jquery-mobile-simpledialog"]
 	path = js/3rd-party/jquery-mobile-simpledialog
 	url = https://github.com/jtsage/jquery-mobile-simpledialog.git
+[submodule "js/3rd-party/secStore.js"]
+	path = js/3rd-party/secStore.js
+	url = https://github.com/jas-/secStore.js.git

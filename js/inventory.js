@@ -29,6 +29,18 @@ var	methods = {
 	remove:	'delete'
 };
 
+/* Execute secStore.js */
+function localData(key, data, cb) {
+	$(window).secStore({
+		appID: key,
+		aes: true,
+		data: data,
+		callback: function(obj){
+			(/function/.test(typeof(cb))) ? cb(obj) : false;
+		}
+	});
+}
+
 /* Execute comm.js */
 function doRequest(id, url, method, data, cb)
 {
@@ -38,7 +50,7 @@ function doRequest(id, url, method, data, cb)
 		method:			(method)	? method	: false,
 		data:				(data)		? data		: false,
 		callback:		function(){
-			cb($(this));
+			(/function/.test(typeof(cb))) ? cb($(this)) : false;
 		}
 	});
 }
@@ -66,7 +78,7 @@ function doGrid(element, obj)
 		source: adapter,
 		sortable: true,
 		updaterow: function (rowid, rowdata, commit) {
-		/* update record */
+			/* update record */
 			commit(true);
 		},
 		width: '100%'
@@ -81,6 +93,21 @@ function model_obj2arr(obj)
 		a.push(v.model);
 	});
 	return a;
+}
+
+function doIt(key, grid, url, method, source) {
+	localData(key, false, function(obj){
+		if (!obj) {
+			doRequest(grid, url, method, false, function(d){
+				source.source.localdata = d;
+				localData(key, d);
+				doGrid(grid, source);
+			});
+		} else {
+			source.source.localdata = obj;
+			doGrid(grid, source);
+		}
+	});
 }
 
 function getBtns(element, obj)
