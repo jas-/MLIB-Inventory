@@ -1,6 +1,6 @@
 [submodule "js/3rd-party/comm.js"]
 	path = js/3rd-party/comm.js
 	url = https://github.com/jas-/comm.js.git
-[submodule "js/3rd-party/secStore.js"]
-	path = js/3rd-party/secStore.js
+[submodule "secStore.js"]
+	path = secStore.js
 	url = https://github.com/jas-/secStore.js.git
