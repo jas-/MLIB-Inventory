@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Mariott Library Inventory Management</title>
+
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<!-- CSS enabling mobile frome work (jQuery Mobile) -->
+	<link rel="stylesheet" href="css/themes/default/jquery.mobile-1.2.0.css" />
+	<link rel="stylesheet" href="css/themes/custom/custom.min.css" />
+	<link rel="stylesheet"  href="js/3rd-party/jQuery-Mobile-Icon-Pack/original/jqm-icon-pack-2.0-original.css" />
+	<link rel="stylesheet"  href="js/3rd-party/jQuery-Mobile-Icon-Pack/font-awesome/jqm-icon-pack-fa.css" />
+
+	<!-- CSS for handling AJAX responses -->
+	<link rel="stylesheet" href="css/main.css" />
+
+	<!-- jQuery libraries -->
+	<script type="text/javascript" src="js/3rd-party/jQuery/jquery.min.js"></script>
+	<script type="text/javascript" src="js/3rd-party/jQuery/jquery.mobile-1.3.2.min.js"></script>
+  </head>
+
+<body>
+
+  <!-- monitor page -->
+  <div data-role="page" id="monitors">
+    <div data-theme="c" data-role="header">
+      <h3>
+		<span align="left"><a href="#"><img src="images/inventory_categories.png" alt="Inventory Management" title="Inventory Management" height="56" /></a><a href="http://www.utah.edu/"><img src="images/marriottHeader-U.gif" alt="The University of Utah" title="The University of Utah" /></a><a href="http://www.lib.utah.edu"><img src="images/marriottHeader-title.gif" alt="J. Willard Marriott Library, The University of Utah" title="J. Willard Marriott Library, The University of Utah" /></a></span>
+	  </h3>
+	  <div data-role="navbar" data-iconpos="left">
+		<ul>
+		  <li>
+			<a href="index.html" rel="external" data-transition="fade" data-theme="c" data-icon="laptop">Computers</a>
+		  </li>
+		  <li>
+			<a href="monitors.html" rel="external" data-transition="fade" data-theme="c" data-icon="desktop">Monitors</a>
+		  </li>
+		  <li>
+			<a href="models.html" rel="external" data-transition="fade" data-theme="c" data-icon="list-ul">Models</a>
+		  </li>
+		  <li>
+			<a href="rma.html" rel="external" data-transition="fade" data-theme="c" data-icon="paste">RMA</a>
+		  </li>
+		  <li>
+			<a href="cors.html" rel="external" data-transition="fade" data-theme="c" data-icon="globe">CORS</a>
+		  </li>
+		</ul>
+	  </div>
+	</div>
+
+	<!-- monitor page content -->
+	<div data-role="content">
+	  <!-- Monitor sub-navigation -->
+	  <div data-role="navbar" data-iconpos="left">
+		<ul>
+		  <li>
+			<a href="#add-monitor-record" data-transition="fade" data-theme="c" onclick="ShowHide(this)" data-icon="plus">Add new record</a>
+		  </li>
+		  <li>
+			<a href="#edit-monitor-records" data-transition="fade" data-theme="c" onclick="ShowHide(this)" data-icon="edit">Edit monitor records</a>
+		  </li>
+		  <li>
+			<a href="#search-monitor-records" data-transition="fade" data-theme="c" onclick="ShowHide(this)" data-icon="search">Advanced search</a>
+		  </li>
+		</ul>
+	  </div>
+
+	  <!-- Monitor content -->
+	  <div data-role="content">
+
+		<!-- Monitor add record -->
+		<div id="add-monitor-record" class="ui-screen-hidden content ui-body ui-body-c">
+		  <form action='http://inventory-server.dev:8080/monitor' id='monitor' name='monitor' method='post'>
+		  <h3>Add monitor record</h3>
+		  <div id="message-add-monitor"></div>
+			<div class="ui-field-contain ui-body ui-br" data-role='fieldcontain'>
+			  <fieldset data-role='controlgroup' data-mini=true>
+				<label for='hostname'>Hostname</label>
+				  <input id='hostname' name='hostname' placeholder='Computer name' type='text' class='ui-input-text ui-body-c ui-corner-all ui-shadow-inset' style='width: 100%'>
+			  </fieldset>
+			</div>
+			<div class="ui-field-contain ui-body ui-br" data-role='fieldcontain'>
+			  <fieldset data-role='controlgroup' data-mini=true>
+				<label for='model'>Model</label>
+				  <input id='model' name='model' placeholder='Model type' type='text' class='ui-input-text ui-body-c ui-corner-all ui-shadow-inset' style='width: 100%'>
+			  </fieldset>
+			</div>
+			<div class="ui-field-contain ui-body ui-br" data-role='fieldcontain'>
+			  <fieldset data-role='controlgroup' data-mini=true>
+				<label for='sku'>SKU</label>
+				  <input id='sku' name='sku' placeholder='SKU (white barcode)' type='text' class='ui-input-text ui-body-c ui-corner-all ui-shadow-inset' style='width: 100%'>
+			  </fieldset>
+			</div>
+			<div class="ui-field-contain ui-body ui-br" data-role='fieldcontain'>
+			  <fieldset data-role='controlgroup' data-mini=true>
+				<label for='serial'>Serial</label>
+				  <input id='serial' name='serial' placeholder='Serial (Red label)' type='text' class='ui-input-text ui-body-c ui-corner-all ui-shadow-inset' style='width: 100%'>
+			  </fieldset>
+			</div>
+			<div class="ui-field-contain ui-body ui-br" data-role='fieldcontain'>
+			  <fieldset data-role='controlgroup' data-mini=true>
+				<label for='eowd'>EOWD</label>
+				  <input id='eowd' name='eowd' placeholder='End of warranty date' type='text' class='ui-input-text ui-body-c ui-corner-all ui-shadow-inset' style='width: 100%'>
+			  </fieldset>
+			</div>
+			<div class="ui-field-contain ui-body ui-br" data-role='fieldcontain'>
+			  <fieldset data-role='controlgroup' data-mini=true>
+				<label for='opd'>OPD</label>
+				  <input id='opd' name='opd' placeholder='Original purchase date' type='text' class='ui-input-text ui-body-c ui-corner-all ui-shadow-inset' style='width: 100%'>
+			  </fieldset>
+			</div>
+			<div class="ui-field-contain ui-body ui-br" data-role='fieldcontain'>
+			  <fieldset data-role='controlgroup' data-mini=true>
+				<label for='description'>Description</label>
+				  <textarea id='description' name='description' placeholder='Description' cols='300' rows='6' style='width: 100%' class='ui-input-text ui-body-c ui-corner-all ui-shadow-inset'></textarea>
+			  </fieldset>
+			</div>
+			<div class="ui-field-contain ui-body ui-br" data-role='fieldcontain'>
+			  <fieldset data-role='controlgroup' data-mini=true>
+				<label for='notes'>Notes</label>
+				  <textarea id='notes' name='notes' placeholder='Notes' cols='300' rows='6' style='width: 100%' class='ui-input-text ui-body-c ui-corner-all ui-shadow-inset'></textarea>
+			  </fieldset>
+			</div>
+			<div data-role='fieldcontain'>
+			  <fieldset data-role='controlgroup' data-mini=true>
+				<input id='save' data-inline='true' data-mini='true' data-theme='c' data-icon='arrow-r' data-iconpos='right' value='Save changes' type='submit'>
+			  </fieldset>
+			</div>
+		  </form>
+		</div>
+
+		<!-- Monitor edit records -->
+		<div id="edit-monitor-records" class="ui-screen-hidden content ui-body ui-body-c">
+		  <h3>Current monitor asset records</h3>
+		  <div id="message-edit-monitor"></div>
+		  <div id='jqxWidget-monitors'>
+			<div id="jqxgrid-monitors"></div>
+		  </div>
+		</div>
+
+		<!-- Advanced monitor search -->
+		<div id="search-monitor-records" class="ui-screen-hidden content ui-body ui-body-c">
+		  <form action='http://inventory-server.dev:8080/monitor' id='monitor' name='monitor' method='post'>
+		  <h3>Search monitor records</h3>
+		  <div id="message-search-monitor"></div>
+			<div class="ui-field-contain ui-body ui-br" data-role='fieldcontain'>
+			  <fieldset data-role='controlgroup' data-mini=true>
+				<label for='search'>Search</label>
+				  <input id='search' name='search' placeholder='Search records (Use * as wildcard)' type='texts' class='ui-input-text ui-body-c ui-corner-all ui-shadow-inset' style='width: 100%'>
+			  </fieldset>
+			</div>
+			<div data-role='fieldcontain'>
+			  <fieldset data-role='controlgroup' data-mini=true>
+				<input id='save' data-inline='true' data-mini='true' data-theme='c' data-icon='arrow-r' data-iconpos='right' value='Search' type='submit'>
+			  </fieldset>
+			</div>
+		  </form>
+		</div>
+	  </div>
+	</div>
+	<div style="text-align: center; padding-bottom: 1%">
+	  <span style="font-size: .7em;font-weight: normal">&copy; University Of Utah - Marriott Library 2013</span>
+	</div>
+  </div>
+
+  <!-- comm.js libs -->
+  <script src="js/3rd-party/comm.js/comm.js"></script>
+
+  <!-- SJCL libs -->
+  <script src="js/3rd-party/secStore.js/3rd-party/sjcl/sjcl.js"></script>
+
+  <!-- secStore.js libs -->
+  <script src="js/3rd-party/secStore.js/secStore.js"></script>
+
+  <!-- jqwidgets css file -->
+  <link rel="stylesheet" href="js/3rd-party/jqWidgets/jqwidgets/styles/jqx.base.css" type="text/css" />
+
+  <!-- jqwidgets required libs -->
+  <script type="text/javascript" src="js/3rd-party/jqWidgets/scripts/gettheme.js"></script>
+  <script type="text/javascript" src="js/3rd-party/jqWidgets/jqwidgets/jqxcore.js"></script>
+  <script type="text/javascript" src="js/3rd-party/jqWidgets/jqwidgets/jqxdata.js"></script>
+  <script type="text/javascript" src="js/3rd-party/jqWidgets/jqwidgets/jqxbuttons.js"></script>
+  <script type="text/javascript" src="js/3rd-party/jqWidgets/jqwidgets/jqxscrollbar.js"></script>
+  <script type="text/javascript" src="js/3rd-party/jqWidgets/jqwidgets/jqxlistbox.js"></script>
+  <script type="text/javascript" src="js/3rd-party/jqWidgets/jqwidgets/jqxdropdownlist.js"></script>
+  <script type="text/javascript" src="js/3rd-party/jqWidgets/jqwidgets/jqxmenu.js"></script>
+  <script type="text/javascript" src="js/3rd-party/jqWidgets/jqwidgets/jqxgrid.js"></script>
+  <script type="text/javascript" src="js/3rd-party/jqWidgets/jqwidgets/jqxgrid.grouping.js"></script>
+  <script type="text/javascript" src="js/3rd-party/jqWidgets/jqwidgets/jqxgrid.sort.js"></script>
+  <script type="text/javascript" src="js/3rd-party/jqWidgets/jqwidgets/jqxgrid.pager.js"></script>
+  <script type="text/javascript" src="js/3rd-party/jqWidgets/jqwidgets/jqxgrid.columnsresize.js"></script>
+  <script type="text/javascript" src="js/3rd-party/jqWidgets/jqwidgets/jqxgrid.selection.js"></script>
+  <script type="text/javascript" src="js/3rd-party/jqWidgets/jqwidgets/jqxwindow.js"></script>
+  <script type="text/javascript" src="js/3rd-party/jqWidgets/jqwidgets/jqxgrid.edit.js"></script>
+  <script type="text/javascript" src="js/3rd-party/jqWidgets/jqwidgets/jqxdata.export.js"></script>
+  <script type="text/javascript" src="js/3rd-party/jqWidgets/jqwidgets/jqxgrid.export.js"></script>
+  <script type="text/javascript" src="js/3rd-party/jqWidgets/jqwidgets/jqxgrid.storage.js"></script>
+  <script type="text/javascript" src="js/3rd-party/jqWidgets/jqwidgets/jqxgrid.filter.js"></script>
+  <script type="text/javascript" src="js/3rd-party/jqWidgets/jqwidgets/jqxdatetimeinput.js"></script>
+  <script type="text/javascript" src="js/3rd-party/jqWidgets/jqwidgets/jqxcalendar.js"></script>
+  <script type="text/javascript" src="js/3rd-party/jqWidgets/jqwidgets/jqxtooltip.js"></script>
+  <script type="text/javascript" src="js/3rd-party/jqWidgets/jqwidgets/globalization/globalize.js"></script>
+  <script type="text/javascript" src="js/3rd-party/jqWidgets/jqwidgets/globalization/jquery.global.js"></script>
+  <script type="text/javascript" src="js/3rd-party/jqWidgets/jqwidgets/globalization/jquery.glob.en-US.js"></script>
+
+  <!-- Inventory libs -->
+  <script src="js/inventory.js"></script>
+
+  <!-- Monitor specific libs -->
+  <script src="js/monitors.js"></script>
+
+</body>
+</html>
