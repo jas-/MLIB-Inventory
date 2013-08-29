@@ -9,6 +9,8 @@
 	<!-- CSS enabling mobile frome work (jQuery Mobile) -->
 	<link rel="stylesheet" href="css/themes/default/jquery.mobile-1.2.0.css" />
 	<link rel="stylesheet" href="css/themes/custom/custom.min.css" />
+	<link rel="stylesheet"  href="js/3rd-party/jQuery-Mobile-Icon-Pack/original/jqm-icon-pack-2.0-original.css" />
+	<link rel="stylesheet"  href="js/3rd-party/jQuery-Mobile-Icon-Pack/font-awesome/jqm-icon-pack-fa.css" />
 
 	<!-- CSS for handling AJAX responses -->
 	<link rel="stylesheet" href="css/main.css" />
@@ -29,105 +31,120 @@
 	  <div data-role="navbar" data-iconpos="left">
 		<ul>
 		  <li>
-			<a href="#computers" data-transition="fade" data-theme="c" data-icon="home">Computers</a>
+			<a href="#computers" data-transition="fade" data-theme="c" data-icon="laptop">Computers</a>
 		  </li>
 		  <li>
-			<a href="#monitors" data-transition="fade" data-theme="c" data-icon="search">Monitors</a>
+			<a href="#monitors" data-transition="fade" data-theme="c" data-icon="desktop">Monitors</a>
 		  </li>
 		  <li>
-			<a href="#models" data-transition="fade" data-theme="c" data-icon="plus">Models</a>
+			<a href="#models" data-transition="fade" data-theme="c" data-icon="list-ul">Models</a>
 		  </li>
 		  <li>
-			<a href="#rma" data-transition="fade" data-theme="c" data-icon="plus">RMA</a>
+			<a href="#rma" data-transition="fade" data-theme="c" data-icon="paste">RMA</a>
 		  </li>
 		  <li>
-			<a href="#cors" data-transition="fade" data-theme="c" data-icon="plus">CORS</a>
+			<a href="#cors" data-transition="fade" data-theme="c" data-icon="globe">CORS</a>
 		  </li>
 		</ul>
 	  </div>
 	</div>
+
+	<!-- page content -->
 	<div data-role="content">
-	  <div data-role="navbar">
+	  <!-- Computer sub-navigation -->
+	  <div data-role="navbar" data-iconpos="left">
 		<ul>
-		  <li><a href="#current-computer-records" onclick="ShowHide(this)">Current computer records</a></li>
-		  <li><a href="#add-computer-record" onclick="ShowHide(this)">Add new record</a></li>
-		  <li><a href="#search-computer-records" onclick="ShowHide(this)">Search computer records</a></li>
+		  <li>
+			<a href="#add-computer-record" data-transition="fade" data-theme="c" onclick="ShowHide(this)" data-icon="plus">Add new record</a>
+		  </li>
+		  <li>
+			<a href="#edit-computer-records" data-transition="fade" data-theme="c" onclick="ShowHide(this)" data-icon="edit">Edit computer records</a>
+		  </li>
+		  <li>
+			<a href="#search-computer-records" data-transition="fade" data-theme="c" onclick="ShowHide(this)" data-icon="search">Advanced search</a>
+		  </li>
 		</ul>
 	  </div>
+
+	  <!-- Computer content -->
 	  <div data-role="content">
-		<div id="current-computer-records" class="ui-screen-hidden">
+
+		<!-- Computer add record -->
+		<div id="add-computer-record" class="ui-screen-hidden content ui-body ui-body-c">
+		  <form action='http://inventory-server.dev:8080/computer' id='computer' name='computer' method='post'>
+		  <h3>Add computer record</h3>
+		  <div id="message-add-computer"></div>
+			<div class="ui-field-contain ui-body ui-br" data-role='fieldcontain'>
+			  <fieldset data-role='controlgroup' data-mini=true>
+				<label for='hostname'>Hostname</label>
+				  <input id='hostname' name='hostname' placeholder='Computer name' type='text' class='ui-input-text ui-body-c ui-corner-all ui-shadow-inset' style='width: 100%'>
+			  </fieldset>
+			</div>
+			<div class="ui-field-contain ui-body ui-br" data-role='fieldcontain'>
+			  <fieldset data-role='controlgroup' data-mini=true>
+				<label for='model'>Model</label>
+				  <input id='model' name='model' placeholder='Model type' type='text' class='ui-input-text ui-body-c ui-corner-all ui-shadow-inset' style='width: 100%'>
+			  </fieldset>
+			</div>
+			<div class="ui-field-contain ui-body ui-br" data-role='fieldcontain'>
+			  <fieldset data-role='controlgroup' data-mini=true>
+				<label for='sku'>SKU</label>
+				  <input id='sku' name='sku' placeholder='SKU (white barcode)' type='text' class='ui-input-text ui-body-c ui-corner-all ui-shadow-inset' style='width: 100%'>
+			  </fieldset>
+			</div>
+			<div class="ui-field-contain ui-body ui-br" data-role='fieldcontain'>
+			  <fieldset data-role='controlgroup' data-mini=true>
+				<label for='uuic'>UUIC</label>
+				  <input id='uuic' name='uuic' placeholder='UUIC (yellow sticker)' type='text' class='ui-input-text ui-body-c ui-corner-all ui-shadow-inset' style='width: 100%'>
+			  </fieldset>
+			</div>
+			<div class="ui-field-contain ui-body ui-br" data-role='fieldcontain'>
+			  <fieldset data-role='controlgroup' data-mini=true>
+				<label for='serial'>Serial</label>
+				  <input id='serial' name='serial' placeholder='Serial (Red label)' type='text' class='ui-input-text ui-body-c ui-corner-all ui-shadow-inset' style='width: 100%'>
+			  </fieldset>
+			</div>
+			<div class="ui-field-contain ui-body ui-br" data-role='fieldcontain'>
+			  <fieldset data-role='controlgroup' data-mini=true>
+				<label for='eowd'>EOWD</label>
+				  <input id='eowd' name='eowd' placeholder='End of warranty date' type='text' class='ui-input-text ui-body-c ui-corner-all ui-shadow-inset' style='width: 100%'>
+			  </fieldset>
+			</div>
+			<div class="ui-field-contain ui-body ui-br" data-role='fieldcontain'>
+			  <fieldset data-role='controlgroup' data-mini=true>
+				<label for='opd'>OPD</label>
+				  <input id='opd' name='opd' placeholder='Original purchase date' type='text' class='ui-input-text ui-body-c ui-corner-all ui-shadow-inset' style='width: 100%'>
+			  </fieldset>
+			</div>
+			<div class="ui-field-contain ui-body ui-br" data-role='fieldcontain'>
+			  <fieldset data-role='controlgroup' data-mini=true>
+				<label for='description'>Description</label>
+				  <textarea id='description' name='description' placeholder='Description' cols='300' rows='6' style='width: 100%' class='ui-input-text ui-body-c ui-corner-all ui-shadow-inset'></textarea>
+			  </fieldset>
+			</div>
+			<div class="ui-field-contain ui-body ui-br" data-role='fieldcontain'>
+			  <fieldset data-role='controlgroup' data-mini=true>
+				<label for='notes'>Notes</label>
+				  <textarea id='notes' name='notes' placeholder='Notes' cols='300' rows='6' style='width: 100%' class='ui-input-text ui-body-c ui-corner-all ui-shadow-inset'></textarea>
+			  </fieldset>
+			</div>
+			<div data-role='fieldcontain'>
+			  <fieldset data-role='controlgroup' data-mini=true>
+				<input id='save' data-inline='true' data-mini='true' data-theme='c' data-icon='arrow-r' data-iconpos='right' value='Save changes' type='submit'>
+			  </fieldset>
+			</div>
+		  </form>
+		</div>
+
+		<!-- Computer edit records -->
+		<div id="edit-computer-records" class="ui-screen-hidden content ui-body ui-body-c">
 		  <h3>Current computer asset records</h3>
 		  <div id="message-computers"></div>
 		  <div id='jqxWidget-computers'>
 			<div id="jqxgrid-computers"></div>
 		  </div>
 		</div>
-		<div id="add-computer-record" class="ui-screen-hidden">
-		  <form action='http://inventory-server.dev:8080/computer' id='computer' name='computer' method='post'>
-		  <h3>Add computer record</h3>
-		  <div id="message-add-computer"></div>
-			<div data-role='fieldcontain'>
-			  <fieldset data-role='controlgroup' data-mini=true>
-				<label for='hostname'>Hostname</label>
-				  <input id='hostname' name='hostname' placeholder='Computer name' type='text'>
-			  </fieldset>
-			</div>
-			<div data-role='fieldcontain'>
-			  <fieldset data-role='controlgroup' data-mini=true>
-				<label for='model'>Model</label>
-				  <input id='model' name='model' placeholder='Model type' type='text'>
-			  </fieldset>
-			</div>
-			<div data-role='fieldcontain'>
-			  <fieldset data-role='controlgroup' data-mini=true>
-				<label for='sku'>SKU</label>
-				  <input id='sku' name='sku' placeholder='SKU (white barcode)' type='text'>
-			  </fieldset>
-			</div>
-			<div data-role='fieldcontain'>
-			  <fieldset data-role='controlgroup' data-mini=true>
-				<label for='uuic'>UUIC</label>
-				  <input id='uuic' name='uuic' placeholder='UUIC (yellow sticker)' type='text'>
-			  </fieldset>
-			</div>
-			<div data-role='fieldcontain'>
-			  <fieldset data-role='controlgroup' data-mini=true>
-				<label for='serial'>Serial</label>
-				  <input id='serial' name='serial' placeholder='Serial (Red label)' type='text'>
-			  </fieldset>
-			</div>
-			<div data-role='fieldcontain'>
-			  <fieldset data-role='controlgroup' data-mini=true>
-				<label for='eowd'>EOWD</label>
-				  <input id='eowd' name='eowd' placeholder='End of warranty date' type='text'>
-			  </fieldset>
-			</div>
-			<div data-role='fieldcontain'>
-			  <fieldset data-role='controlgroup' data-mini=true>
-				<label for='opd'>OPD</label>
-				  <input id='opd' name='opd' placeholder='Original purchase date' type='text'>
-			  </fieldset>
-			</div>
-			<div data-role='fieldcontain'>
-			  <fieldset data-role='controlgroup' data-mini=true>
-				<label for='description'>Description</label>
-				  <textarea id='description' name='description' placeholder='Description'></textarea>
-			  </fieldset>
-			</div>
-			<div data-role='fieldcontain'>
-			  <fieldset data-role='controlgroup' data-mini=true>
-				<label for='notes'>Notes</label>
-				  <textarea id='notes' name='notes' placeholder='Notes'></textarea>
-			  </fieldset>
-			</div>
-			<div data-role='fieldcontain'>
-			  <fieldset data-role='controlgroup' data-mini=true>
-				<input id='save' data-inline='true' data-mini='true' data-theme='c' data-icon='arrow-r' data-iconpos='right' value='Save changes' type='submit'>
-				<!--input id='close' data-inline='true' data-mini='true' data-theme='c' data-icon='arrow-r' data-iconpos='right' value='Close' type='button'-->
-			  </fieldset>
-			</div>
-		  </form>
-		</div>
+
 	  </div>
 	</div>
 	<div style="text-align: center; padding-bottom: 1%">
@@ -174,10 +191,6 @@
   <script type="text/javascript" src="js/3rd-party/jqWidgets/jqwidgets/globalization/globalize.js"></script>
   <script type="text/javascript" src="js/3rd-party/jqWidgets/jqwidgets/globalization/jquery.global.js"></script>
   <script type="text/javascript" src="js/3rd-party/jqWidgets/jqwidgets/globalization/jquery.glob.en-US.js"></script>
-
-  <!-- jQM-SimpleDialog2 -->
-  <link rel="stylesheet" href="js/3rd-party/jQM-SimpleDialog2/jquery.mobile.simpledialog.min.css" />
-  <script type="text/javascript" src="js/3rd-party/jQM-SimpleDialog2/jquery.mobile.simpledialog2.min.js"></script>
 
   <!-- Inventory libs -->
   <script src="js/inventory.js"></script>

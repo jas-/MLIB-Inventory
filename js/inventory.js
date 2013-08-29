@@ -30,7 +30,8 @@ var	methods = {
 };
 
 /* Execute secStore.js */
-function localData(key, data, cb) {
+function localData(key, data, cb)
+{
 	$(window).secStore({
 		appID: key,
 		aes: true,
@@ -75,15 +76,8 @@ function doGrid(element, obj)
 		ready: function () {
 			$('#'+element).jqxGrid('loadstate', $('#'+element).jqxGrid('getstate'));
 		},
-/*
-		renderstatusbar: function (statusbar) {
-			statusbar.append(getBtns(element, statusbar));
-		},
-*/
 		selectionmode: 'singlecell',
 		showfilterrow: true,
-		showstatusbar: true,
-		showtoolbar: true,
 		source: adapter,
 		sortable: true,
 		updaterow: function (rowid, rowdata, commit) {
@@ -92,18 +86,6 @@ function doGrid(element, obj)
 		},
 		width: '100%'
 	});
-}
-
-$(function()
-{
- $(".content").find("div:first").show();
-});
-
-function ShowHide(e)
-{
-  $(".content").hide();
-  var id =$(e).attr("href");
-  $(id).show();
 }
 
 /* Extract model for drop down list */
@@ -116,7 +98,9 @@ function model_obj2arr(obj)
 	return a;
 }
 
-function doIt(key, grid, url, method, source) {
+/* work horse */
+function doIt(key, grid, url, method, source)
+{
 	localData(key, false, function(obj){
 		if (!obj) {
 			doRequest(grid, url, method, false, function(d){
@@ -131,101 +115,17 @@ function doIt(key, grid, url, method, source) {
 	});
 }
 
-function getBtns(element, obj)
+/* Display first tab */
+$(function(){
+ $(".content").find("div:first").show();
+});
+
+/* On click hide & show */
+function ShowHide(e)
 {
-	var AddBtn = genAddBtn();
-	var EditBtn = genEditBtn();
-	var DeleteBtn = genDeleteBtn();
-
-	var container = genBtnContainer();
-
-	container.append(AddBtn);
-	container.append(EditBtn);
-	container.append(DeleteBtn);
-
-	btnEvents(element, AddBtn, EditBtn, DeleteBtn);
-
-	return container;
-}
-
-function btnEvents(element, AddBtn, EditBtn, DeleteBtn)
-{
-	AddBtn.jqxButton({
-		width: 70,
-		height: 20
-	}).click(function(event) {
-		launchModel($('#config').data('config'));
-	});
-
-	EditBtn.jqxButton({
-		width: 70,
-		height: 20
-	}).click(function(event) {
-		launchModel($('#config').data('config'));
-	});
-
-	DeleteBtn.jqxButton({
-		width: 70,
-		height: 20
-	}).click(function(event) {
-		launchModel($('#config').data('config'));
-	});
-}
-
-function launchModel(config)
-{
-	$('#'+config.page).simpledialog2({
-		headerText: 'wtf',
-		dialogAllow: true,
-		dialogForce: true,
-		safeNuke: true,
-		blankContentAdopt: true,
-		callbackOpen: function(){
-			alert(2);
-		}
-	});
-}
-
-function genBtnContainer()
-{
-	return $("<div style='overflow: visible; position: relative; margin: 5px;'></div>");
-}
-
-/* Add button */
-function genAddBtn()
-{
-	return $("<div id='add-btn' style='float: left; margin-left: 5px'>"+
-							"<img id='add' style='position: relative; margin-top: 2px;' src='../images/add.png'/>"+
-							"<span style='margin-left: 4px; position: relative; top: -3px;'>"+
-								"Add"+
-							"</span>"+
-						"</div>");
-}
-
-/* Edit button */
-function genEditBtn()
-{
-	return $("<div style='float: left; margin-left: 5px; data-rel='popup' data-position-to='window' data-role='button' data-inline='true'>"+
-							"<a data-role='button' data-rel='popup'>"+
-								"<img style='position: relative; margin-top: 2px;' src='../images/add.png'/>"+
-								"<span style='margin-left: 4px; position: relative; top: -3px;'>"+
-									"Edit"+
-								"</span>"+
-							"</a>"+
-						"</div>");
-}
-
-/* Delete button */
-function genDeleteBtn()
-{
-	return $("<div style='float: left; margin-left: 5px; data-rel='popup' data-position-to='window' data-role='button' data-inline='true'>"+
-							"<a data-role='button' data-rel='popup'>"+
-								"<img style='position: relative; margin-top: 2px;' src='../images/add.png'/>"+
-								"<span style='margin-left: 4px; position: relative; top: -3px;'>"+
-									"Delete"+
-								"</span>"+
-							"</a>"+
-						"</div>");
+  $(".content").hide();
+  var id =$(e).attr("href");
+  $(id).show();
 }
 
 /* Validate hostname (RFC 1123) */
@@ -274,4 +174,11 @@ function valDate(obj)
 
 	return (/^[\d+]{1,2}\/[\d+]{1,2}\/[\d+]{4}$/.test(obj)) ?
 		true : {result: false, message: 'Date is invalid [mm/dd/yyyy]' }
+}
+
+/* Validate General (paragraph) */
+function valGeneral(obj)
+{
+	return (!/^[a-z0-9- .\n\r\t,;:]{1,128}$/i.test(obj)) ?
+		true : {result: false, message: 'Field is invalid [a-z0-9- .\n\r,;:]{1,128}' }
 }

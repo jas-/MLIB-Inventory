@@ -20,7 +20,7 @@ $(document).ready(function(){
 				{ name:		'Description',type: 'string' },
 				{ name:		'Notes',			type: 'string' }
 			],
-			datatype: "json"
+			datatype: 'json'
 		},
 		columns: [
 			{ text: 'Hostname',
@@ -113,14 +113,14 @@ $(document).ready(function(){
         datafield: 'Description',
         width: '10%',
         validation: function(cell, value) {
-          return valDescription(value);
+          return valGeneral(value);
         }
       },
 			{ text: 'Notes',
         datafield: 'Notes',
         width: '20%',
         validation: function(cell, value) {
-          return valNotes(value);
+          return valGeneral(value);
         }
       }
 		]
