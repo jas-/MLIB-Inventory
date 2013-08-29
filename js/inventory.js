@@ -9,7 +9,7 @@ var api = {
 	monitors: {
 		url:	url+'/monitor',
 	},
-	rmas: {
+	rma: {
 		url:	url+'/rma',
 	},
 	models: {
@@ -93,7 +93,7 @@ function model_obj2arr(obj)
 {
 	var a = [];
 	$.each(obj, function(k, v){
-		a.push(v.model);
+		a.push(v.Model);
 	});
 	return a;
 }

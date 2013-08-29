@@ -1,33 +1,124 @@
 $(document).ready(function(){
-	/* Mappings for monitors data source */
+
+	/* DOM element storing dqxGrid */
+	var grid = 'jqxgrid-monitors';
+
+	/* Name of client storage key */
+	var key = 'monitors';
+
+  /* Mappings for computer data source */
 	var monitors = {
 		source: {
 			datafields:[
 				{ name:		'Hostname',		type: 'string' },
 				{ name:		'Model',			type: 'string' },
 				{ name:		'SKU',				type: 'string' },
-				{ name:		'Serial',			type: 'string' }
+				{ name:		'Serial',			type: 'string' },
+				{ name:		'EOWD',				type: 'date'   },
+				{ name:		'OPD',				type: 'date'   },
+				{ name:		'Description',type: 'string' },
+				{ name:		'Notes',			type: 'string' }
 			],
-			datatype: "json"
+			datatype: 'json'
 		},
 		columns: [
-			{ text: 'Hostname',		datafield: 'Hostname',		width: '20%' },
+			{ text: 'Hostname',
+        datafield: 'Hostname',
+        width: '10%',
+        validation: function (cell, value) {
+          return valHostname(value);
+        }
+      },
 			{	text: 'Model',
 				datafield: 'Model',
 				width: '10%',
 				columntype: 'dropdownlist',
 				createeditor: function (row, column, editor) {
 					doRequest('models', api.models.url, methods.all, false, function(obj){
-						console.log(JSON.stringify(obj));
 						editor.jqxDropDownList({
 							autoDropDownHeight: true,
 							source: model_obj2arr(obj)
 						});
 					});
-				}
+				},
+        validation: function(cell, value) {
+          return valModel(value);
+        }
 			},
-			{ text: 'SKU',				datafield: 'SKU',					width: '20%' },
-			{ text: 'UUIC',				datafield: 'UUIC',				width: '20%' }
+			{ text: 'SKU',
+        datafield: 'SKU',
+        width: '10%',
+        validation: function(cell, value) {
+          return valSKU(value);
+        }
+      },
+			{ text: 'Serial',
+        datafield: 'Serial',
+        width: '10%',
+        validation: function(cell, value) {
+          return valSerial(value);
+        }
+      },
+			{ text: 'EOWD',
+				datafield: 'EOWD',
+				width: '10%',
+				cellsformat: 'MM/dd/yyyy',
+				columntype: 'datetimeinput',
+        filtertype: 'date',
+				initeditor: function(row, column, editor) {
+					var d = new Date()
+					_d = [d.getMonth()+1, d.getDate(), d.getFullYear()].join('/');
+					editor.jqxDateTimeInput('setDate', _d, {
+						formatString: 'MM/dd/yyyy',
+						animationType: 'fade',
+						width: '150px',
+						height: '25px',
+						dropDownHorizontalAlignment: 'right'
+					})
+				},
+        validation: function(cell, value) {
+          return valDate(value);
+        }
+			},
+			{ text: 'OPD',
+				datafield: 'OPD',
+				width: '10%',
+				cellsformat: 'MM/dd/yyyy',
+				columntype: 'datetimeinput',
+        filtertype: 'date',
+				initeditor: function(row, column, editor) {
+					var d = new Date()
+					_d = [d.getMonth()+1, d.getDate(), d.getFullYear()].join('/');
+					editor.jqxDateTimeInput('setDate', _d, {
+						formatString: 'MM/dd/yyyy',
+						animationType: 'fade',
+						width: '150px',
+						height: '25px',
+						dropDownHorizontalAlignment: 'right'
+					})
+				},
+        validation: function(cell, value) {
+          return valDate(value);
+        }
+			},
+			{ text: 'Description',
+        datafield: 'Description',
+        width: '20%',
+        validation: function(cell, value) {
+          return valGeneral(value);
+        }
+      },
+			{ text: 'Notes',
+        datafield: 'Notes',
+        width: '20%',
+        validation: function(cell, value) {
+          return valGeneral(value);
+        }
+      }
 		]
 	};
+
+  /* Initialize computer record set */
+	doIt(key, grid, api.monitors.url, methods.all, monitors)
+
 });

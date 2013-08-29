@@ -1,22 +1,100 @@
 $(document).ready(function(){
-	/* Mappings for models data source */
+
+	/* DOM element storing dqxGrid */
+	var grid = 'jqxgrid-models';
+
+	/* Name of client storage key */
+	var key = 'models';
+
+  /* Mappings for computer data source */
 	var models = {
 		source: {
 			datafields:[
 				{ name:		'Model',			type: 'string' },
-				{ name:		'EOWD',				type: 'string' },
-				{ name:		'OPD',				type: 'string' },
+				{ name:		'EOWD',				type: 'date'   },
+				{ name:		'OPD',				type: 'date'   },
 				{ name:		'Description',type: 'string' },
 				{ name:		'Notes',			type: 'string' }
 			],
-			datatype: "json"
+			datatype: 'json'
 		},
 		columns: [
-			{ text: 'Model',			datafield: 'Date',				width: '20%' },
-			{ text: 'EOWD',				datafield: 'EOWD',				width: '20%' },
-			{ text: 'OPD',				datafield: 'OPD',					width: '20%' },
-			{ text: 'Description',datafield: 'Description',	width: '20%' },
-			{ text: 'Notes',			datafield: 'Notes',				width: '10%' }
+			{	text: 'Model',
+				datafield: 'Model',
+				width: '20%',
+				columntype: 'dropdownlist',
+				createeditor: function (row, column, editor) {
+					doRequest('models', api.models.url, methods.all, false, function(obj){
+						editor.jqxDropDownList({
+							autoDropDownHeight: true,
+							source: model_obj2arr(obj)
+						});
+					});
+				},
+        validation: function(cell, value) {
+          return valModel(value);
+        }
+			},
+			{ text: 'EOWD',
+				datafield: 'EOWD',
+				width: '15%',
+				cellsformat: 'MM/dd/yyyy',
+				columntype: 'datetimeinput',
+        filtertype: 'date',
+				initeditor: function(row, column, editor) {
+					var d = new Date()
+					_d = [d.getMonth()+1, d.getDate(), d.getFullYear()].join('/');
+					editor.jqxDateTimeInput('setDate', _d, {
+						formatString: 'MM/dd/yyyy',
+						animationType: 'fade',
+						width: '150px',
+						height: '25px',
+						dropDownHorizontalAlignment: 'right'
+					})
+				},
+        validation: function(cell, value) {
+          return valDate(value);
+        }
+			},
+			{ text: 'OPD',
+				datafield: 'OPD',
+				width: '15%',
+				cellsformat: 'MM/dd/yyyy',
+				columntype: 'datetimeinput',
+        filtertype: 'date',
+				initeditor: function(row, column, editor) {
+					var d = new Date()
+					_d = [d.getMonth()+1, d.getDate(), d.getFullYear()].join('/');
+					editor.jqxDateTimeInput('setDate', _d, {
+						formatString: 'MM/dd/yyyy',
+						animationType: 'fade',
+						width: '150px',
+						height: '25px',
+						dropDownHorizontalAlignment: 'right'
+					})
+				},
+        validation: function(cell, value) {
+          return valDate(value);
+        }
+			},
+			{ text: 'Description',
+        datafield: 'Description',
+        width: '25%',
+        validation: function(cell, value) {
+          return valGeneral(value);
+        }
+      },
+			{ text: 'Notes',
+        datafield: 'Notes',
+        width: '25%',
+        validation: function(cell, value) {
+          return valGeneral(value);
+        }
+      }
 		]
 	};
+
+  /* Initialize computer record set */
+	doIt(key, grid, api.models.url, methods.all, models)
+
 });

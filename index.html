@@ -153,7 +153,7 @@
 			<div class="ui-field-contain ui-body ui-br" data-role='fieldcontain'>
 			  <fieldset data-role='controlgroup' data-mini=true>
 				<label for='search'>Search</label>
-				  <input id='search' name='search' placeholder='Search records (Use "*" as wildcard)' type='texts' class='ui-input-text ui-body-c ui-corner-all ui-shadow-inset' style='width: 100%'>
+				  <input id='search' name='search' placeholder='Search records (Use * as wildcard)' type='texts' class='ui-input-text ui-body-c ui-corner-all ui-shadow-inset' style='width: 100%'>
 			  </fieldset>
 			</div>
 			<div data-role='fieldcontain'>
@@ -242,12 +242,6 @@
 			</div>
 			<div class="ui-field-contain ui-body ui-br" data-role='fieldcontain'>
 			  <fieldset data-role='controlgroup' data-mini=true>
-				<label for='uuic'>UUIC</label>
-				  <input id='uuic' name='uuic' placeholder='UUIC (yellow sticker)' type='text' class='ui-input-text ui-body-c ui-corner-all ui-shadow-inset' style='width: 100%'>
-			  </fieldset>
-			</div>
-			<div class="ui-field-contain ui-body ui-br" data-role='fieldcontain'>
-			  <fieldset data-role='controlgroup' data-mini=true>
 				<label for='serial'>Serial</label>
 				  <input id='serial' name='serial' placeholder='Serial (Red label)' type='text' class='ui-input-text ui-body-c ui-corner-all ui-shadow-inset' style='width: 100%'>
 			  </fieldset>
@@ -301,7 +295,7 @@
 			<div class="ui-field-contain ui-body ui-br" data-role='fieldcontain'>
 			  <fieldset data-role='controlgroup' data-mini=true>
 				<label for='search'>Search</label>
-				  <input id='search' name='search' placeholder='Search records (Use "*" as wildcard)' type='texts' class='ui-input-text ui-body-c ui-corner-all ui-shadow-inset' style='width: 100%'>
+				  <input id='search' name='search' placeholder='Search records (Use * as wildcard)' type='texts' class='ui-input-text ui-body-c ui-corner-all ui-shadow-inset' style='width: 100%'>
 			  </fieldset>
 			</div>
 			<div data-role='fieldcontain'>
@@ -372,32 +366,8 @@
 		  <div id="message-add-models"></div>
 			<div class="ui-field-contain ui-body ui-br" data-role='fieldcontain'>
 			  <fieldset data-role='controlgroup' data-mini=true>
-				<label for='hostname'>Hostname</label>
-				  <input id='hostname' name='hostname' placeholder='Computer name' type='text' class='ui-input-text ui-body-c ui-corner-all ui-shadow-inset' style='width: 100%'>
-			  </fieldset>
-			</div>
-			<div class="ui-field-contain ui-body ui-br" data-role='fieldcontain'>
-			  <fieldset data-role='controlgroup' data-mini=true>
 				<label for='model'>Model</label>
 				  <input id='model' name='model' placeholder='Model type' type='text' class='ui-input-text ui-body-c ui-corner-all ui-shadow-inset' style='width: 100%'>
-			  </fieldset>
-			</div>
-			<div class="ui-field-contain ui-body ui-br" data-role='fieldcontain'>
-			  <fieldset data-role='controlgroup' data-mini=true>
-				<label for='sku'>SKU</label>
-				  <input id='sku' name='sku' placeholder='SKU (white barcode)' type='text' class='ui-input-text ui-body-c ui-corner-all ui-shadow-inset' style='width: 100%'>
-			  </fieldset>
-			</div>
-			<div class="ui-field-contain ui-body ui-br" data-role='fieldcontain'>
-			  <fieldset data-role='controlgroup' data-mini=true>
-				<label for='uuic'>UUIC</label>
-				  <input id='uuic' name='uuic' placeholder='UUIC (yellow sticker)' type='text' class='ui-input-text ui-body-c ui-corner-all ui-shadow-inset' style='width: 100%'>
-			  </fieldset>
-			</div>
-			<div class="ui-field-contain ui-body ui-br" data-role='fieldcontain'>
-			  <fieldset data-role='controlgroup' data-mini=true>
-				<label for='serial'>Serial</label>
-				  <input id='serial' name='serial' placeholder='Serial (Red label)' type='text' class='ui-input-text ui-body-c ui-corner-all ui-shadow-inset' style='width: 100%'>
 			  </fieldset>
 			</div>
 			<div class="ui-field-contain ui-body ui-br" data-role='fieldcontain'>
@@ -433,23 +403,23 @@
 		</div>
 
 		<!-- Models edit records -->
-		<div id="edit-models-records" class="ui-screen-hidden content ui-body ui-body-c">
+		<div id="edit-model-records" class="ui-screen-hidden content ui-body ui-body-c">
 		  <h3>Current models asset records</h3>
 		  <div id="message-edit-models"></div>
-		  <div id='jqxWidget-modelss'>
-			<div id="jqxgrid-modelss"></div>
+		  <div id='jqxWidget-models'>
+			<div id="jqxgrid-models"></div>
 		  </div>
 		</div>
 
 		<!-- Advanced models search -->
-		<div id="search-models-records" class="ui-screen-hidden content ui-body ui-body-c">
+		<div id="search-model-records" class="ui-screen-hidden content ui-body ui-body-c">
 		  <form action='http://inventory-server.dev:8080/models' id='models' name='models' method='post'>
 		  <h3>Search models records</h3>
 		  <div id="message-search-models"></div>
 			<div class="ui-field-contain ui-body ui-br" data-role='fieldcontain'>
 			  <fieldset data-role='controlgroup' data-mini=true>
 				<label for='search'>Search</label>
-				  <input id='search' name='search' placeholder='Search records (Use "*" as wildcard)' type='texts' class='ui-input-text ui-body-c ui-corner-all ui-shadow-inset' style='width: 100%'>
+				  <input id='search' name='search' placeholder='Search records (Use * as wildcard)' type='texts' class='ui-input-text ui-body-c ui-corner-all ui-shadow-inset' style='width: 100%'>
 			  </fieldset>
 			</div>
 			<div data-role='fieldcontain'>
@@ -516,7 +486,7 @@
 		<!-- RMA add record -->
 		<div id="add-rma-record" class="ui-screen-hidden content ui-body ui-body-c">
 		  <form action='http://inventory-server.dev:8080/rma' id='rma' name='rma' method='post'>
-		  <h3>Add rma record</h3>
+		  <h3>Add RMA record</h3>
 		  <div id="message-add-rma"></div>
 			<div class="ui-field-contain ui-body ui-br" data-role='fieldcontain'>
 			  <fieldset data-role='controlgroup' data-mini=true>
@@ -582,22 +552,22 @@
 
 		<!-- RMA edit records -->
 		<div id="edit-rma-records" class="ui-screen-hidden content ui-body ui-body-c">
-		  <h3>Current rma asset records</h3>
+		  <h3>Current RMA asset records</h3>
 		  <div id="message-edit-rma"></div>
-		  <div id='jqxWidget-rmas'>
-			<div id="jqxgrid-rmas"></div>
+		  <div id='jqxWidget-rma'>
+			<div id="jqxgrid-rma"></div>
 		  </div>
 		</div>
 
 		<!-- Advanced rma search -->
 		<div id="search-rma-records" class="ui-screen-hidden content ui-body ui-body-c">
 		  <form action='http://inventory-server.dev:8080/rma' id='rma' name='rma' method='post'>
-		  <h3>Search rma records</h3>
+		  <h3>Search RMA records</h3>
 		  <div id="message-search-rma"></div>
 			<div class="ui-field-contain ui-body ui-br" data-role='fieldcontain'>
 			  <fieldset data-role='controlgroup' data-mini=true>
 				<label for='search'>Search</label>
-				  <input id='search' name='search' placeholder='Search records (Use "*" as wildcard)' type='texts' class='ui-input-text ui-body-c ui-corner-all ui-shadow-inset' style='width: 100%'>
+				  <input id='search' name='search' placeholder='Search records (Use * as wildcard)' type='texts' class='ui-input-text ui-body-c ui-corner-all ui-shadow-inset' style='width: 100%'>
 			  </fieldset>
 			</div>
 			<div data-role='fieldcontain'>
@@ -745,7 +715,7 @@
 			<div class="ui-field-contain ui-body ui-br" data-role='fieldcontain'>
 			  <fieldset data-role='controlgroup' data-mini=true>
 				<label for='search'>Search</label>
-				  <input id='search' name='search' placeholder='Search records (Use "*" as wildcard)' type='texts' class='ui-input-text ui-body-c ui-corner-all ui-shadow-inset' style='width: 100%'>
+				  <input id='search' name='search' placeholder='Search records (Use * as wildcard)' type='texts' class='ui-input-text ui-body-c ui-corner-all ui-shadow-inset' style='width: 100%'>
 			  </fieldset>
 			</div>
 			<div data-role='fieldcontain'>
@@ -807,5 +777,15 @@
 
   <!-- Computer specific libs -->
   <script src="js/computers.js"></script>
+
+  <!-- Monitor specific libs -->
+  <script src="js/monitors.js"></script>
+
+  <!-- Model specific libs -->
+  <script src="js/models.js"></script>
+
+  <!-- RMA specific libs -->
+  <script src="js/rma.js"></script>
+
 </body>
 </html>
