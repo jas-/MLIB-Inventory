@@ -63,18 +63,25 @@ function doGrid(element, obj)
 	$("#"+element).jqxGrid({
 		altrows: true,
 		autoheight: true,
+		autosavestate: true,
+		autoshowloadelement: true,
+		autoloadstate: true,
 		columns: obj.columns,
 		editable: true,
 		filterable: true,
 		groupable: true,
 		pageable: true,
 		pagesizeoptions: ['5', '10', '20', '30', '40', '50'],
+		ready: function () {
+			$('#'+element).jqxGrid('loadstate', $('#'+element).jqxGrid('getstate'));
+		},
 		renderstatusbar: function (statusbar) {
 			statusbar.append(getBtns(element, statusbar));
 		},
 		selectionmode: 'singlecell',
 		showfilterrow: true,
 		showstatusbar: true,
+		showtoolbar: true,
 		source: adapter,
 		sortable: true,
 		updaterow: function (rowid, rowdata, commit) {
@@ -133,26 +140,42 @@ function btnEvents(element, AddBtn, EditBtn, DeleteBtn)
 		width: 65,
 		height: 20
 	});
-	AddBtn.click(function(event) {
-		/* launch model add record window */
-	});
+	//AddBtn.click(function(event) {
+	//	launchModel();
+	//});
 
 	EditBtn.jqxButton({
 		width: 70,
 		height: 20
 	});
+/*
 	EditBtn.click(function(event) {
-		/* launch model edit record window */
 	});
+*/
 
 	DeleteBtn.jqxButton({
 		width: 85,
 		height: 20
 	});
+/*
 	DeleteBtn.click(function(event) {
-		/* launch model delete record window */
-	});
 
+	});
+*/
+}
+
+function launchModel() {
+	var config = $('#config').data('config');
+
+	$('#'+config.page).simpledialog2({
+		headerText: config.message,
+		dialogForce: true,
+		safeNuke: true,
+		blankContentAdopt: true,
+		callbackOpen: function(){
+
+		}
+	});
 }
 
 function genBtnContainer()
@@ -164,11 +187,21 @@ function genBtnContainer()
 function genAddBtn()
 {
 	return $("<div style='float: left; margin-left: 5px;'>"+
+							"<a href='#add-computer' data-rel='popup' data-position-to='window' data-role='button' data-inline='true'>"+
+								"<img style='position: relative; margin-top: 2px;' src='../images/add.png'/>"+
+								"<span style='margin-left: 4px; position: relative; top: -3px;'>"+
+									"Add"+
+								"</span>"+
+							"</a>"+
+						"</div>");
+/*
+	return $("<div style='float: left; margin-left: 5px;'>"+
 						"<img style='position: relative; margin-top: 2px;' src='../images/add.png'/>"+
 							"<span style='margin-left: 4px; position: relative; top: -3px;'>"+
 								"Add"+
 							"</span>"+
 						"</div>");
+*/
 }
 
 /* Edit button */

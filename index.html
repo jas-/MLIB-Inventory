@@ -21,7 +21,7 @@
 <body>
 
   <!-- Main content page -->
-  <div data-role="page" id="main">
+  <div data-role="page" id="computers">
     <div data-theme="c" data-role="header">
       <h3>
 		<span align="left"><a href="#"><img src="images/inventory_categories.png" alt="Inventory Management" title="Inventory Management" height="56" /></a><a href="http://www.utah.edu/"><img src="images/marriottHeader-U.gif" alt="The University of Utah" title="The University of Utah" /></a><a href="http://www.lib.utah.edu"><img src="images/marriottHeader-title.gif" alt="J. Willard Marriott Library, The University of Utah" title="J. Willard Marriott Library, The University of Utah" /></a></span>
@@ -29,19 +29,26 @@
 	  <div data-role="navbar" data-iconpos="left">
 		<ul>
 		  <li>
-			<a href="#main" data-transition="fade" data-theme="c" data-icon="home">Main</a>
+			<a href="#computers" data-transition="fade" data-theme="c" data-icon="home">Computers</a>
 		  </li>
 		  <li>
-			<a href="#search" data-transition="fade" data-theme="c" data-icon="search">Search</a>
+			<a href="#monitors" data-transition="fade" data-theme="c" data-icon="search">Monitors</a>
 		  </li>
 		  <li>
-			<a href="#add" data-transition="fade" data-theme="c" data-icon="plus">Add</a>
+			<a href="#models" data-transition="fade" data-theme="c" data-icon="plus">Models</a>
+		  </li>
+		  <li>
+			<a href="#rma" data-transition="fade" data-theme="c" data-icon="plus">RMA</a>
+		  </li>
+		  <li>
+			<a href="#cors" data-transition="fade" data-theme="c" data-icon="plus">CORS</a>
 		  </li>
 		</ul>
 	  </div>
 	</div>
 	<div data-role="content">
-	  <h3>Current inventory records</h3>
+	  <h3>Current computer asset records</h3>
+	  <div id="config" data-config='{"page": "add-computer", "message": "Add new computer record"}'></div>
 	  <div>
 		<div id="message-computers"></div>
 		<div id='jqxWidget-computers'>
@@ -54,6 +61,69 @@
 	</div>
   </div>
 
+  <div id="add-computer" style="display: none;">
+	<h3>Add computer record</h3>
+	<div id="message-add-computer"></div>
+	<form action='http://inventory-server.dev:8080/computer' id='computer' name='computer' method='post'>
+	  <div data-role='fieldcontain'>
+		<fieldset data-role='controlgroup' data-mini=true>
+		  <label for='hostname'>Hostname</label>
+			<input id='hostname' name='hostname' placeholder='Computer name' type='text'>
+		</fieldset>
+	  </div>
+	  <div data-role='fieldcontain'>
+		<fieldset data-role='controlgroup' data-mini=true>
+		  <label for='model'>Model</label>
+			<input id='model' name='model' placeholder='Model type' type='text'>
+		</fieldset>
+	  </div>
+	  <div data-role='fieldcontain'>
+		<fieldset data-role='controlgroup' data-mini=true>
+		  <label for='sku'>SKU</label>
+			<input id='sku' name='sku' placeholder='SKU (white barcode)' type='text'>
+		</fieldset>
+	  </div>
+	  <div data-role='fieldcontain'>
+		<fieldset data-role='controlgroup' data-mini=true>
+		  <label for='uuic'>UUIC</label>
+			<input id='uuic' name='uuic' placeholder='UUIC (yellow sticker)' type='text'>
+		</fieldset>
+	  </div>
+	  <div data-role='fieldcontain'>
+		<fieldset data-role='controlgroup' data-mini=true>
+		  <label for='serial'>Serial</label>
+			<input id='serial' name='serial' placeholder='Serial (Red label)' type='text'>
+		</fieldset>
+	  </div>
+	  <div data-role='fieldcontain'>
+		<fieldset data-role='controlgroup' data-mini=true>
+		  <label for='eowd'>EOWD</label>
+			<input id='eowd' name='eowd' placeholder='End of warranty date' type='text'>
+		</fieldset>
+	  </div>
+	  <div data-role='fieldcontain'>
+		<fieldset data-role='controlgroup' data-mini=true>
+		  <label for='opd'>OPD</label>
+			<input id='opd' name='opd' placeholder='Original purchase date' type='text'>
+		</fieldset>
+	  </div>
+	  <div data-role='fieldcontain'>
+		<fieldset data-role='controlgroup' data-mini=true>
+		  <label for='description'>Description</label>
+			<textarea id='description' name='description' placeholder='Description'></textarea>
+		</fieldset>
+	  </div>
+	  <div data-role='fieldcontain'>
+		<fieldset data-role='controlgroup' data-mini=true>
+		  <label for='notes'>Notes</label>
+			<textarea id='notes' name='notes' placeholder='Notes'></textarea>
+		</fieldset>
+	  </div>
+	  <!--a rel='close' data-icon='delete' data-iconpos='right' data-inline='true' data-role='button' data-mini='true' href='#'>Close</a-->
+	  <input id='edit' data-inline='true' data-mini='true' data-theme='c' data-icon='arrow-r' data-iconpos='right' value='Save changes' type='submit'>
+	</form>
+  </div
+
   <!-- comm.js libs -->
   <script src="js/3rd-party/comm.js/comm.js"></script>
 
@@ -62,9 +132,6 @@
 
   <!-- secStore.js libs -->
   <script src="js/3rd-party/secStore.js/secStore.js"></script>
-
-  <!-- SmpleModal libs -->
-  <script type="text/javascript" src="js/3rd-party/jquery-mobile-simpledialog/js/jquery.mobile.simpledialog2.js"></script>
 
   <!-- jqwidgets css file -->
   <link rel="stylesheet" href="js/3rd-party/jqWidgets/jqwidgets/styles/jqx.base.css" type="text/css" />
