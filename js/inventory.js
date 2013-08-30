@@ -146,16 +146,26 @@ function btnEvents(element, AddBtn, EditBtn, DeleteBtn)
 	EditBtn.jqxButton({
 		width: 70,
 		height: 20
+	}).click(function(event) {
+		launchModel($('#config').data('config'));
 	});
 
 	DeleteBtn.jqxButton({
 		width: 85,
 		height: 20
+	}).click(function(event) {
+		launchModel($('#config').data('config'));
 	});
 }
 
 function launchModel(config) {
+
 	$('#'+config.page).popup();
+	$('#'+config.page).popup('open', {
+		theme: 'c',
+		overlayTheme: 'c',
+		//positionTo: 'window'
+	});
 }
 
 function genBtnContainer()
@@ -180,10 +190,12 @@ function genAddBtn()
 function genEditBtn()
 {
 	return $("<div style='float: left; margin-left: 5px;'>"+
-						"<img style='position: relative; margin-top: 2px;' src='../images/add.png'/>"+
-							"<span style='margin-left: 4px; position: relative; top: -3px;'>"+
-								"Edit"+
-							"</span>"+
+							"<a href='#edit-computer' data-rel='popup' data-position-to='window' data-role='button' data-inline='true'>"+
+								"<img style='position: relative; margin-top: 2px;' src='../images/add.png'/>"+
+								"<span style='margin-left: 4px; position: relative; top: -3px;'>"+
+									"Add"+
+								"</span>"+
+							"</a>"+
 						"</div>");
 }
 
@@ -191,10 +203,12 @@ function genEditBtn()
 function genDeleteBtn()
 {
 	return $("<div style='float: left; margin-left: 5px;'>"+
-						"<img style='position: relative; margin-top: 2px;' src='../images/add.png'/>"+
-							"<span style='margin-left: 4px; position: relative; top: -3px;'>"+
-								"Delete"+
-							"</span>"+
+							"<a href='#delete-computer' data-rel='popup' data-position-to='window' data-role='button' data-inline='true'>"+
+								"<img style='position: relative; margin-top: 2px;' src='../images/add.png'/>"+
+								"<span style='margin-left: 4px; position: relative; top: -3px;'>"+
+									"Add"+
+								"</span>"+
+							"</a>"+
 						"</div>");
 }
 

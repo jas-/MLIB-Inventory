@@ -61,10 +61,10 @@
 	</div>
   </div>
 
-  <div id="add-computer" style="display: none;">
+  <div id="add-computer" data-role="popup" data-theme="c" class="ui-corner-all">
+	<form action='http://inventory-server.dev:8080/computer' id='computer' name='computer' method='post'>
 	<h3>Add computer record</h3>
 	<div id="message-add-computer"></div>
-	<form action='http://inventory-server.dev:8080/computer' id='computer' name='computer' method='post'>
 	  <div data-role='fieldcontain'>
 		<fieldset data-role='controlgroup' data-mini=true>
 		  <label for='hostname'>Hostname</label>
