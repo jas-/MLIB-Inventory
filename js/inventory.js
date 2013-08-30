@@ -264,6 +264,12 @@ function valSerial(obj)
 /* Validate Date */
 function valDate(obj)
 {
+	/* attempt to correct date format */
+	if (!/^[0-9]{1,2}\/[0-9]{1,2}\/[0-9]{4}$/.test(obj)){
+		var d = new Date()
+		obj = [d.getMonth()+1, d.getDate(), d.getFullYear()].join('/');
+	}
+
 	return (/^[\d+]{1,2}\/[\d+]{1,2}\/[\d+]{4}$/.test(obj)) ?
 		true : {result: false, message: 'Date is invalid [mm/dd/yyyy]' }
 }

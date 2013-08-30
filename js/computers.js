@@ -70,6 +70,7 @@ $(document).ready(function(){
 			{ text: 'EOWD',
 				datafield: 'EOWD',
 				width: '10%',
+				cellsformat: 'MM/dd/yyyy',
 				columntype: 'datetimeinput',
         filtertype: 'date',
 				initeditor: function(row, column, editor) {
@@ -90,6 +91,7 @@ $(document).ready(function(){
 			{ text: 'OPD',
 				datafield: 'OPD',
 				width: '10%',
+				cellsformat: 'MM/dd/yyyy',
 				columntype: 'datetimeinput',
         filtertype: 'date',
 				initeditor: function(row, column, editor) {
