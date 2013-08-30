@@ -139,43 +139,23 @@ function btnEvents(element, AddBtn, EditBtn, DeleteBtn)
 	AddBtn.jqxButton({
 		width: 65,
 		height: 20
+	}).click(function(event) {
+		launchModel($('#config').data('config'));
 	});
-	//AddBtn.click(function(event) {
-	//	launchModel();
-	//});
 
 	EditBtn.jqxButton({
 		width: 70,
 		height: 20
 	});
-/*
-	EditBtn.click(function(event) {
-	});
-*/
 
 	DeleteBtn.jqxButton({
 		width: 85,
 		height: 20
 	});
-/*
-	DeleteBtn.click(function(event) {
-
-	});
-*/
 }
 
-function launchModel() {
-	var config = $('#config').data('config');
-
-	$('#'+config.page).simpledialog2({
-		headerText: config.message,
-		dialogForce: true,
-		safeNuke: true,
-		blankContentAdopt: true,
-		callbackOpen: function(){
-
-		}
-	});
+function launchModel(config) {
+	$('#'+config.page).popup();
 }
 
 function genBtnContainer()
@@ -194,14 +174,6 @@ function genAddBtn()
 								"</span>"+
 							"</a>"+
 						"</div>");
-/*
-	return $("<div style='float: left; margin-left: 5px;'>"+
-						"<img style='position: relative; margin-top: 2px;' src='../images/add.png'/>"+
-							"<span style='margin-left: 4px; position: relative; top: -3px;'>"+
-								"Add"+
-							"</span>"+
-						"</div>");
-*/
 }
 
 /* Edit button */
