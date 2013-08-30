@@ -137,7 +137,7 @@ function getBtns(element, obj)
 function btnEvents(element, AddBtn, EditBtn, DeleteBtn)
 {
 	AddBtn.jqxButton({
-		width: 65,
+		width: 70,
 		height: 20
 	}).click(function(event) {
 		launchModel($('#config').data('config'));
@@ -151,20 +151,20 @@ function btnEvents(element, AddBtn, EditBtn, DeleteBtn)
 	});
 
 	DeleteBtn.jqxButton({
-		width: 85,
+		width: 70,
 		height: 20
 	}).click(function(event) {
 		launchModel($('#config').data('config'));
 	});
 }
 
-function launchModel(config) {
-
+function launchModel(config)
+{
 	$('#'+config.page).popup();
-	$('#'+config.page).popup('open', {
-		theme: 'c',
-		overlayTheme: 'c',
-		//positionTo: 'window'
+	$('#'+config.page).popup('open', config.options);
+	$('#close').on('click', function(event){
+		$("#"+config.page).popup("close");
+		$("#"+config.page+'-popup').hide();
 	});
 }
 
@@ -176,8 +176,8 @@ function genBtnContainer()
 /* Add button */
 function genAddBtn()
 {
-	return $("<div style='float: left; margin-left: 5px;'>"+
-							"<a href='#add-computer' data-rel='popup' data-position-to='window' data-role='button' data-inline='true'>"+
+	return $("<div style='float: left; margin-left: 5px' data-rel='popup' data-position-to='window' data-role='button' data-inline='true'>"+
+							"<a data-role='button' data-rel='popup'>"+
 								"<img style='position: relative; margin-top: 2px;' src='../images/add.png'/>"+
 								"<span style='margin-left: 4px; position: relative; top: -3px;'>"+
 									"Add"+
@@ -189,11 +189,11 @@ function genAddBtn()
 /* Edit button */
 function genEditBtn()
 {
-	return $("<div style='float: left; margin-left: 5px;'>"+
-							"<a href='#edit-computer' data-rel='popup' data-position-to='window' data-role='button' data-inline='true'>"+
+	return $("<div style='float: left; margin-left: 5px; data-rel='popup' data-position-to='window' data-role='button' data-inline='true'>"+
+							"<a data-role='button' data-rel='popup'>"+
 								"<img style='position: relative; margin-top: 2px;' src='../images/add.png'/>"+
 								"<span style='margin-left: 4px; position: relative; top: -3px;'>"+
-									"Add"+
+									"Edit"+
 								"</span>"+
 							"</a>"+
 						"</div>");
@@ -202,11 +202,11 @@ function genEditBtn()
 /* Delete button */
 function genDeleteBtn()
 {
-	return $("<div style='float: left; margin-left: 5px;'>"+
-							"<a href='#delete-computer' data-rel='popup' data-position-to='window' data-role='button' data-inline='true'>"+
+	return $("<div style='float: left; margin-left: 5px; data-rel='popup' data-position-to='window' data-role='button' data-inline='true'>"+
+							"<a data-role='button' data-rel='popup'>"+
 								"<img style='position: relative; margin-top: 2px;' src='../images/add.png'/>"+
 								"<span style='margin-left: 4px; position: relative; top: -3px;'>"+
-									"Add"+
+									"Delete"+
 								"</span>"+
 							"</a>"+
 						"</div>");
