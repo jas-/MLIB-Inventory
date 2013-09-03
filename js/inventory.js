@@ -75,9 +75,11 @@ function doGrid(element, obj)
 		ready: function () {
 			$('#'+element).jqxGrid('loadstate', $('#'+element).jqxGrid('getstate'));
 		},
+/*
 		renderstatusbar: function (statusbar) {
 			statusbar.append(getBtns(element, statusbar));
 		},
+*/
 		selectionmode: 'singlecell',
 		showfilterrow: true,
 		showstatusbar: true,
@@ -90,6 +92,18 @@ function doGrid(element, obj)
 		},
 		width: '100%'
 	});
+}
+
+$(function()
+{
+ $(".content").find("div:first").show();
+});
+
+function ShowHide(e)
+{
+  $(".content").hide();
+  var id =$(e).attr("href");
+  $(id).show();
 }
 
 /* Extract model for drop down list */
@@ -160,11 +174,15 @@ function btnEvents(element, AddBtn, EditBtn, DeleteBtn)
 
 function launchModel(config)
 {
-	$('#'+config.page).popup();
-	$('#'+config.page).popup('open', config.options);
-	$('#close').on('click', function(event){
-		$("#"+config.page).popup("close");
-		$("#"+config.page+'-popup').hide();
+	$('#'+config.page).simpledialog2({
+		headerText: 'wtf',
+		dialogAllow: true,
+		dialogForce: true,
+		safeNuke: true,
+		blankContentAdopt: true,
+		callbackOpen: function(){
+			alert(2);
+		}
 	});
 }
 
@@ -176,13 +194,11 @@ function genBtnContainer()
 /* Add button */
 function genAddBtn()
 {
-	return $("<div style='float: left; margin-left: 5px' data-rel='popup' data-position-to='window' data-role='button' data-inline='true'>"+
-							"<a data-role='button' data-rel='popup'>"+
-								"<img style='position: relative; margin-top: 2px;' src='../images/add.png'/>"+
-								"<span style='margin-left: 4px; position: relative; top: -3px;'>"+
-									"Add"+
-								"</span>"+
-							"</a>"+
+	return $("<div id='add-btn' style='float: left; margin-left: 5px'>"+
+							"<img id='add' style='position: relative; margin-top: 2px;' src='../images/add.png'/>"+
+							"<span style='margin-left: 4px; position: relative; top: -3px;'>"+
+								"Add"+
+							"</span>"+
 						"</div>");
 }
 

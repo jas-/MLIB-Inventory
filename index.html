@@ -47,65 +47,92 @@
 	  </div>
 	</div>
 	<div data-role="content">
-	  <h3>Current computer asset records</h3>
-	  <div id="config" data-config='{"page": "add-computer", "options": {"theme": "c", "overlayTheme": "c", "history": false}}'></div>
-	  <div>
-		<div id="message-computers"></div>
-		<div id='jqxWidget-computers'>
-		  <div id="jqxgrid-computers"></div>
+	  <div data-role="navbar">
+		<ul>
+		  <li><a href="#current-computer-records" onclick="ShowHide(this)">Current computer records</a></li>
+		  <li><a href="#add-computer-record" onclick="ShowHide(this)">Add new record</a></li>
+		  <li><a href="#search-computer-records" onclick="ShowHide(this)">Search computer records</a></li>
+		</ul>
+	  </div>
+	  <div data-role="content">
+		<div id="current-computer-records" class="ui-screen-hidden">
+		  <h3>Current computer asset records</h3>
+		  <div id="message-computers"></div>
+		  <div id='jqxWidget-computers'>
+			<div id="jqxgrid-computers"></div>
+		  </div>
+		</div>
+		<div id="add-computer-record" class="ui-screen-hidden">
+		  <form action='http://inventory-server.dev:8080/computer' id='computer' name='computer' method='post'>
+		  <h3>Add computer record</h3>
+		  <div id="message-add-computer"></div>
+			<div data-role='fieldcontain'>
+			  <fieldset data-role='controlgroup' data-mini=true>
+				<label for='hostname'>Hostname</label>
+				  <input id='hostname' name='hostname' placeholder='Computer name' type='text'>
+			  </fieldset>
+			</div>
+			<div data-role='fieldcontain'>
+			  <fieldset data-role='controlgroup' data-mini=true>
+				<label for='model'>Model</label>
+				  <input id='model' name='model' placeholder='Model type' type='text'>
+			  </fieldset>
+			</div>
+			<div data-role='fieldcontain'>
+			  <fieldset data-role='controlgroup' data-mini=true>
+				<label for='sku'>SKU</label>
+				  <input id='sku' name='sku' placeholder='SKU (white barcode)' type='text'>
+			  </fieldset>
+			</div>
+			<div data-role='fieldcontain'>
+			  <fieldset data-role='controlgroup' data-mini=true>
+				<label for='uuic'>UUIC</label>
+				  <input id='uuic' name='uuic' placeholder='UUIC (yellow sticker)' type='text'>
+			  </fieldset>
+			</div>
+			<div data-role='fieldcontain'>
+			  <fieldset data-role='controlgroup' data-mini=true>
+				<label for='serial'>Serial</label>
+				  <input id='serial' name='serial' placeholder='Serial (Red label)' type='text'>
+			  </fieldset>
+			</div>
+			<div data-role='fieldcontain'>
+			  <fieldset data-role='controlgroup' data-mini=true>
+				<label for='eowd'>EOWD</label>
+				  <input id='eowd' name='eowd' placeholder='End of warranty date' type='text'>
+			  </fieldset>
+			</div>
+			<div data-role='fieldcontain'>
+			  <fieldset data-role='controlgroup' data-mini=true>
+				<label for='opd'>OPD</label>
+				  <input id='opd' name='opd' placeholder='Original purchase date' type='text'>
+			  </fieldset>
+			</div>
+			<div data-role='fieldcontain'>
+			  <fieldset data-role='controlgroup' data-mini=true>
+				<label for='description'>Description</label>
+				  <textarea id='description' name='description' placeholder='Description'></textarea>
+			  </fieldset>
+			</div>
+			<div data-role='fieldcontain'>
+			  <fieldset data-role='controlgroup' data-mini=true>
+				<label for='notes'>Notes</label>
+				  <textarea id='notes' name='notes' placeholder='Notes'></textarea>
+			  </fieldset>
+			</div>
+			<div data-role='fieldcontain'>
+			  <fieldset data-role='controlgroup' data-mini=true>
+				<input id='save' data-inline='true' data-mini='true' data-theme='c' data-icon='arrow-r' data-iconpos='right' value='Save changes' type='submit'>
+				<!--input id='close' data-inline='true' data-mini='true' data-theme='c' data-icon='arrow-r' data-iconpos='right' value='Close' type='button'-->
+			  </fieldset>
+			</div>
+		  </form>
 		</div>
 	  </div>
 	</div>
 	<div style="text-align: center; padding-bottom: 1%">
 	  <span style="font-size: .7em;font-weight: normal">&copy; University Of Utah - Marriott Library 2013</span>
 	</div>
-  </div>
-
-  <div id="add-computer" data-history="false" data-role="popup" data-overlay-theme='c' data-theme="c" style="padding: 15px">
-	<form action='http://inventory-server.dev:8080/computer' id='computer' name='computer' method='post'>
-	<h3>Add computer record</h3>
-	<div id="message-add-computer"></div>
-	  <div data-role='fieldcontain'>
-		<label for='hostname'>Hostname</label>
-		  <input id='hostname' name='hostname' placeholder='Computer name' type='text'>
-	  </div>
-	  <div data-role='fieldcontain'>
-		<label for='model'>Model</label>
-		  <input id='model' name='model' placeholder='Model type' type='text'>
-	  </div>
-	  <div data-role='fieldcontain'>
-		<label for='sku'>SKU</label>
-		  <input id='sku' name='sku' placeholder='SKU (white barcode)' type='text'>
-	  </div>
-	  <div data-role='fieldcontain'>
-		<label for='uuic'>UUIC</label>
-		  <input id='uuic' name='uuic' placeholder='UUIC (yellow sticker)' type='text'>
-	  </div>
-	  <div data-role='fieldcontain'>
-		<label for='serial'>Serial</label>
-		  <input id='serial' name='serial' placeholder='Serial (Red label)' type='text'>
-	  </div>
-	  <div data-role='fieldcontain'>
-		<label for='eowd'>EOWD</label>
-		  <input id='eowd' name='eowd' placeholder='End of warranty date' type='text'>
-	  </div>
-	  <div data-role='fieldcontain'>
-		<label for='opd'>OPD</label>
-		  <input id='opd' name='opd' placeholder='Original purchase date' type='text'>
-	  </div>
-	  <div data-role='fieldcontain'>
-		<label for='description'>Description</label>
-		  <textarea id='description' name='description' placeholder='Description'></textarea>
-	  </div>
-	  <div data-role='fieldcontain'>
-		<label for='notes'>Notes</label>
-		  <textarea id='notes' name='notes' placeholder='Notes'></textarea>
-	  </div>
-	  <div data-role='fieldcontain'>
-		<input id='save' data-inline='true' data-mini='true' data-theme='c' data-icon='arrow-r' data-iconpos='right' value='Save changes' type='submit'>
-		<input id='close' data-inline='true' data-mini='true' data-theme='c' data-icon='arrow-r' data-iconpos='right' value='Close' type='button'>
-	  </div>
-	</form>
   </div>
 
   <!-- comm.js libs -->
@@ -147,6 +174,10 @@
   <script type="text/javascript" src="js/3rd-party/jqWidgets/jqwidgets/globalization/globalize.js"></script>
   <script type="text/javascript" src="js/3rd-party/jqWidgets/jqwidgets/globalization/jquery.global.js"></script>
   <script type="text/javascript" src="js/3rd-party/jqWidgets/jqwidgets/globalization/jquery.glob.en-US.js"></script>
+
+  <!-- jQM-SimpleDialog2 -->
+  <link rel="stylesheet" href="js/3rd-party/jQM-SimpleDialog2/jquery.mobile.simpledialog.min.css" />
+  <script type="text/javascript" src="js/3rd-party/jQM-SimpleDialog2/jquery.mobile.simpledialog2.min.js"></script>
 
   <!-- Inventory libs -->
   <script src="js/inventory.js"></script>
