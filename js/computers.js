@@ -10,6 +10,7 @@ $(document).ready(function(){
 	var computers = {
 		source: {
 			datafields:[
+				{ name:		'Id',					type: 'number' },
 				{ name:		'Hostname',		type: 'string' },
 				{ name:		'Model',			type: 'string' },
 				{ name:		'SKU',				type: 'string' },
@@ -23,12 +24,30 @@ $(document).ready(function(){
 			datatype: 'json'
 		},
 		columns: [
+			{ text: 'Record ID',
+        datafield: 'Id',
+        width: '5%',
+				editable: false,
+        validation: function (cell, value) {
+          return valNumber(value);
+        }
+      },
 			{ text: 'Hostname',
         datafield: 'Hostname',
         width: '10%',
         validation: function (cell, value) {
           return valHostname(value);
-        }
+        },
+				cellendedit: function(id) {
+					var d = $('#'+grid).jqxGrid('getrowdata', id);
+
+					d.EOWD = d.EOWD.iso();
+					d.OPD = d.OPD.iso();
+console.log(JSON.stringify(d));
+					doRequest(grid, api.computers.url+'/'+d.Id, methods.update, d, function(result){
+						console.log(result);
+					});
+				}
       },
 			{	text: 'Model',
 				datafield: 'Model',
@@ -118,7 +137,7 @@ $(document).ready(function(){
       },
 			{ text: 'Notes',
         datafield: 'Notes',
-        width: '20%',
+        width: '15%',
         validation: function(cell, value) {
           return valGeneral(value);
         }

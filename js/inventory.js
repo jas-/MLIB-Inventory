@@ -98,6 +98,37 @@ function model_obj2arr(obj)
 	return a;
 }
 
+/* Format object to serialized string */
+function serialize(obj)
+{
+	if (size(obj) > 0){
+		var x='';
+		$.each(obj, function(a, b){
+			if (typeof b === 'object'){
+				$.each(b, function(c, d){
+					x+=a+'['+c+']'+'='+d+'&';
+				});
+			} else {
+				x+=a+'='+b+'&';
+			}
+		});
+		x = x.substring(0, x.length-1);
+	} else {
+		return false;
+	}
+	return x;
+}
+
+/* calculate size of object */
+function size(obj)
+{
+	var n = 0;
+	$.each(obj, function(k, v){
+		if (obj.hasOwnProperty(k)) n++;
+	});
+	return n;
+}
+
 /* work horse */
 function doIt(key, grid, url, method, source)
 {
@@ -126,6 +157,13 @@ function ShowHide(e)
   $(".content").hide();
   var id =$(e).attr("href");
   $(id).show();
+}
+
+/* Validate integer */
+function valNumber(obj)
+{
+	return (/^(0-9){1,}$/i.test(obj)) ?
+		true : { result: false, message: 'Field requires an integer [0-9]' };
 }
 
 /* Validate hostname (RFC 1123) */
