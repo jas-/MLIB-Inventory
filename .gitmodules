@@ -7,3 +7,6 @@
 [submodule "js/3rd-party/jQuery-Mobile-Icon-Pack"]
 	path = js/3rd-party/jQuery-Mobile-Icon-Pack
 	url = https://github.com/commadelimited/jQuery-Mobile-Icon-Pack
+[submodule "js/3rd-party/jquery-mobile-datebox"]
+	path = js/3rd-party/jquery-mobile-datebox
+	url = https://github.com/jtsage/jquery-mobile-datebox.git

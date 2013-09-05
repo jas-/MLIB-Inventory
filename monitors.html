@@ -101,13 +101,13 @@
 			<div class="ui-field-contain ui-body ui-br" data-role='fieldcontain'>
 			  <fieldset data-role='controlgroup' data-mini=true>
 				<label for='eowd'>EOWD</label>
-				  <input id='eowd' name='eowd' placeholder='End of warranty date' type='text' class='ui-input-text ui-body-c ui-corner-all ui-shadow-inset' style='width: 100%'>
+				  <input id='eowd' name='eowd' placeholder='End of warranty date' type='text' class='ui-input-text ui-body-c ui-corner-all ui-shadow-inset' style='width: 100%' data-role="datebox" data-options='{"mode":"calbox", "useNewStyle":true}'>
 			  </fieldset>
 			</div>
 			<div class="ui-field-contain ui-body ui-br" data-role='fieldcontain'>
 			  <fieldset data-role='controlgroup' data-mini=true>
 				<label for='opd'>OPD</label>
-				  <input id='opd' name='opd' placeholder='Original purchase date' type='text' class='ui-input-text ui-body-c ui-corner-all ui-shadow-inset' style='width: 100%'>
+				  <input id='opd' name='opd' placeholder='Original purchase date' type='text' class='ui-input-text ui-body-c ui-corner-all ui-shadow-inset' style='width: 100%' data-role="datebox" data-options='{"mode":"calbox", "useNewStyle":true}'>
 			  </fieldset>
 			</div>
 			<div class="ui-field-contain ui-body ui-br" data-role='fieldcontain'>
@@ -203,6 +203,14 @@
   <script type="text/javascript" src="js/3rd-party/jqWidgets/jqwidgets/globalization/globalize.js"></script>
   <script type="text/javascript" src="js/3rd-party/jqWidgets/jqwidgets/globalization/jquery.global.js"></script>
   <script type="text/javascript" src="js/3rd-party/jqWidgets/jqwidgets/globalization/jquery.glob.en-US.js"></script>
+
+  <!-- jquery-mobile-datebox css -->
+  <link rel="stylesheet" type="text/css" href="js/3rd-party/jquery-mobile-datebox/css/jqm-datebox.css" />
+
+  <!-- jquery-mobile-date libs -->
+  <script type="text/javascript" src="js/3rd-party/jquery-mobile-datebox/js/jqm-datebox.core.js"></script>
+  <script type="text/javascript" src="js/3rd-party/jquery-mobile-datebox/js/jqm-datebox.mode.calbox.js"></script>
+  <script type="text/javascript" src="js/3rd-party/jquery-mobile-datebox/js/i8n/jquery.mobile.datebox.i18n.en-US.js"></script>
 
   <!-- Inventory libs -->
   <script src="js/inventory.js"></script>

@@ -127,6 +127,6 @@ $(document).ready(function(){
 	};
 
   /* Initialize computer record set */
-	doIt(key, grid, api.computers.url, methods.all, computers)
+	doIt(key, grid, api.computers.url, methods.all, computers);
 
 });
