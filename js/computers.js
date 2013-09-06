@@ -148,7 +148,6 @@ $(document).ready(function(){
 
 		doRequest(grid, api.computers.url+'/'+d.Id, methods.update, d, function(result){
 			message(result, 'message-edit-computer');
-			//doIt(key, grid, api.computers.url, methods.all, computers);
 		});
 	});
 

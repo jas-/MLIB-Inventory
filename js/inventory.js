@@ -32,10 +32,13 @@ var	methods = {
 /* Execute secStore.js */
 function localData(key, data, cb)
 {
+	/* Add some expiration for object */
 	$(window).secStore({
 		appID: key,
 		aes: true,
 		data: data,
+		storage: 'session',
+		debug: true,
 		callback: function(obj){
 			(/function/.test(typeof(cb))) ? cb(obj) : false;
 		}
@@ -133,21 +136,6 @@ function size(obj)
 		if (obj.hasOwnProperty(k)) n++;
 	});
 	return n;
-}
-
-/* update local cached data */
-function updateLocal(id, obj){
-	localData(id, false, function(data){
-		if (data) {
-			data[obj.uid] = obj;
-			localData(id, data, function(results){
-				console.log(results);
-				localData(id, false, function(r){
-					console.log(r[obj.uid]);
-				});
-			});
-		}
-	});
 }
 
 /* work horse */
