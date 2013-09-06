@@ -38,7 +38,6 @@ function localData(key, data, cb)
 		aes: true,
 		data: data,
 		storage: 'session',
-		debug: true,
 		callback: function(obj){
 			(/function/.test(typeof(cb))) ? cb(obj) : false;
 		}
@@ -102,8 +101,8 @@ function format_obj(obj, field, value)
 {
 	var d = obj;
 	d[field] = value;
-	d.EOWD = obj.EOWD.iso();
-	d.OPD = obj.OPD.iso();
+	d.EOWD = (/object/.test(typeof(obj.EOWD))) ? obj.EOWD.iso() : false;
+	d.OPD = (/object/.test(typeof(obj.OPD))) ? obj.OPD.iso() : false;
 	return d;
 }
 
@@ -226,7 +225,7 @@ function valDate(obj)
 /* Validate General (paragraph) */
 function valGeneral(obj)
 {
-	return (!/^[a-z0-9- .\n\r\t,;:]{1,128}$/i.test(obj)) ?
+	return (!/[`~!@#$%^&*()_|+\-=?;:'",.<>\{\}\[\]\\\/]/gi.test(obj)) ?
 		true : {result: false, message: 'Field is invalid [a-z0-9- .\n\r,;:]{1,128}' }
 }
 

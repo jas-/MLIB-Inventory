@@ -10,6 +10,7 @@ $(document).ready(function(){
 	var monitors = {
 		source: {
 			datafields:[
+				{ name:		'Id',					type: 'number' },
 				{ name:		'Hostname',		type: 'string' },
 				{ name:		'Model',			type: 'string' },
 				{ name:		'SKU',				type: 'string' },
@@ -22,6 +23,14 @@ $(document).ready(function(){
 			datatype: 'json'
 		},
 		columns: [
+			{ text: 'Record ID',
+        datafield: 'Id',
+        width: '5%',
+				editable: false,
+        validation: function (cell, value) {
+          return valNumber(value);
+        }
+      },
 			{ text: 'Hostname',
         datafield: 'Hostname',
         width: '10%',
@@ -110,7 +119,7 @@ $(document).ready(function(){
       },
 			{ text: 'Notes',
         datafield: 'Notes',
-        width: '20%',
+        width: '15%',
         validation: function(cell, value) {
           return valGeneral(value);
         }
@@ -119,6 +128,19 @@ $(document).ready(function(){
 	};
 
   /* Initialize computer record set */
-	doIt(key, grid, api.monitors.url, methods.all, monitors)
+	doIt(key, grid, api.monitors.url, methods.all, monitors);
+
+	/* Listen for cell edit events */
+	$('#'+grid).on('cellendedit', function(event){
+		var args = event.args;
+
+		$('#'+grid).jqxGrid('setcellvalue', args.rowindex, args.datafield, args.value);
+
+		var d = format_obj($('#'+grid).jqxGrid('getrowdata', args.rowindex), args.datafield, args.value);
+
+		doRequest(grid, api.monitors.url+'/'+d.Id, methods.update, d, function(result){
+			message(result, 'message-edit-monitor');
+		});
+	});
 
 });

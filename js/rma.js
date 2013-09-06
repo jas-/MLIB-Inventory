@@ -10,6 +10,7 @@ $(document).ready(function(){
 	var rma = {
 		source: {
 			datafields:[
+				{ name:		'Id',						type: 'number' },
 				{ name:		'Problem',			type: 'boolean' },
 				{ name:		'Date',					type: 'string' },
 				{ name:		'Hostname',			type: 'string' },
@@ -23,6 +24,14 @@ $(document).ready(function(){
 			datatype: 'json'
 		},
 		columns: [
+			{ text: 'Record ID',
+        datafield: 'Id',
+        width: '5%',
+				editable: false,
+        validation: function (cell, value) {
+          return valNumber(value);
+        }
+      },
 			{ text: 'Problem?',
         datafield: 'Problem',
         width: '5%',
@@ -104,7 +113,7 @@ $(document).ready(function(){
       },
 			{ text: 'Notes',
         datafield: 'Notes',
-        width: '20%',
+        width: '15%',
         validation: function(cell, value) {
           return valGeneral(value);
         }
@@ -114,5 +123,18 @@ $(document).ready(function(){
 
   /* Initialize computer record set */
 	doIt(key, grid, api.rma.url, methods.all, rma)
+
+	/* Listen for cell edit events */
+	$('#'+grid).on('cellendedit', function(event){
+		var args = event.args;
+
+		$('#'+grid).jqxGrid('setcellvalue', args.rowindex, args.datafield, args.value);
+
+		var d = format_obj($('#'+grid).jqxGrid('getrowdata', args.rowindex), args.datafield, args.value);
+
+		doRequest(grid, api.rma.url+'/'+d.Id, methods.update, d, function(result){
+			message(result, 'message-edit-rma');
+		});
+	});
 
 });
