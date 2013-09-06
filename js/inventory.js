@@ -98,6 +98,16 @@ function model_obj2arr(obj)
 	return a;
 }
 
+/* Object formatting prior to sync */
+function format_obj(obj, field, value)
+{
+	var d = obj;
+	d[field] = value;
+	d.EOWD = obj.EOWD.iso();
+	d.OPD = obj.OPD.iso();
+	return d;
+}
+
 /* Format object to serialized string */
 function serialize(obj)
 {
@@ -219,4 +229,45 @@ function valGeneral(obj)
 {
 	return (!/^[a-z0-9- .\n\r\t,;:]{1,128}$/i.test(obj)) ?
 		true : {result: false, message: 'Field is invalid [a-z0-9- .\n\r,;:]{1,128}' }
+}
+
+
+/* handle server responses */
+function message(obj, ele){
+	if (obj!='') {
+		var _d = '';
+		if (obj[0]['details']){
+			_d = _details(obj[0]['details']);
+		}
+		$.each(obj, function(key, value){
+			$.each(value, function(k, v){
+				if(k=='error'){
+					$('#'+ele).html('<div class="error">'+v+_d+'</div>').fadeIn(2000).delay(3500).fadeOut('slow');
+				}
+				if(k=='warning'){
+					$('#'+ele).html('<div class="warning">'+v+_d+'</div>').fadeIn(2000).delay(3500).fadeOut('slow');
+				}
+				if(k=='info'){
+					$('#'+ele).html('<div class="info">'+v+_d+'</div>').fadeIn(2000).delay(3500).fadeOut('slow');
+				}
+				if(k=='success'){
+					$('#'+ele).html('<div class="success">'+v+_d+'</div>').fadeIn(2000).delay(3500).fadeOut('slow');
+				}
+			});
+		});
+	} else {
+		$('#'+ele).html('<div class="warning">Empty response for request</div>').fadeIn(2000).delay(3500).fadeOut('slow');
+	}
+}
+
+/* Object inspection tool */
+function inspect(obj){
+	$.each(obj, function(x, y){
+		if ((/object|array/.test(typeof(y))) && (size(y) > 0)){
+			console.log('Inspecting '+y+' ('+typeof(y)+')');
+			inspect(o, y);
+		} else {
+			console.log(x+' => '+y);
+		}
+	});
 }

@@ -38,14 +38,10 @@ $(document).ready(function(){
         validation: function (cell, value) {
           return valHostname(value);
         },
-				cellendedit: function(id) {
-					var d = $('#'+grid).jqxGrid('getrowdata', id);
-
-					d.EOWD = d.EOWD.iso();
-					d.OPD = d.OPD.iso();
-
+				cellendedit: function(row, datafield, columntype, oldvalue, newvalue) {
+					var d = format_obj($('#'+grid).jqxGrid('getrowdata', row), datafield, newvalue);
 					doRequest(grid, api.computers.url+'/'+d.Id, methods.update, d, function(result){
-						console.log(result);
+						message(result, 'message-edit-computer');
 					});
 				}
       },
