@@ -43,7 +43,7 @@ $(document).ready(function(){
 
 					d.EOWD = d.EOWD.iso();
 					d.OPD = d.OPD.iso();
-console.log(JSON.stringify(d));
+
 					doRequest(grid, api.computers.url+'/'+d.Id, methods.update, d, function(result){
 						console.log(result);
 					});
