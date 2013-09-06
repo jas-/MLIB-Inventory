@@ -37,13 +37,7 @@ $(document).ready(function(){
         width: '10%',
         validation: function (cell, value) {
           return valHostname(value);
-        },
-				cellendedit: function(row, datafield, columntype, oldvalue, newvalue) {
-					var d = format_obj($('#'+grid).jqxGrid('getrowdata', row), datafield, newvalue);
-					doRequest(grid, api.computers.url+'/'+d.Id, methods.update, d, function(result){
-						message(result, 'message-edit-computer');
-					});
-				}
+        }
       },
 			{	text: 'Model',
 				datafield: 'Model',
@@ -143,5 +137,19 @@ $(document).ready(function(){
 
   /* Initialize computer record set */
 	doIt(key, grid, api.computers.url, methods.all, computers);
+
+	/* Listen for cell edit events */
+	$('#'+grid).on('cellendedit', function(event){
+		var args = event.args;
+
+		$('#'+grid).jqxGrid('setcellvalue', args.rowindex, args.datafield, args.value);
+
+		var d = format_obj($('#'+grid).jqxGrid('getrowdata', args.rowindex), args.datafield, args.value);
+
+		doRequest(grid, api.computers.url+'/'+d.Id, methods.update, d, function(result){
+			message(result, 'message-edit-computer');
+			//doIt(key, grid, api.computers.url, methods.all, computers);
+		});
+	});
 
 });

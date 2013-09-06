@@ -80,10 +80,6 @@ function doGrid(element, obj)
 		showfilterrow: true,
 		source: adapter,
 		sortable: true,
-		updaterow: function (rowid, rowdata, commit) {
-			/* update record */
-			commit(true);
-		},
 		width: '100%'
 	});
 }
@@ -137,6 +133,21 @@ function size(obj)
 		if (obj.hasOwnProperty(k)) n++;
 	});
 	return n;
+}
+
+/* update local cached data */
+function updateLocal(id, obj){
+	localData(id, false, function(data){
+		if (data) {
+			data[obj.uid] = obj;
+			localData(id, data, function(results){
+				console.log(results);
+				localData(id, false, function(r){
+					console.log(r[obj.uid]);
+				});
+			});
+		}
+	});
 }
 
 /* work horse */
