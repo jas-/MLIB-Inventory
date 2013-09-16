@@ -26,24 +26,39 @@
   <div data-role="page" id="cors">
     <div data-theme="c" data-role="header">
       <h3>
-		<span align="left"><a href="#"><img src="images/inventory_categories.png" alt="Inventory Management" title="Inventory Management" height="56" /></a><a href="http://www.utah.edu/"><img src="images/marriottHeader-U.gif" alt="The University of Utah" title="The University of Utah" /></a><a href="http://www.lib.utah.edu"><img src="images/marriottHeader-title.gif" alt="J. Willard Marriott Library, The University of Utah" title="J. Willard Marriott Library, The University of Utah" /></a></span>
+		<span align="left">
+		  <a href="#">
+			<img src="images/inventory_categories.png" alt="Inventory Management" title="Inventory Management" height="56" />
+		  </a>
+		  <a href="http://www.utah.edu/">
+			<img src="images/marriottHeader-U.gif" alt="The University of Utah" title="The University of Utah" />
+		  </a>
+		  <a href="http://www.lib.utah.edu">
+			<img src="images/marriottHeader-title.gif" alt="J. Willard Marriott Library, The University of Utah" title="J. Willard Marriott Library, The University of Utah" />
+		  </a>
+		</span>
+		<span align="right" style="position: block">
+		  <a href="" data-toggle="chardinjs" onclick="$('body').chardinJs('start')">
+			<img src="images/help.png" alt="Inventory Management Help" title="Inventory Management Help" height="56" />
+		  </a>
+		</span>
 	  </h3>
 	  <div data-role="navbar" data-iconpos="left">
 		<ul>
 		  <li>
-			<a href="index.html" rel="external" data-transition="fade" data-theme="c" data-icon="laptop">Computers</a>
+			<a href="index.html" rel="external" data-transition="fade" data-theme="c" data-icon="laptop" data-intro="Manage computer records" data-position="top">Computers</a>
 		  </li>
 		  <li>
-			<a href="monitors.html" rel="external" data-transition="fade" data-theme="c" data-icon="desktop">Monitors</a>
+			<a href="monitors.html" rel="external" data-transition="fade" data-theme="c" data-icon="desktop" data-intro="Manage monitor records" data-position="top">Monitors</a>
 		  </li>
 		  <li>
-			<a href="models.html" rel="external" data-transition="fade" data-theme="c" data-icon="list-ul">Models</a>
+			<a href="models.html" rel="external" data-transition="fade" data-theme="c" data-icon="list-ul" data-intro="Manage model records" data-position="top">Models</a>
 		  </li>
 		  <li>
-			<a href="rma.html" rel="external" data-transition="fade" data-theme="c" data-icon="paste">RMA</a>
+			<a href="rma.html" rel="external" data-transition="fade" data-theme="c" data-icon="paste" data-intro="Manage RMA records" data-position="top">RMA</a>
 		  </li>
 		  <li>
-			<a href="cors.html" rel="external" data-transition="fade" data-theme="c" data-icon="globe">CORS</a>
+			<a href="cors.html" rel="external" data-transition="fade" data-theme="c" data-icon="globe" data-intro="Manage CORS whitelists" data-position="top">CORS</a>
 		  </li>
 		</ul>
 	  </div>
@@ -55,46 +70,51 @@
 	  <div data-role="navbar" data-iconpos="left">
 		<ul>
 		  <li>
-			<a href="#add-cors-record" data-transition="fade" data-theme="c" onclick="ShowHide(this)" data-icon="plus">Add new record</a>
+			<a href="#add-cors-record" data-transition="fade" data-theme="c" onclick="ShowHide(this)" data-icon="plus" data-intro="Add new CORS entry" data-position="bottom">Add new record</a>
 		  </li>
 		  <li>
-			<a href="#edit-cors-records" data-transition="fade" data-theme="c" onclick="ShowHide(this)" data-icon="edit">Edit CORS records</a>
+			<a href="#edit-cors-records" data-transition="fade" data-theme="c" onclick="ShowHide(this)" data-icon="edit" data-intro="Edit CORS whitelist entries" data-position="bottom">Edit CORS records</a>
 		  </li>
 		  <li>
-			<a href="#search-cors-records" data-transition="fade" data-theme="c" onclick="ShowHide(this)" data-icon="search">Advanced search</a>
+			<a href="#search-cors-records" data-transition="fade" data-theme="c" onclick="ShowHide(this)" data-icon="search" data-intro="Advanced CORS search" data-position="bottom">Advanced search</a>
 		  </li>
 		</ul>
 	  </div>
 
 	  <!-- CORS content -->
-	  <div data-role="content">
+	  <div data-role="content" id="cors-content">
 
 		<!-- CORS add record -->
 		<div id="add-cors-record" class="ui-screen-hidden content ui-body ui-body-c">
 		  <form action='http://inventory-server.dev:8080/cors' id='cors' name='cors' method='post'>
-		  <h3>Add cors record</h3>
+	  		<h3>
+			  <a href="" data-toggle="chardinjs" onclick="$('#cors-content').chardinJs('start')">
+				<img src="images/help.png" alt="Inventory Management Help" title="Inventory Management Help" height="25" />
+			  </a>
+			  Add new CORS whitelist entry
+			</h3>
 		  <div id="message-add-cors"></div>
 			<div class="ui-field-contain ui-body ui-br" data-role='fieldcontain'>
 			  <fieldset data-role='controlgroup' data-mini=true>
 				<label for='application'>Application</label>
-				  <input id='application' name='application' placeholder='Application name' type='text' class='ui-input-text ui-body-c ui-corner-all ui-shadow-inset' style='width: 100%'>
+				  <input id='application' name='application' placeholder='Application name' type='text' class='ui-input-text ui-body-c ui-corner-all ui-shadow-inset' style='width: 100%' data-intro="Application name for CORS entry" data-position="right">
 			  </fieldset>
 			</div>
 			<div class="ui-field-contain ui-body ui-br" data-role='fieldcontain'>
 			  <fieldset data-role='controlgroup' data-mini=true>
 				<label for='url'>URL</label>
-				  <input id='url' name='url' placeholder='URL (FQDN)' type='text' class='ui-input-text ui-body-c ui-corner-all ui-shadow-inset' style='width: 100%'>
+				  <input id='url' name='url' placeholder='URL (FQDN)' type='text' class='ui-input-text ui-body-c ui-corner-all ui-shadow-inset' style='width: 100%' data-intro="FQDN for new CORS entry" data-position="right">
 			  </fieldset>
 			</div>
 			<div class="ui-field-contain ui-body ui-br" data-role='fieldcontain'>
 			  <fieldset data-role='controlgroup' data-mini=true>
 				<label for='ip'>IP</label>
-				  <input id='ip' name='ip' placeholder='IP address' type='text' class='ui-input-text ui-body-c ui-corner-all ui-shadow-inset' style='width: 100%'>
+				  <input id='ip' name='ip' placeholder='IP address' type='text' class='ui-input-text ui-body-c ui-corner-all ui-shadow-inset' style='width: 100%' data-intro="IP address for new CORS entry" data-position="right">
 			  </fieldset>
 			</div>
 			<div data-role='fieldcontain'>
 			  <fieldset data-role='controlgroup' data-mini=true>
-				<input id='save' data-inline='true' data-mini='true' data-theme='c' data-icon='arrow-r' data-iconpos='right' value='Save changes' type='submit'>
+				<input id='save' data-inline='true' data-mini='true' data-theme='c' data-icon='arrow-r' data-iconpos='right' value='Save changes' type='submit' data-intro="Click to save new record" data-position="right">
 			  </fieldset>
 			</div>
 		  </form>
@@ -102,27 +122,37 @@
 
 		<!-- CORS edit records -->
 		<div id="edit-cors-records" class="ui-screen-hidden content ui-body ui-body-c">
-		  <h3>Current cors asset records</h3>
+	  		<h3>
+			  <a href="" data-toggle="chardinjs" onclick="$('#cors-content').chardinJs('start')">
+				<img src="images/help.png" alt="Inventory Management Help" title="Inventory Management Help" height="25" />
+			  </a>
+			  Edit current CORS whitelist
+			</h3>
 		  <div id="message-edit-cors"></div>
 		  <div id='jqxWidget-cors'>
-			<div id="jqxgrid-cors"></div>
+			<div id="jqxgrid-cors" data-intro="Edit CORS whitelist entries" data-position="right"></div>
 		  </div>
 		</div>
 
 		<!-- Advanced cors search -->
 		<div id="search-cors-records" class="ui-screen-hidden content ui-body ui-body-c">
 		  <form action='http://inventory-server.dev:8080/cors' id='cors' name='cors' method='post'>
-		  <h3>Search cors records</h3>
+	  		<h3>
+			  <a href="" data-toggle="chardinjs" onclick="$('#cors-content').chardinJs('start')">
+				<img src="images/help.png" alt="Inventory Management Help" title="Inventory Management Help" height="25" />
+			  </a>
+			  Search CORS records
+			</h3>
 		  <div id="message-search-cors"></div>
 			<div class="ui-field-contain ui-body ui-br" data-role='fieldcontain'>
 			  <fieldset data-role='controlgroup' data-mini=true>
 				<label for='search'>Search</label>
-				  <input id='search' name='search' placeholder='Search records (Use * as wildcard)' type='texts' class='ui-input-text ui-body-c ui-corner-all ui-shadow-inset' style='width: 100%'>
+				  <input id='search' name='search' placeholder='Search records (Use * as wildcard)' type='texts' class='ui-input-text ui-body-c ui-corner-all ui-shadow-inset' style='width: 100%' data-intro="Advanced CORS search. Use * as wildcard" data-position="right">
 			  </fieldset>
 			</div>
 			<div data-role='fieldcontain'>
 			  <fieldset data-role='controlgroup' data-mini=true>
-				<input id='save' data-inline='true' data-mini='true' data-theme='c' data-icon='arrow-r' data-iconpos='right' value='Search' type='submit'>
+				<input id='save' data-inline='true' data-mini='true' data-theme='c' data-icon='arrow-r' data-iconpos='right' value='Search' type='submit' data-intro="Click to search" data-position="right">
 			  </fieldset>
 			</div>
 		  </form>
@@ -133,6 +163,10 @@
 	  <span style="font-size: .7em;font-weight: nocorsl">&copy; University Of Utah - Marriott Library 2013</span>
 	</div>
   </div>
+
+  <!-- chardin.js libs -->
+  <link rel="stylesheet" href="js/3rd-party/chardin.js/chardinjs.css" type="text/css" />
+  <script type="text/javascript" src="js/3rd-party/chardin.js/chardinjs.min.js"></script>
 
   <!-- comm.js libs -->
   <script src="js/3rd-party/comm.js/comm.min.js"></script>

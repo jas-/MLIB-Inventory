@@ -26,24 +26,39 @@
   <div data-role="page" id="models">
     <div data-theme="c" data-role="header">
       <h3>
-		<span align="left"><a href="#"><img src="images/inventory_categories.png" alt="Inventory Management" title="Inventory Management" height="56" /></a><a href="http://www.utah.edu/"><img src="images/marriottHeader-U.gif" alt="The University of Utah" title="The University of Utah" /></a><a href="http://www.lib.utah.edu"><img src="images/marriottHeader-title.gif" alt="J. Willard Marriott Library, The University of Utah" title="J. Willard Marriott Library, The University of Utah" /></a></span>
+		<span align="left">
+		  <a href="#">
+			<img src="images/inventory_categories.png" alt="Inventory Management" title="Inventory Management" height="56" />
+		  </a>
+		  <a href="http://www.utah.edu/">
+			<img src="images/marriottHeader-U.gif" alt="The University of Utah" title="The University of Utah" />
+		  </a>
+		  <a href="http://www.lib.utah.edu">
+			<img src="images/marriottHeader-title.gif" alt="J. Willard Marriott Library, The University of Utah" title="J. Willard Marriott Library, The University of Utah" />
+		  </a>
+		</span>
+		<span align="right" style="position: block">
+		  <a href="" data-toggle="chardinjs" onclick="$('body').chardinJs('start')">
+			<img src="images/help.png" alt="Inventory Management Help" title="Inventory Management Help" height="56" />
+		  </a>
+		</span>
 	  </h3>
 	  <div data-role="navbar" data-iconpos="left">
 		<ul>
 		  <li>
-			<a href="index.html" rel="external" data-transition="fade" data-theme="c" data-icon="laptop">Computers</a>
+			<a href="index.html" rel="external" data-transition="fade" data-theme="c" data-icon="laptop" data-intro="Manage computer records" data-position="top">Computers</a>
 		  </li>
 		  <li>
-			<a href="monitors.html" rel="external" data-transition="fade" data-theme="c" data-icon="desktop">Monitors</a>
+			<a href="monitors.html" rel="external" data-transition="fade" data-theme="c" data-icon="desktop" data-intro="Manage monitor records" data-position="top">Monitors</a>
 		  </li>
 		  <li>
-			<a href="models.html" rel="external" data-transition="fade" data-theme="c" data-icon="list-ul">Models</a>
+			<a href="models.html" rel="external" data-transition="fade" data-theme="c" data-icon="list-ul" data-intro="Manage model records" data-position="top">Models</a>
 		  </li>
 		  <li>
-			<a href="rma.html" rel="external" data-transition="fade" data-theme="c" data-icon="paste">RMA</a>
+			<a href="rma.html" rel="external" data-transition="fade" data-theme="c" data-icon="paste" data-intro="Manage RMA records" data-position="top">RMA</a>
 		  </li>
 		  <li>
-			<a href="cors.html" rel="external" data-transition="fade" data-theme="c" data-icon="globe">CORS</a>
+			<a href="cors.html" rel="external" data-transition="fade" data-theme="c" data-icon="globe" data-intro="Manage CORS whitelists" data-position="top">CORS</a>
 		  </li>
 		</ul>
 	  </div>
@@ -67,46 +82,51 @@
 	  </div>
 
 	  <!-- Models content -->
-	  <div data-role="content">
+	  <div data-role="content" id="model-content">
 
 		<!-- Models add record -->
 		<div id="add-model-record" class="ui-screen-hidden content ui-body ui-body-c">
 		  <form action='http://inventory-server.dev:8080/models' id='models' name='models' method='post'>
-		  <h3>Add models record</h3>
+	  		<h3>
+			  <a href="" data-toggle="chardinjs" onclick="$('#model-content').chardinJs('start')">
+				<img src="images/help.png" alt="Inventory Management Help" title="Inventory Management Help" height="25" />
+			  </a>
+			  Add new model record
+			</h3>
 		  <div id="message-add-models"></div>
 			<div class="ui-field-contain ui-body ui-br" data-role='fieldcontain'>
 			  <fieldset data-role='controlgroup' data-mini=true>
 				<label for='model'>Model</label>
-				  <input id='model' name='model' placeholder='Model type' type='text' class='ui-input-text ui-body-c ui-corner-all ui-shadow-inset' style='width: 100%'>
+				  <input id='model' name='model' placeholder='Model type' type='text' class='ui-input-text ui-body-c ui-corner-all ui-shadow-inset' style='width: 100%' data-intro="Add new computer records" data-position="right">
 			  </fieldset>
 			</div>
 			<div class="ui-field-contain ui-body ui-br" data-role='fieldcontain'>
 			  <fieldset data-role='controlgroup' data-mini=true>
 				<label for='eowd'>EOWD</label>
-				  <input id='eowd' name='eowd' placeholder='End of warranty date' type='text' class='ui-input-text ui-body-c ui-corner-all ui-shadow-inset' style='width: 100%' data-role="datebox" data-options='{"mode":"calbox", "useNewStyle":true}'>
+				  <input id='eowd' name='eowd' placeholder='End of warranty date' type='text' class='ui-input-text ui-body-c ui-corner-all ui-shadow-inset' style='width: 100%' data-role="datebox" data-options='{"mode":"calbox", "useNewStyle":true}' data-intro="Add new computer records" data-position="right">
 			  </fieldset>
 			</div>
 			<div class="ui-field-contain ui-body ui-br" data-role='fieldcontain'>
 			  <fieldset data-role='controlgroup' data-mini=true>
 				<label for='opd'>OPD</label>
-				  <input id='opd' name='opd' placeholder='Original purchase date' type='text' class='ui-input-text ui-body-c ui-corner-all ui-shadow-inset' style='width: 100%' data-role="datebox" data-options='{"mode":"calbox", "useNewStyle":true}'>
+				  <input id='opd' name='opd' placeholder='Original purchase date' type='text' class='ui-input-text ui-body-c ui-corner-all ui-shadow-inset' style='width: 100%' data-role="datebox" data-options='{"mode":"calbox", "useNewStyle":true}' data-intro="Add new computer records" data-position="right">
 			  </fieldset>
 			</div>
 			<div class="ui-field-contain ui-body ui-br" data-role='fieldcontain'>
 			  <fieldset data-role='controlgroup' data-mini=true>
 				<label for='description'>Description</label>
-				  <textarea id='description' name='description' placeholder='Description' cols='300' rows='6' style='width: 100%' class='ui-input-text ui-body-c ui-corner-all ui-shadow-inset'></textarea>
+				  <textarea id='description' name='description' placeholder='Description' cols='300' rows='6' style='width: 100%' class='ui-input-text ui-body-c ui-corner-all ui-shadow-inset' data-intro="Add new computer records" data-position="right"></textarea>
 			  </fieldset>
 			</div>
 			<div class="ui-field-contain ui-body ui-br" data-role='fieldcontain'>
 			  <fieldset data-role='controlgroup' data-mini=true>
 				<label for='notes'>Notes</label>
-				  <textarea id='notes' name='notes' placeholder='Notes' cols='300' rows='6' style='width: 100%' class='ui-input-text ui-body-c ui-corner-all ui-shadow-inset'></textarea>
+				  <textarea id='notes' name='notes' placeholder='Notes' cols='300' rows='6' style='width: 100%' class='ui-input-text ui-body-c ui-corner-all ui-shadow-inset' data-intro="Add new computer records" data-position="right"></textarea>
 			  </fieldset>
 			</div>
 			<div data-role='fieldcontain'>
 			  <fieldset data-role='controlgroup' data-mini=true>
-				<input id='save' data-inline='true' data-mini='true' data-theme='c' data-icon='arrow-r' data-iconpos='right' value='Save changes' type='submit'>
+				<input id='save' data-inline='true' data-mini='true' data-theme='c' data-icon='arrow-r' data-iconpos='right' value='Save changes' type='submit' data-intro="Click to save new model record" data-position="right">
 			  </fieldset>
 			</div>
 		  </form>
@@ -114,27 +134,37 @@
 
 		<!-- Models edit records -->
 		<div id="edit-model-records" class="ui-screen-hidden content ui-body ui-body-c">
-		  <h3>Current models asset records</h3>
+	  		<h3>
+			  <a href="" data-toggle="chardinjs" onclick="$('#model-content').chardinJs('start')">
+				<img src="images/help.png" alt="Inventory Management Help" title="Inventory Management Help" height="25" />
+			  </a>
+			  Edit existing model records
+			</h3>
 		  <div id="message-edit-models"></div>
 		  <div id='jqxWidget-models'>
-			<div id="jqxgrid-model"></div>
+			<div id="jqxgrid-model" data-intro="Edit current model records" data-position="top"></div>
 		  </div>
 		</div>
 
 		<!-- Advanced models search -->
 		<div id="search-model-records" class="ui-screen-hidden content ui-body ui-body-c">
 		  <form action='http://inventory-server.dev:8080/models' id='models' name='models' method='post'>
-		  <h3>Search models records</h3>
+	  		<h3>
+			  <a href="" data-toggle="chardinjs" onclick="$('#model-content').chardinJs('start')">
+				<img src="images/help.png" alt="Inventory Management Help" title="Inventory Management Help" height="25" />
+			  </a>
+			  Advanced models search
+			</h3>
 		  <div id="message-search-models"></div>
 			<div class="ui-field-contain ui-body ui-br" data-role='fieldcontain'>
 			  <fieldset data-role='controlgroup' data-mini=true>
 				<label for='search'>Search</label>
-				  <input id='search' name='search' placeholder='Search records (Use * as wildcard)' type='texts' class='ui-input-text ui-body-c ui-corner-all ui-shadow-inset' style='width: 100%'>
+				  <input id='search' name='search' placeholder='Search records (Use * as wildcard)' type='texts' class='ui-input-text ui-body-c ui-corner-all ui-shadow-inset' style='width: 100%' data-intro="Advanced models search. Use * as wildcard." data-position="right">
 			  </fieldset>
 			</div>
 			<div data-role='fieldcontain'>
 			  <fieldset data-role='controlgroup' data-mini=true>
-				<input id='save' data-inline='true' data-mini='true' data-theme='c' data-icon='arrow-r' data-iconpos='right' value='Search' type='submit'>
+				<input id='save' data-inline='true' data-mini='true' data-theme='c' data-icon='arrow-r' data-iconpos='right' value='Search' type='submit' data-intro="Click to search" data-position="right">
 			  </fieldset>
 			</div>
 		  </form>
@@ -145,6 +175,10 @@
 	  <span style="font-size: .7em;font-weight: normal">&copy; University Of Utah - Marriott Library 2013</span>
 	</div>
   </div>
+
+  <!-- chardin.js libs -->
+  <link rel="stylesheet" href="js/3rd-party/chardin.js/chardinjs.css" type="text/css" />
+  <script type="text/javascript" src="js/3rd-party/chardin.js/chardinjs.min.js"></script>
 
   <!-- comm.js libs -->
   <script src="js/3rd-party/comm.js/comm.min.js"></script>

@@ -26,24 +26,39 @@
   <div data-role="page" id="monitors">
     <div data-theme="c" data-role="header">
       <h3>
-		<span align="left"><a href="#"><img src="images/inventory_categories.png" alt="Inventory Management" title="Inventory Management" height="56" /></a><a href="http://www.utah.edu/"><img src="images/marriottHeader-U.gif" alt="The University of Utah" title="The University of Utah" /></a><a href="http://www.lib.utah.edu"><img src="images/marriottHeader-title.gif" alt="J. Willard Marriott Library, The University of Utah" title="J. Willard Marriott Library, The University of Utah" /></a></span>
+		<span align="left">
+		  <a href="#">
+			<img src="images/inventory_categories.png" alt="Inventory Management" title="Inventory Management" height="56" />
+		  </a>
+		  <a href="http://www.utah.edu/">
+			<img src="images/marriottHeader-U.gif" alt="The University of Utah" title="The University of Utah" />
+		  </a>
+		  <a href="http://www.lib.utah.edu">
+			<img src="images/marriottHeader-title.gif" alt="J. Willard Marriott Library, The University of Utah" title="J. Willard Marriott Library, The University of Utah" />
+		  </a>
+		</span>
+		<span align="right" style="position: block">
+		  <a href="" data-toggle="chardinjs" onclick="$('body').chardinJs('start')">
+			<img src="images/help.png" alt="Inventory Management Help" title="Inventory Management Help" height="56" />
+		  </a>
+		</span>
 	  </h3>
 	  <div data-role="navbar" data-iconpos="left">
 		<ul>
 		  <li>
-			<a href="index.html" rel="external" data-transition="fade" data-theme="c" data-icon="laptop">Computers</a>
+			<a href="index.html" rel="external" data-transition="fade" data-theme="c" data-icon="laptop" data-intro="Manage computer records" data-position="top">Computers</a>
 		  </li>
 		  <li>
-			<a href="monitors.html" rel="external" data-transition="fade" data-theme="c" data-icon="desktop">Monitors</a>
+			<a href="monitors.html" rel="external" data-transition="fade" data-theme="c" data-icon="desktop" data-intro="Manage monitor records" data-position="top">Monitors</a>
 		  </li>
 		  <li>
-			<a href="models.html" rel="external" data-transition="fade" data-theme="c" data-icon="list-ul">Models</a>
+			<a href="models.html" rel="external" data-transition="fade" data-theme="c" data-icon="list-ul" data-intro="Manage model records" data-position="top">Models</a>
 		  </li>
 		  <li>
-			<a href="rma.html" rel="external" data-transition="fade" data-theme="c" data-icon="paste">RMA</a>
+			<a href="rma.html" rel="external" data-transition="fade" data-theme="c" data-icon="paste" data-intro="Manage RMA records" data-position="top">RMA</a>
 		  </li>
 		  <li>
-			<a href="cors.html" rel="external" data-transition="fade" data-theme="c" data-icon="globe">CORS</a>
+			<a href="cors.html" rel="external" data-transition="fade" data-theme="c" data-icon="globe" data-intro="Manage CORS whitelists" data-position="top">CORS</a>
 		  </li>
 		</ul>
 	  </div>
@@ -163,6 +178,10 @@
 	  <span style="font-size: .7em;font-weight: normal">&copy; University Of Utah - Marriott Library 2013</span>
 	</div>
   </div>
+
+  <!-- chardin.js libs -->
+  <link rel="stylesheet" href="js/3rd-party/chardin.js/chardinjs.css" type="text/css" />
+  <script type="text/javascript" src="js/3rd-party/chardin.js/chardinjs.min.js"></script>
 
   <!-- comm.js libs -->
   <script src="js/3rd-party/comm.js/comm.min.js"></script>
