@@ -1,7 +1,7 @@
 $(document).ready(function(){
 
 	/* DOM element storing dqxGrid */
-	var grid = 'jqxgrid-models';
+	var grid = 'jqxgrid-model';
 
 	/* Name of client storage key */
 	var key = 'models';

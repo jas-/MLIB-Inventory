@@ -165,6 +165,11 @@ function ShowHide(e)
   $(".content").hide();
   var id =$(e).attr("href");
   $(id).show();
+
+	var _m = id.match(/edit\-(.*)\-records/);
+	if (_m[1]){
+		$('#jqxgrid-'+_m[1]).jqxGrid('render');
+	}
 }
 
 /* Validate integer */
