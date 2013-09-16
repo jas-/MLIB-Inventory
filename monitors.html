@@ -100,12 +100,14 @@
 				  <input id='hostname' name='hostname' placeholder='Computer name' type='text' class='ui-input-text ui-body-c ui-corner-all ui-shadow-inset' style='width: 100%' data-intro="Monitor hostname" data-position="right">
 			  </fieldset>
 			</div>
-			<div class="ui-field-contain ui-body ui-br selection" data-role='fieldcontain'>
-			  <fieldset data-role='controlgroup' data-mini=true>
-				<label for='model'>Model</label>
-				  <select name="model" id="model"  data-mini="true">
-					
+			<div class='ui-field-contain ui-body ui-br' data-role='fieldcontain'>
+			  <fieldset data-role='controlgroup'>
+				<label for='model' class='select'>Model</label>
+				<div class='ui-select'>
+				  <select name='model' id='model' data-mini='true' data-mini='true' data-theme='c' data-overlay-theme='c'>
+					<option data-placeholder='true'>Select model</option>
 				  </select>
+				</div>
 			  </fieldset>
 			</div>
 			<div class="ui-field-contain ui-body ui-br" data-role='fieldcontain'>

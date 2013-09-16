@@ -138,6 +138,14 @@ $(document).ready(function(){
   /* Initialize computer record set */
 	doIt(key, grid, api.computers.url, methods.all, computers);
 
+	/* Bind to add record event */
+	$('#computer').on('submit', function(e){
+		e.preventDefault();
+		doRequest(grid, api.computers.url, methods.add, $(this).serialize(), function(result){
+			message(result, 'message-add-computer');
+		});
+	});
+
 	/* Listen for cell edit events */
 	$('#'+grid).on('cellendedit', function(event){
 		var args = event.args;

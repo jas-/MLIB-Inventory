@@ -29,6 +29,11 @@ var	methods = {
 	remove:	'delete'
 };
 
+/* Change default behavior of select lists for mobile devices */
+$(document).on('mobileinit', function() {
+  $.mobile.selectmenu.prototype.options.nativeMenu = false;
+});
+
 /* Execute secStore.js */
 function localData(key, data, cb)
 {
@@ -48,6 +53,7 @@ function localData(key, data, cb)
 function doRequest(id, url, method, data, cb)
 {
 	$(window).comm({
+		debug: true,
 		appID:			(id)			? id			: 'MLIB-Inventory',
 		url:				(url)			? url			: false,
 		method:			(method)	? method	: false,
@@ -172,13 +178,14 @@ function ShowHide(e)
 			$('#jqxgrid-'+_m[1]).jqxGrid('render');
 		}
 	}
+
 	modelList();
 }
 
 /* Create model select list */
 function modelList() {
 	doRequest('models', api.models.url, methods.all, false, function(obj){
-		var options;
+		var options = '<option data-placeholder="true">Select model</option>';
 		$.each(obj, function(k, v){
 			options += '<option value="'+v.Model+'" data-eowd="'+v.EOWD+'" data-opd="'+v.OPD+'">'+v.Model+'</option>';
 		});

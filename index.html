@@ -85,27 +85,29 @@
 	  <div data-role="content" id="computer-content">
 
 		<!-- Computer add record -->
-		<div id="add-computer-record" class="ui-screen-hidden content ui-body ui-body-c">
-		  <form action='http://inventory-server.dev:8080/computer' id='computer' name='computer' method='post'>
+		<div id='add-computer-record' class='ui-screen-hidden content ui-body ui-body-c'>
+		  <form action='http://inventory.dev:8080/computer' id='computer' name='computer' method='post'>
 		  <h3>
-			<a href="" data-toggle="chardinjs" onclick="$('#computer-content').chardinJs('start')">
-			  <img src="images/help.png" alt="Inventory Management Help" title="Inventory Management Help" height="25" />
+			<a href="" data-toggle='chardinjs' onclick="$('#computer-content').chardinJs('start')">
+			  <img src='images/help.png' alt='Inventory Management Help' title='Inventory Management Help' height='25' />
 			</a>
 			Add new computer record
 		  </h3>
-		  <div id="message-add-computer"></div>
-			<div class="ui-field-contain ui-body ui-br" data-role='fieldcontain'>
+		  <div id='message-add-computer'></div>
+			<div class='ui-field-contain ui-body ui-br' data-role='fieldcontain'>
 			  <fieldset data-role='controlgroup' data-mini=true>
 				<label for='hostname'>Hostname</label>
 				  <input id='hostname' name='hostname' placeholder='Computer name' type='text' class='ui-input-text ui-body-c ui-corner-all ui-shadow-inset' style='width: 100%' data-intro="Hostname of computer record" data-position="right">
 			  </fieldset>
 			</div>
-			<div class="ui-field-contain ui-body ui-br selection" data-role='fieldcontain'>
-			  <fieldset data-role='controlgroup' data-mini=true>
-				<label for='model'>Model</label>
-				  <select name="model" id="model"  data-mini="true">
-					
+			<div class='ui-field-contain ui-body ui-br' data-role='fieldcontain'>
+			  <fieldset data-role='controlgroup'>
+				<label for='model' class='select'>Model</label>
+				<div class='ui-select'>
+				  <select name='model' id='model' data-mini='true' data-mini='true' data-theme='c' data-overlay-theme='c'>
+					<option data-placeholder='true'>Select model</option>
 				  </select>
+				</div>
 			  </fieldset>
 			</div>
 			<div class="ui-field-contain ui-body ui-br" data-role='fieldcontain'>
