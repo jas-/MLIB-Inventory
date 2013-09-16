@@ -26,7 +26,7 @@
   <div data-role="page" id="monitors">
     <div data-theme="c" data-role="header">
       <h3>
-		<span align="left">
+		<span style="float: left">
 		  <a href="#">
 			<img src="images/inventory_categories.png" alt="Inventory Management" title="Inventory Management" height="56" />
 		  </a>
@@ -37,7 +37,7 @@
 			<img src="images/marriottHeader-title.gif" alt="J. Willard Marriott Library, The University of Utah" title="J. Willard Marriott Library, The University of Utah" />
 		  </a>
 		</span>
-		<span align="right" style="position: block">
+		<span style="float: right">
 		  <a href="" data-toggle="chardinjs" onclick="$('body').chardinJs('start')">
 			<img src="images/help.png" alt="Inventory Management Help" title="Inventory Management Help" height="56" />
 		  </a>
@@ -70,76 +70,81 @@
 	  <div data-role="navbar" data-iconpos="left">
 		<ul>
 		  <li>
-			<a href="#add-monitor-record" data-transition="fade" data-theme="c" onclick="ShowHide(this)" data-icon="plus">Add new record</a>
+			<a href="#add-monitor-record" data-transition="fade" data-theme="c" onclick="ShowHide(this)" data-icon="plus" data-intro="Add new monitor record" data-position="bottom">Add new record</a>
 		  </li>
 		  <li>
-			<a href="#edit-monitor-records" data-transition="fade" data-theme="c" onclick="ShowHide(this)" data-icon="edit">Edit monitor records</a>
+			<a href="#edit-monitor-records" data-transition="fade" data-theme="c" onclick="ShowHide(this)" data-icon="edit" data-intro="Edit monitor records" data-position="bottom">Edit monitor records</a>
 		  </li>
 		  <li>
-			<a href="#search-monitor-records" data-transition="fade" data-theme="c" onclick="ShowHide(this)" data-icon="search">Advanced search</a>
+			<a href="#search-monitor-records" data-transition="fade" data-theme="c" onclick="ShowHide(this)" data-icon="search" data-intro="Advanced monitor search" data-position="bottom">Advanced search</a>
 		  </li>
 		</ul>
 	  </div>
 
 	  <!-- Monitor content -->
-	  <div data-role="content">
+	  <div data-role="content" id="monitor-content">
 
 		<!-- Monitor add record -->
 		<div id="add-monitor-record" class="ui-screen-hidden content ui-body ui-body-c">
 		  <form action='http://inventory-server.dev:8080/monitor' id='monitor' name='monitor' method='post'>
-		  <h3>Add monitor record</h3>
+		  <h3>
+			<a href="" data-toggle="chardinjs" onclick="$('#monitor-content').chardinJs('start')">
+			  <img src="images/help.png" alt="Inventory Management Help" title="Inventory Management Help" height="25" />
+			</a>
+			Add new monitor record
+		  </h3>
 		  <div id="message-add-monitor"></div>
 			<div class="ui-field-contain ui-body ui-br" data-role='fieldcontain'>
 			  <fieldset data-role='controlgroup' data-mini=true>
 				<label for='hostname'>Hostname</label>
-				  <input id='hostname' name='hostname' placeholder='Computer name' type='text' class='ui-input-text ui-body-c ui-corner-all ui-shadow-inset' style='width: 100%'>
+				  <input id='hostname' name='hostname' placeholder='Computer name' type='text' class='ui-input-text ui-body-c ui-corner-all ui-shadow-inset' style='width: 100%' data-intro="Monitor hostname" data-position="right">
 			  </fieldset>
 			</div>
 			<div class="ui-field-contain ui-body ui-br" data-role='fieldcontain'>
 			  <fieldset data-role='controlgroup' data-mini=true>
 				<label for='model'>Model</label>
-				  <input id='model' name='model' placeholder='Model type' type='text' class='ui-input-text ui-body-c ui-corner-all ui-shadow-inset' style='width: 100%'>
+				  <input id='model' name='model' placeholder='Model type' type='text' class='ui-input-text ui-body-c ui-corner-all ui-shadow-inset' style='width: 100%' data-intro="Monitor model number" data-position="right">
 			  </fieldset>
 			</div>
 			<div class="ui-field-contain ui-body ui-br" data-role='fieldcontain'>
 			  <fieldset data-role='controlgroup' data-mini=true>
 				<label for='sku'>SKU</label>
-				  <input id='sku' name='sku' placeholder='SKU (white barcode)' type='text' class='ui-input-text ui-body-c ui-corner-all ui-shadow-inset' style='width: 100%'>
+				  <input id='sku' name='sku' placeholder='SKU (white barcode)' type='text' class='ui-input-text ui-body-c ui-corner-all ui-shadow-inset' style='width: 100%' data-intro="Monitor SKU" data-position="right">
 			  </fieldset>
 			</div>
 			<div class="ui-field-contain ui-body ui-br" data-role='fieldcontain'>
 			  <fieldset data-role='controlgroup' data-mini=true>
 				<label for='serial'>Serial</label>
-				  <input id='serial' name='serial' placeholder='Serial (Red label)' type='text' class='ui-input-text ui-body-c ui-corner-all ui-shadow-inset' style='width: 100%'>
+				  <input id='serial' name='serial' placeholder='Serial (Red label)' type='text' class='ui-input-text ui-body-c ui-corner-all ui-shadow-inset' style='width: 100%' data-intro="Monitor serial number" data-position="right">
 			  </fieldset>
 			</div>
 			<div class="ui-field-contain ui-body ui-br" data-role='fieldcontain'>
 			  <fieldset data-role='controlgroup' data-mini=true>
 				<label for='eowd'>EOWD</label>
-				  <input id='eowd' name='eowd' placeholder='End of warranty date' type='text' class='ui-input-text ui-body-c ui-corner-all ui-shadow-inset' style='width: 100%' data-role="datebox" data-options='{"mode":"calbox", "useNewStyle":true}'>
+				  <input id='eowd' name='eowd' placeholder='End of warranty date' type='text' class='ui-input-text ui-body-c ui-corner-all ui-shadow-inset' style='width: 100%' data-role="datebox" data-options='{"mode":"calbox", "useNewStyle":true}' data-intro="End of warranty date" data-position="right">
 			  </fieldset>
 			</div>
 			<div class="ui-field-contain ui-body ui-br" data-role='fieldcontain'>
 			  <fieldset data-role='controlgroup' data-mini=true>
 				<label for='opd'>OPD</label>
-				  <input id='opd' name='opd' placeholder='Original purchase date' type='text' class='ui-input-text ui-body-c ui-corner-all ui-shadow-inset' style='width: 100%' data-role="datebox" data-options='{"mode":"calbox", "useNewStyle":true}'>
+				  <input id='opd' name='opd' placeholder='Original purchase date' type='text' class='ui-input-text ui-body-c ui-corner-all ui-shadow-inset' style='width: 100%' data-role="datebox" data-options='{"mode":"calbox", "useNewStyle":true}' data-intro="Original purchase date" data-position="right">
 			  </fieldset>
 			</div>
 			<div class="ui-field-contain ui-body ui-br" data-role='fieldcontain'>
 			  <fieldset data-role='controlgroup' data-mini=true>
 				<label for='description'>Description</label>
-				  <textarea id='description' name='description' placeholder='Description' cols='300' rows='6' style='width: 100%' class='ui-input-text ui-body-c ui-corner-all ui-shadow-inset'></textarea>
+				  <textarea id='description' name='description' placeholder='Description' cols='300' rows='6' style='width: 100%' class='ui-input-text ui-body-c ui-corner-all ui-shadow-inset' data-intro="Monitor description" data-position="right"></textarea>
 			  </fieldset>
 			</div>
 			<div class="ui-field-contain ui-body ui-br" data-role='fieldcontain'>
 			  <fieldset data-role='controlgroup' data-mini=true>
 				<label for='notes'>Notes</label>
-				  <textarea id='notes' name='notes' placeholder='Notes' cols='300' rows='6' style='width: 100%' class='ui-input-text ui-body-c ui-corner-all ui-shadow-inset'></textarea>
+				  <textarea id='notes' name='notes' placeholder='Notes' cols='300' rows='6' style='width: 100%' class='ui-input-text ui-body-c ui-corner-all ui-shadow-inset' data-intro="Monitor notes field" data-position="right"></textarea>
 			  </fieldset>
 			</div>
 			<div data-role='fieldcontain'>
 			  <fieldset data-role='controlgroup' data-mini=true>
-				<input id='save' data-inline='true' data-mini='true' data-theme='c' data-icon='arrow-r' data-iconpos='right' value='Save changes' type='submit'>
+				<input id='save' data-inline='true' data-mini='true' data-theme='c' data-icon='arrow-r' data-iconpos='right' value='Save changes' type='submit' data-intro="Click to save" data-position="right">
 			  </fieldset>
 			</div>
 		  </form>
@@ -147,27 +152,37 @@
 
 		<!-- Monitor edit records -->
 		<div id="edit-monitor-records" class="ui-screen-hidden content ui-body ui-body-c">
-		  <h3>Current monitor asset records</h3>
+		  <h3>
+			<a href="" data-toggle="chardinjs" onclick="$('#monitor-content').chardinJs('start')">
+			  <img src="images/help.png" alt="Inventory Management Help" title="Inventory Management Help" height="25" />
+			</a>
+			Edit monitor records
+		  </h3>
 		  <div id="message-edit-monitor"></div>
 		  <div id='jqxWidget-monitors'>
-			<div id="jqxgrid-monitor"></div>
+			<div id="jqxgrid-monitor" data-intro="Edit monitor records" data-position="bottom"></div>
 		  </div>
 		</div>
 
 		<!-- Advanced monitor search -->
 		<div id="search-monitor-records" class="ui-screen-hidden content ui-body ui-body-c">
 		  <form action='http://inventory-server.dev:8080/monitor' id='monitor' name='monitor' method='post'>
-		  <h3>Search monitor records</h3>
+		  <h3>
+			<a href="" data-toggle="chardinjs" onclick="$('#monitor-content').chardinJs('start')">
+			  <img src="images/help.png" alt="Inventory Management Help" title="Inventory Management Help" height="25" />
+			</a>
+			Advanced monitor search
+		  </h3>
 		  <div id="message-search-monitor"></div>
 			<div class="ui-field-contain ui-body ui-br" data-role='fieldcontain'>
 			  <fieldset data-role='controlgroup' data-mini=true>
 				<label for='search'>Search</label>
-				  <input id='search' name='search' placeholder='Search records (Use * as wildcard)' type='texts' class='ui-input-text ui-body-c ui-corner-all ui-shadow-inset' style='width: 100%'>
+				  <input id='search' name='search' placeholder='Search records (Use * as wildcard)' type='texts' class='ui-input-text ui-body-c ui-corner-all ui-shadow-inset' style='width: 100%' data-intro="Advanced monitor search. Use * as wildcard" data-position="right">
 			  </fieldset>
 			</div>
 			<div data-role='fieldcontain'>
 			  <fieldset data-role='controlgroup' data-mini=true>
-				<input id='save' data-inline='true' data-mini='true' data-theme='c' data-icon='arrow-r' data-iconpos='right' value='Search' type='submit'>
+				<input id='save' data-inline='true' data-mini='true' data-theme='c' data-icon='arrow-r' data-iconpos='right' value='Search' type='submit' data-intro="Click to search" data-position="right">
 			  </fieldset>
 			</div>
 		  </form>
