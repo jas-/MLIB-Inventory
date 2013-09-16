@@ -71,14 +71,14 @@ $(document).ready(function(){
 			{ text: 'EOWD',
 				datafield: 'EOWD',
 				width: '10%',
-				cellsformat: 'MM/dd/yyyy',
+				cellsformat: 'yyyy-MM-dd',
 				columntype: 'datetimeinput',
         filtertype: 'date',
 				initeditor: function(row, column, editor) {
 					var d = new Date()
-					_d = [d.getMonth()+1, d.getDate(), d.getFullYear()].join('/');
+					_d = [d.getFullYear(), d.getMonth(), d.getDate()].join('-');
 					editor.jqxDateTimeInput('setDate', _d, {
-						formatString: 'MM/dd/yyyy',
+						formatString: 'yyyy-MM-dd',
 						animationType: 'fade',
 						width: '150px',
 						height: '25px',
@@ -92,14 +92,14 @@ $(document).ready(function(){
 			{ text: 'OPD',
 				datafield: 'OPD',
 				width: '10%',
-				cellsformat: 'MM/dd/yyyy',
+				cellsformat: 'yyyy-MM-dd',
 				columntype: 'datetimeinput',
         filtertype: 'date',
 				initeditor: function(row, column, editor) {
 					var d = new Date()
-					_d = [d.getMonth()+1, d.getDate(), d.getFullYear()].join('/');
+					_d = [d.getFullYear(), d.getMonth(), d.getDate()].join('-');
 					editor.jqxDateTimeInput('setDate', _d, {
-						formatString: 'MM/dd/yyyy',
+						formatString: 'yyyy-MM-dd',
 						animationType: 'fade',
 						width: '150px',
 						height: '25px',

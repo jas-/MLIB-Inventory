@@ -167,9 +167,27 @@ function ShowHide(e)
   $(id).show();
 
 	var _m = id.match(/edit\-(.*)\-records/);
-	if (_m[1]){
-		$('#jqxgrid-'+_m[1]).jqxGrid('render');
+	if (_m){
+		if (_m[1]){
+			$('#jqxgrid-'+_m[1]).jqxGrid('render');
+		}
 	}
+	modelList();
+}
+
+/* Create model select list */
+function modelList() {
+	doRequest('models', api.models.url, methods.all, false, function(obj){
+		var options;
+		$.each(obj, function(k, v){
+			options += '<option value="'+v.Model+'" data-eowd="'+v.EOWD+'" data-opd="'+v.OPD+'">'+v.Model+'</option>';
+		});
+		$('#model').selectmenu().empty().append(options).selectmenu('refresh');
+		$('#model').on('change', function(){
+			$('#eowd').val($("select option:selected").data('eowd'));
+			$('#opd').val($("select option:selected").data('opd'));
+		});
+	});
 }
 
 /* Validate integer */
@@ -220,11 +238,11 @@ function valDate(obj)
 	/* attempt to correct date format */
 	if (!/^[0-9]{1,2}\/[0-9]{1,2}\/[0-9]{4}$/.test(obj)){
 		var d = new Date()
-		obj = [d.getMonth()+1, d.getDate(), d.getFullYear()].join('/');
+		obj = [d.getFullYear(), d.getMonth(), d.getDate()].join('-');
 	}
 
-	return (/^[\d+]{1,2}\/[\d+]{1,2}\/[\d+]{4}$/.test(obj)) ?
-		true : {result: false, message: 'Date is invalid [mm/dd/yyyy]' }
+	return (/^[\d+]{4}\-[\d+]{1,2}\-[\d+]{1,2}$/.test(obj)) ?
+		true : {result: false, message: 'Date is invalid [yyyy-mm-dd]' }
 }
 
 /* Validate General (paragraph) */
@@ -268,7 +286,7 @@ function inspect(obj){
 	$.each(obj, function(x, y){
 		if ((/object|array/.test(typeof(y))) && (size(y) > 0)){
 			console.log('Inspecting '+y+' ('+typeof(y)+')');
-			inspect(o, y);
+			inspect(y);
 		} else {
 			console.log(x+' => '+y);
 		}
