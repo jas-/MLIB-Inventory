@@ -1,4 +1,4 @@
-$(document).ready(function(event){
+$(document).ready(function(){
 
 	/* DOM element storing dqxGrid */
 	var grid = 'jqxgrid-computer';

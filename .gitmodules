@@ -10,3 +10,6 @@
 [submodule "js/3rd-party/secStore.js"]
 	path = js/3rd-party/secStore.js
 	url = https://github.com/jas-/secStore.js.git
+[submodule "js/3rd-party/chardin.js"]
+	path = js/3rd-party/chardin.js
+	url = https://github.com/heelhook/chardin.js.git
