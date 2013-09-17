@@ -179,21 +179,48 @@ function ShowHide(e)
 		}
 	}
 
+	var _m = id.match(/add\-(.*)\-record/);
+	if (_m){
+		if (_m[1]){
+			$('#'+_m[1]).comm({
+				appID: _m[1],
+				callback: function(){
+					message($(this), 'message-add-'+_m[1]);
+				}
+			});
+		}
+	}
+
 	modelList();
 }
 
-/* Create model select list */
+/* Create select list */
+function createList(obj)
+{
+	var options = '<option data-placeholder="true">Select model</option>';
+	$.each(obj, function(k, v){
+		options += '<option value="'+v.Model+'" data-eowd="'+v.EOWD+'" data-opd="'+v.OPD+'">'+v.Model+'</option>';
+	});
+
+	$('#model').selectmenu().empty().append(options).selectmenu('refresh');
+	$('#model').on('change', function(){
+		$('#eowd').val($("select option:selected").data('eowd'));
+		$('#opd').val($("select option:selected").data('opd'));
+	});
+
+	return options;
+}
+
+/* Handle model list & create select list */
 function modelList() {
-	doRequest('models', api.models.url, methods.all, false, function(obj){
-		var options = '<option data-placeholder="true">Select model</option>';
-		$.each(obj, function(k, v){
-			options += '<option value="'+v.Model+'" data-eowd="'+v.EOWD+'" data-opd="'+v.OPD+'">'+v.Model+'</option>';
-		});
-		$('#model').selectmenu().empty().append(options).selectmenu('refresh');
-		$('#model').on('change', function(){
-			$('#eowd').val($("select option:selected").data('eowd'));
-			$('#opd').val($("select option:selected").data('opd'));
-		});
+	localData('models', false, function(obj){
+		if (!obj) {
+			doRequest('models', api.models.url, methods.all, false, function(result){
+				localData('models', result);
+				return createList(result);
+			});
+		}
+		return createList(obj);
 	});
 }
 
