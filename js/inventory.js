@@ -34,6 +34,11 @@ $(document).on('mobileinit', function() {
   $.mobile.selectmenu.prototype.options.nativeMenu = false;
 });
 
+/* Default date format for datepicker */
+jQuery.extend(jQuery.mobile.datebox.prototype.options, {
+	'overrideDateFormat': '%Y-%m-%d',
+});
+
 /* Execute secStore.js */
 function localData(key, data, cb)
 {
@@ -53,7 +58,6 @@ function localData(key, data, cb)
 function doRequest(id, url, method, data, cb)
 {
 	$(window).comm({
-		debug: true,
 		appID:			(id)			? id			: 'MLIB-Inventory',
 		url:				(url)			? url			: false,
 		method:			(method)	? method	: false,
@@ -231,7 +235,6 @@ function ShowHide(e)
 	if (_m){
 		if (_m[1]){
 			$('#'+_m[1]).comm({
-				debug: true,
 				appID: _m[1],
 				callback: function(){
 					message($(this), 'message-add-'+_m[1]);
