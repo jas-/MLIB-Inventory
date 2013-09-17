@@ -64,6 +64,51 @@ function doRequest(id, url, method, data, cb)
 	});
 }
 
+
+function _pager(ele)
+{
+	if (_detect()){
+
+		var element = $("<div style='margin-top: 5px; width: 100%; height: 100%;'></div>");
+		var datainfo = $("#"+ele).jqxGrid('getdatainformation');
+		var paginginfo = datainfo.paginginformation;
+
+		var leftButton = $("<div style='padding: 1px; float: left;'><div style='margin-left: 9px; width: 16px; height: 16px;'></div></div>");
+		leftButton.find('div').addClass('icon-arrow-left');
+		leftButton.width(36);
+		leftButton.jqxButton();
+
+		var rightButton = $("<div style='padding: 1px; margin: 0px 3px; float: left;'><div style='margin-left: 9px; width: 16px; height: 16px;'></div></div>");
+		rightButton.find('div').addClass('icon-arrow-right');
+		rightButton.width(36);
+		rightButton.jqxButton();
+
+		leftButton.appendTo(element);
+		rightButton.appendTo(element);
+
+		var label = $("<div style='font-size: 11px; margin: 2px 3px; font-weight: bold; float: left;'></div>");
+		label.text("1-" + paginginfo.pagesize + ' of ' + datainfo.rowscount);
+		label.appendTo(element);
+
+		rightButton.click(function () {
+		$("#"+element).jqxGrid('gotonextpage');
+			var datainfo = $("#"+ele).jqxGrid('getdatainformation');
+			var paginginfo = datainfo.paginginformation;
+			label.text(1 + paginginfo.pagenum * paginginfo.pagesize + "-" + Math.min(datainfo.rowscount, (paginginfo.pagenum + 1) * paginginfo.pagesize) + ' of ' + datainfo.rowscount);
+		});
+
+		leftButton.click(function () {
+			$("#"+element).jqxGrid('gotoprevpage');
+			var datainfo = $("#"+ele).jqxGrid('getdatainformation');
+			var paginginfo = datainfo.paginginformation;
+			label.text(1 + paginginfo.pagenum * paginginfo.pagesize + "-" + Math.min(datainfo.rowscount, (paginginfo.pagenum + 1) * paginginfo.pagesize) + ' of ' + datainfo.rowscount);
+		});
+
+		return element;
+	}
+	return false;
+}
+
 /* create jqxGrid for specified data */
 function doGrid(element, obj)
 {
@@ -80,6 +125,7 @@ function doGrid(element, obj)
 		filterable: true,
 		groupable: true,
 		pageable: true,
+		pagerrenderer: _pager(element),
 		pagesizeoptions: ['5', '10', '20', '30', '40', '50'],
 		ready: function () {
 			$('#'+element).jqxGrid('loadstate', $('#'+element).jqxGrid('getstate'));
@@ -172,6 +218,7 @@ function ShowHide(e)
   var id =$(e).attr("href");
   $(id).show();
 
+	/* handle grid init on page load */
 	var _m = id.match(/edit\-(.*)\-records/);
 	if (_m){
 		if (_m[1]){
@@ -179,6 +226,7 @@ function ShowHide(e)
 		}
 	}
 
+	/* handle binding to form on page load */
 	var _m = id.match(/add\-(.*)\-record/);
 	if (_m){
 		if (_m[1]){
@@ -222,6 +270,11 @@ function modelList() {
 		}
 		return createList(obj);
 	});
+}
+
+/* Test for mobile device */
+function _detect(){
+	return /android|blackberry|symbian|iemobile|ipad|iphone/gi.test(navigator.userAgent);
 }
 
 /* Validate integer */
