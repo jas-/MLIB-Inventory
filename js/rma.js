@@ -137,4 +137,22 @@ $(document).ready(function(){
 		});
 	});
 
+	/* Bind computer & monitor objects to autocomplete */
+	localData('computers', false, function(local){
+		$('#hostname').autocomplete({
+			source: hostname_obj2arr(local),
+			select: function(event, ui){
+				var index = ui.item.value;
+				$.grep(local, function(obj){
+					if (obj.Hostname == index) {
+						$('#model').val(obj.Model);
+						$('#sku').val(obj.SKU);
+						$('#uuic').val(obj.UUIC);
+						$('#serial').val(obj.Serial);
+					}
+				});
+			}
+		});
+	});
+
 });

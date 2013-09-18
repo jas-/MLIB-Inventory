@@ -152,6 +152,16 @@ function model_obj2arr(obj)
 	return a;
 }
 
+/* Extract hostname for autocomplete */
+function hostname_obj2arr(obj)
+{
+	var a = [];
+	$.each(obj, function(k, v){
+		a.push(v.Hostname);
+	});
+	return a;
+}
+
 /* Object formatting prior to sync */
 function format_obj(obj, field, value)
 {

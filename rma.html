@@ -9,14 +9,16 @@
 	<!-- CSS enabling mobile frome work (jQuery Mobile) -->
 	<link rel="stylesheet" href="css/themes/default/jquery.mobile-1.2.0.css" />
 	<link rel="stylesheet" href="css/themes/custom/custom.min.css" />
-	<link rel="stylesheet"  href="js/3rd-party/jQuery-Mobile-Icon-Pack/original/jqm-icon-pack-2.0-original.css" />
-	<link rel="stylesheet"  href="js/3rd-party/jQuery-Mobile-Icon-Pack/font-awesome/jqm-icon-pack-fa.css" />
+	<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css">
+	<link rel="stylesheet" href="js/3rd-party/jQuery-Mobile-Icon-Pack/original/jqm-icon-pack-2.0-original.css" />
+	<link rel="stylesheet" href="js/3rd-party/jQuery-Mobile-Icon-Pack/font-awesome/jqm-icon-pack-fa.css" />
 
 	<!-- CSS for handling AJAX responses -->
 	<link rel="stylesheet" href="css/main.css" />
 
 	<!-- jQuery libraries -->
 	<script type="text/javascript" src="js/3rd-party/jQuery/jquery.min.js"></script>
+	<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
 	<script type="text/javascript" src="js/3rd-party/jQuery/jquery.mobile-1.3.2.min.js"></script>
   </head>
 
@@ -97,7 +99,7 @@
 			<div class="ui-field-contain ui-body ui-br" data-role='fieldcontain'>
 			  <fieldset data-role='controlgroup' data-mini=true>
 				<label for='date'>Date</label>
-				  <input id='date' name='date' placeholder='Date (MM/DD/YYYY)' type='text' class='ui-input-text ui-body-c ui-corner-all ui-shadow-inset' style='width: 100%' data-role="datebox" data-options='{"mode":"calbox", "useNewStyle":true}' data-intro="RMA date" data-position="right">
+				  <input id='date' name='date' placeholder='Date (YYYY-MM-DD)' type='text' class='ui-input-text ui-body-c ui-corner-all ui-shadow-inset' style='width: 100%' data-role="datebox" data-options='{"mode":"calbox", "useNewStyle":true}' data-intro="RMA date" data-position="right">
 			  </fieldset>
 			</div>
 			<div class="ui-field-contain ui-body ui-br" data-role='fieldcontain'>
