@@ -9,7 +9,7 @@ var api = {
 	monitors: {
 		url:	url+'/monitor',
 	},
-	rma: {
+	rmas: {
 		url:	url+'/rma',
 	},
 	models: {
@@ -244,6 +244,7 @@ function ShowHide(e)
 	var _m = id.match(/add\-(.*)\-record/);
 	if (_m){
 		if (_m[1]){
+			$('#'+_m[1]).attr('action', api[_m[1]]);
 			$('#'+_m[1]).comm({
 				appID: _m[1],
 				callback: function(){

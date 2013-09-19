@@ -124,7 +124,7 @@ $(document).ready(function(){
 	};
 
   /* Initialize computer record set */
-	doIt(key, grid, api.rma.url, methods.all, rma)
+	doIt(key, grid, api.rmas.url, methods.all, rma)
 
 	/* Listen for cell edit events */
 	$('#'+grid).on('cellendedit', function(event){
@@ -134,7 +134,7 @@ $(document).ready(function(){
 
 		var d = format_obj($('#'+grid).jqxGrid('getrowdata', args.rowindex), args.datafield, args.value);
 
-		doRequest(grid, api.rma.url+'/'+d.Id, methods.update, d, function(result){
+		doRequest(grid, api.rmas.url+'/'+d.Id, methods.update, d, function(result){
 			message(result, 'message-edit-rma');
 		});
 	});
