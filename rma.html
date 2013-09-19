@@ -18,8 +18,8 @@
 
 	<!-- jQuery libraries -->
 	<script type="text/javascript" src="js/3rd-party/jQuery/jquery.min.js"></script>
-	<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
 	<script type="text/javascript" src="js/3rd-party/jQuery/jquery.mobile-1.3.2.min.js"></script>
+	<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
   </head>
 
 <body>
@@ -72,7 +72,7 @@
 	  <div data-role="navbar" data-iconpos="left">
 		<ul>
 		  <li>
-			<a href="#add-rma-record" data-transition="fade" data-theme="c" onclick="ShowHide(this)" data-icon="plus" data-intro="Add new RMA record" data-position="bottom">Add new record</a>
+			<a href="#add-rmas-record" data-transition="fade" data-theme="c" onclick="ShowHide(this)" data-icon="plus" data-intro="Add new RMA record" data-position="bottom">Add new record</a>
 		  </li>
 		  <li>
 			<a href="#edit-rma-records" data-transition="fade" data-theme="c" onclick="ShowHide(this)" data-icon="edit" data-intro="Edit RMA records" data-position="bottom">Edit RMA records</a>
@@ -87,15 +87,15 @@
 	  <div data-role="content" id="rma-content">
 
 		<!-- RMA add record -->
-		<div id="add-rma-record" class="ui-screen-hidden content ui-body ui-body-c">
-		  <form action='http://inventory.dev:8080/rma' id='rma' name='rma' method='post'>
+		<div id="add-rmas-record" class="ui-screen-hidden content ui-body ui-body-c">
+		  <form action='http://inventory.dev:8080/rma' id='rmas' name='rmas' method='post'>
 		  <h3>
 			<a href="" data-toggle="chardinjs" onclick="$('#rma-content').chardinJs('start')">
 			  <img src="images/help.png" alt="Inventory Management Help" title="Inventory Management Help" height="25" />
 			</a>
 			Add new RMA record
 		  </h3>
-		  <div id="message-add-rma"></div>
+		  <div id="message-add-rmas"></div>
 			<div class="ui-field-contain ui-body ui-br" data-role='fieldcontain'>
 			  <fieldset data-role='controlgroup' data-mini=true>
 				<label for='date'>Date</label>

@@ -245,6 +245,7 @@ function ShowHide(e)
 	if (_m){
 		if (_m[1]){
 			$('#'+_m[1]).comm({
+				debug: true,
 				appID: _m[1],
 				callback: function(){
 					message($(this), 'message-add-'+_m[1]);
