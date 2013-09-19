@@ -3,7 +3,7 @@ var url = 'http://inventory.dev:8080';
 
 /* API end points */
 var api = {
-	computers: {
+	computer: {
 		url:	url+'/computer',
 	},
 	monitors: {
@@ -244,7 +244,7 @@ function ShowHide(e)
 	var _m = id.match(/add\-(.*)\-record/);
 	if (_m){
 		if (_m[1]){
-			$('#'+_m[1]).attr('action', api[_m[1]]);
+			$('#'+_m[1]).attr('action', api[_m[1]].url);
 			$('#'+_m[1]).comm({
 				appID: _m[1],
 				callback: function(){
