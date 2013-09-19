@@ -245,7 +245,6 @@ function ShowHide(e)
 	if (_m){
 		if (_m[1]){
 			$('#'+_m[1]).comm({
-				debug: true,
 				appID: _m[1],
 				callback: function(){
 					message($(this), 'message-add-'+_m[1]);
@@ -332,6 +331,13 @@ function valSerial(obj)
 {
 	return (/^[a-z0-9-]{1,128}$/i.test(obj)) ?
 		true : {result: false, message: 'Serial is invalid [a-z0-9-]{1,128}' }
+}
+
+/* Validate Boolean */
+function valBoolean(obj)
+{
+	return (/^[0|1|true|false]$/i.test(obj)) ?
+		true : {result: false, message: 'Boolean (true/false) value required' }
 }
 
 /* Validate Date */

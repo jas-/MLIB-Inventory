@@ -35,8 +35,10 @@ $(document).ready(function(){
 			{ text: 'Problem?',
         datafield: 'Problem',
         width: '5%',
+				type: 'bool',
+				columntype: 'checkbox',
         validation: function (cell, value) {
-          /* checkbox */
+          return valBoolean(value);
         }
       },
 			{	text: 'Date',
