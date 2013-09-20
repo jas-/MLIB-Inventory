@@ -249,6 +249,11 @@ function ShowHide(e)
 				appID: _m[1],
 				callback: function(){
 					message($(this), 'message-add-'+_m[1]);
+					$(window).secStore('clear', {
+						storage: 'session',
+						debug: true,
+						appID: _m[1]
+					});
 				}
 			});
 		}
