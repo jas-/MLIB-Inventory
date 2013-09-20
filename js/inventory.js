@@ -6,7 +6,7 @@ var api = {
 	computer: {
 		url:	url+'/computer',
 	},
-	monitors: {
+	monitor: {
 		url:	url+'/monitor',
 	},
 	rmas: {
@@ -251,7 +251,6 @@ function ShowHide(e)
 					message($(this), 'message-add-'+_m[1]);
 					$(window).secStore('clear', {
 						storage: 'session',
-						debug: true,
 						appID: _m[1]
 					});
 				}
