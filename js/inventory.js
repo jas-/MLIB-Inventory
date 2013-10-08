@@ -1,5 +1,5 @@
 /* Inventory RestFul API FQDN */
-var url = 'http://inventory.dev:8080';
+var url = 'http://inventory-server.dev:8080';
 
 /* API end points */
 var api = {
