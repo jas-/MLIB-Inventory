@@ -1,5 +1,5 @@
 /* Inventory RestFul API FQDN */
-var url = 'http://inventory-server.dev:8080';
+var url = 'http://inventory-server.dev:8081';
 
 /* API end points */
 var api = {
@@ -237,6 +237,7 @@ function ShowHide(e)
 	if (_m){
 		if (_m[1]){
 			$('#jqxgrid-'+_m[1]).jqxGrid('render');
+			$('#jqxgrid-'+_m[1]).jqxGrid('updatebounddata', cells);
 		}
 	}
 
