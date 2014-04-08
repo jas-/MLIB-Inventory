@@ -371,9 +371,9 @@ function valGeneral(obj)
 function message(obj, ele){
 	if (obj!='') {
 		var _d = '';
-		if (obj[0]['details']){
-			_d = _details(obj[0]['details']);
-		}
+//		if (obj[0]['details']){
+//			_d = _details(obj[0]['details']);
+//		}
 		$.each(obj, function(key, value){
 			$.each(value, function(k, v){
 				if(k=='error'){
