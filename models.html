@@ -70,7 +70,7 @@
 	  <div data-role="navbar" data-iconpos="left">
 		<ul>
 		  <li>
-			<a href="#add-modelo-record" data-transition="fade" data-theme="c" onclick="ShowHide(this)" data-icon="plus" data-intro="Add new model record" data-position="bottom">Add new record</a>
+			<a href="#add-model-record" data-transition="fade" data-theme="c" onclick="ShowHide(this)" data-icon="plus" data-intro="Add new model record" data-position="bottom">Add new record</a>
 		  </li>
 		  <li>
 			<a href="#edit-model-records" data-transition="fade" data-theme="c" onclick="ShowHide(this)" data-icon="edit" data-intro="Edit model records" data-position="bottom">Edit model records</a>
@@ -85,15 +85,15 @@
 	  <div data-role="content" id="model-content">
 
 		<!-- Models add record -->
-		<div id="add-modelo-record" class="ui-screen-hidden content ui-body ui-body-c">
-		  <form action='' id='modelo' name='modelo' method='post'>
+		<div id="add-model-record" class="ui-screen-hidden content ui-body ui-body-c">
+		  <form action='' id='models' name='models' method='post'>
 		  <h3>
 			<a href="" data-toggle="chardinjs" onclick="$('#model-content').chardinJs('start')">
 			  <img src="images/help.png" alt="Inventory Management Help" title="Inventory Management Help" height="25" />
 			</a>
 			Add new model record
 		  </h3>
-		  <div id="message-add-modelo"></div>
+		  <div id="message-add-models"></div>
 			<div class="ui-field-contain ui-body ui-br" data-role='fieldcontain'>
 			  <fieldset data-role='controlgroup' data-mini=true>
 				<label for='modelname'>Model</label>

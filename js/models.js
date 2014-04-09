@@ -104,7 +104,7 @@ $(document).ready(function(){
 	};
 
   /* Initialize computer record set */
-	doIt(key, grid, api.models.url, methods.all, models);
+	doIt(key, grid, api.model.url, methods.all, models);
 
 	/* Listen for cell edit events */
 	$('#'+grid).on('cellendedit', function(event){
@@ -114,7 +114,7 @@ $(document).ready(function(){
 
 		var d = format_obj($('#'+grid).jqxGrid('getrowdata', args.rowindex), args.datafield, args.value);
 
-		doRequest(grid, api.models.url+'/'+d.Id, methods.update, d, function(result){
+		doRequest(grid, api.model.url+'/'+d.Id, methods.update, d, function(result){
 			message(result, 'message-edit-models');
 		});
 	});

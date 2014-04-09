@@ -12,7 +12,7 @@ var api = {
 	rmas: {
 		url:	url+'/rma',
 	},
-	models: {
+	model: {
 		url:	url+'/model',
 	},
 	cors: {
@@ -234,7 +234,7 @@ function ShowHide(e)
 
 	/* handle grid init on page load */
 	var _m = id.match(/edit\-(.*)\-records/);
-console.log(_m)
+
 	if (_m){
 		if (_m[1]){
 			$('#jqxgrid-'+_m[1]).jqxGrid('render');
@@ -246,12 +246,12 @@ console.log(_m)
 	var _m = id.match(/add\-(.*)\-record|search\-(.*)\-records/);
 
 	if (_m){
-
+console.log(_m)
     /* AJAXify add record */
 		if (_m[1]){
-			$('#'+_m[1]).attr('action', api[_m[1]].url);
+			$('form#'+_m[1]).attr('action', api[_m[1]].url);
 console.log($('#'+_m[1]))
-      $('#'+_m[1]).comm({
+      $('form#'+_m[1]).comm({
 				appID: _m[1],
 				callback: function(){
 					message($(this), 'message-add-'+_m[1]);
@@ -267,9 +267,9 @@ console.log($('#'+_m[1]))
 
     /* AJAXify search record */
 		if (_m[2]){
-      $('#'+_m[2]).attr('action', api[_m[2]].url);
+      $('form#'+_m[2]).attr('action', api[_m[2]].url);
 console.log($('#'+_m[2]));
-			$('#'+_m[2]).comm({
+			$('form#'+_m[2]).comm({
 				appID: _m[2],
 				callback: function(){
 					message($(this), 'message-search-'+_m[2]);
@@ -308,7 +308,7 @@ function createList(obj)
 function modelList() {
 	localData('models', false, function(obj){
 		if (!obj) {
-			doRequest('models', api.models.url, methods.all, false, function(result){
+			doRequest('models', api.model.url, methods.all, false, function(result){
 				localData('models', result);
 				return createList(result);
 			});
