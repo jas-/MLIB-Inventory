@@ -234,26 +234,51 @@ function ShowHide(e)
 
 	/* handle grid init on page load */
 	var _m = id.match(/edit\-(.*)\-records/);
+console.log(_m)
 	if (_m){
 		if (_m[1]){
 			$('#jqxgrid-'+_m[1]).jqxGrid('render');
-			$('#jqxgrid-'+_m[1]).jqxGrid('updatebounddata', cells);
+			$('#jqxgrid-'+_m[1]).jqxGrid('updatebounddata', 'cells');
 		}
 	}
 
 	/* handle binding to form on page load */
-	var _m = id.match(/add\-(.*)\-record/);
+	var _m = id.match(/add\-(.*)\-record|search\-(.*)\-records/);
+
 	if (_m){
+
+    /* AJAXify add record */
 		if (_m[1]){
 			$('#'+_m[1]).attr('action', api[_m[1]].url);
-			$('#'+_m[1]).comm({
+console.log($('#'+_m[1]))
+      $('#'+_m[1]).comm({
 				appID: _m[1],
 				callback: function(){
 					message($(this), 'message-add-'+_m[1]);
+/*
 					$(window).secStore('clear', {
 						storage: 'session',
 						appID: _m[1]
 					});
+*/
+				}
+			});
+		}
+
+    /* AJAXify search record */
+		if (_m[2]){
+      $('#'+_m[2]).attr('action', api[_m[2]].url);
+console.log($('#'+_m[2]));
+			$('#'+_m[2]).comm({
+				appID: _m[2],
+				callback: function(){
+					message($(this), 'message-search-'+_m[2]);
+/*
+					$(window).secStore('clear', {
+						storage: 'session',
+						appID: _m[2]
+					});
+*/
 				}
 			});
 		}
