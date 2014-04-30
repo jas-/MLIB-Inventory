@@ -15,6 +15,9 @@ var api = {
 	model: {
 		url:	url+'/model',
 	},
+	warranty: {
+		url:	url+'/warranty',
+	},
 	cors: {
 		url:		url+'/cors',
 	}
@@ -246,11 +249,11 @@ function ShowHide(e)
 	var _m = id.match(/add\-(.*)\-record|search\-(.*)\-records/);
 
 	if (_m){
-console.log(_m)
+
     /* AJAXify add record */
 		if (_m[1]){
 			$('form#'+_m[1]).attr('action', api[_m[1]].url);
-console.log($('#'+_m[1]))
+
       $('form#'+_m[1]).comm({
 				appID: _m[1],
 				callback: function(){
@@ -268,7 +271,7 @@ console.log($('#'+_m[1]))
     /* AJAXify search record */
 		if (_m[2]){
       $('form#'+_m[2]).attr('action', api[_m[2]].url);
-console.log($('#'+_m[2]));
+
 			$('form#'+_m[2]).comm({
 				appID: _m[2],
 				callback: function(){

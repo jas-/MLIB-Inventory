@@ -12,10 +12,7 @@ $(document).ready(function(){
 			datafields:[
 				{ name:		'Id',					type: 'number' },
 				{ name:		'Model',			type: 'string' },
-				{ name:		'EOWD',				type: 'date'   },
-				{ name:		'OPD',				type: 'date'   },
-				{ name:		'Description',type: 'string' },
-				{ name:		'Notes',			type: 'string' }
+				{ name:		'Description',type: 'string' }
 			],
 			datatype: 'json'
 		},
@@ -44,58 +41,8 @@ $(document).ready(function(){
           return valModel(value);
         }
 			},
-			{ text: 'EOWD',
-				datafield: 'EOWD',
-				width: '15%',
-				cellsformat: 'yyyy-MM-dd',
-				columntype: 'datetimeinput',
-        filtertype: 'date',
-				initeditor: function(row, column, editor) {
-					var d = new Date()
-					_d = [d.getFullYear(), d.getMonth(), d.getDate()].join('-');
-					editor.jqxDateTimeInput('setDate', _d, {
-						formatString: 'yyyy-MM-dd',
-						animationType: 'fade',
-						width: '150px',
-						height: '25px',
-						dropDownHorizontalAlignment: 'right'
-					})
-				},
-        validation: function(cell, value) {
-          return valDate(value);
-        }
-			},
-			{ text: 'OPD',
-				datafield: 'OPD',
-				width: '15%',
-				cellsformat: 'yyyy-MM-dd',
-				columntype: 'datetimeinput',
-        filtertype: 'date',
-				initeditor: function(row, column, editor) {
-					var d = new Date()
-					_d = [d.getFullYear(), d.getMonth(), d.getDate()].join('-');
-					editor.jqxDateTimeInput('setDate', _d, {
-						formatString: 'yyyy-MM-dd',
-						animationType: 'fade',
-						width: '150px',
-						height: '25px',
-						dropDownHorizontalAlignment: 'right'
-					})
-				},
-        validation: function(cell, value) {
-          return valDate(value);
-        }
-			},
 			{ text: 'Description',
         datafield: 'Description',
-        width: '25%',
-        validation: function(cell, value) {
-          return valGeneral(value);
-        }
-      },
-			{ text: 'Notes',
-        datafield: 'Notes',
-        width: '20%',
         validation: function(cell, value) {
           return valGeneral(value);
         }

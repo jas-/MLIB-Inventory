@@ -21,8 +21,8 @@
 
 <body>
 
-  <!-- monitor page -->
-  <div data-role="page" id="monitors">
+  <!-- warranty page -->
+  <div data-role="page" id="warranty">
     <div data-theme="c" data-role="header">
       <h3>
 		<span style="float: left">
@@ -51,7 +51,7 @@
 			<a href="monitors.html" rel="external" data-transition="fade" data-theme="c" data-icon="desktop" data-intro="Manage monitor records" data-position="top">Monitors</a>
 		  </li>
 		  <li>
-			<a href="models.html" rel="external" data-transition="fade" data-theme="c" data-icon="list-ul" data-intro="Manage model records" data-position="top">Models</a>
+			<a href="models.html" rel="external" data-transition="fade" data-theme="c" data-icon="list-ul" data-intro="Manage warranty records" data-position="top">Models</a>
 		  </li>
 		  <li>
 			<a href="warranty.html" rel="external" data-transition="fade" data-theme="c" data-icon="list-ul" data-intro="Manage warranty records" data-position="top">Warranties</a>
@@ -68,124 +68,84 @@
 	  </div>
 	</div>
 
-	<!-- monitor page content -->
+	<!-- Models page content -->
 	<div data-role="content">
-	  <!-- Monitor sub-navigation -->
+	  <!-- Models sub-navigation -->
 	  <div data-role="navbar" data-iconpos="left">
 		<ul>
 		  <li>
-			<a href="#add-monitor-record" data-transition="fade" data-theme="c" onclick="ShowHide(this)" data-icon="plus" data-intro="Add new monitor record" data-position="bottom">Add new record</a>
+			<a href="#add-warranty-record" data-transition="fade" data-theme="c" onclick="ShowHide(this)" data-icon="plus" data-intro="Add new warranty record" data-position="bottom">Add new record</a>
 		  </li>
 		  <li>
-			<a href="#edit-monitor-records" data-transition="fade" data-theme="c" onclick="ShowHide(this)" data-icon="edit" data-intro="Edit monitor records" data-position="bottom">Edit monitor records</a>
+			<a href="#edit-warranty-records" data-transition="fade" data-theme="c" onclick="ShowHide(this)" data-icon="edit" data-intro="Edit warranty records" data-position="bottom">Edit warranty records</a>
 		  </li>
 		  <!--li>
-			<a href="#search-monitor-records" data-transition="fade" data-theme="c" onclick="ShowHide(this)" data-icon="search" data-intro="Advanced monitor search" data-position="bottom">Advanced search</a>
+			<a href="#search-warranty-records" data-transition="fade" data-theme="c" onclick="ShowHide(this)" data-icon="search" data-intro="Search warranty records" data-position="bottom">Advanced search</a>
 		  </li-->
 		</ul>
 	  </div>
 
-	  <!-- Monitor content -->
-	  <div data-role="content" id="monitor-content">
+	  <!-- Models content -->
+	  <div data-role="content" id="warranty-content">
 
-		<!-- Monitor add record -->
-		<div id="add-monitor-record" class="ui-screen-hidden content ui-body ui-body-c">
-		  <form action='' id='monitor' name='monitor' method='post'>
+		<!-- Models add record -->
+		<div id="add-warranty-record" class="ui-screen-hidden content ui-body ui-body-c">
+		  <form action='' id='warranty' name='warranty' method='post'>
 		  <h3>
-			<a href="" data-toggle="chardinjs" onclick="$('#monitor-content').chardinJs('start')">
+			<a href="" data-toggle="chardinjs" onclick="$('#warranty-content').chardinJs('start')">
 			  <img src="images/help.png" alt="Inventory Management Help" title="Inventory Management Help" height="25" />
 			</a>
-			Add new monitor record
+			Add new warranty record
 		  </h3>
-		  <div id="message-add-monitor"></div>
-			<div class="ui-field-contain ui-body ui-br" data-role='fieldcontain'>
-			  <fieldset data-role='controlgroup' data-mini=true>
-				<label for='hostname'>Hostname</label>
-				  <input id='hostname' name='hostname' placeholder='Computer name' type='text' class='ui-input-text ui-body-c ui-corner-all ui-shadow-inset' style='width: 100%' data-intro="Monitor hostname" data-position="right">
-			  </fieldset>
-			</div>
-			<div class='ui-field-contain ui-body ui-br' data-role='fieldcontain'>
-			  <fieldset data-role='controlgroup'>
-				<label for='model' class='select'>Model</label>
-				<div class='ui-select'>
-				  <select name='model' id='model' data-mini='true' data-mini='true' data-theme='c' data-overlay-theme='c'>
-					<option data-placeholder='true'>Select model</option>
-				  </select>
-				</div>
-			  </fieldset>
-			</div>
-			<div class="ui-field-contain ui-body ui-br" data-role='fieldcontain'>
-			  <fieldset data-role='controlgroup' data-mini=true>
-				<label for='sku'>SKU</label>
-				  <input id='sku' name='sku' placeholder='SKU (white barcode)' type='text' class='ui-input-text ui-body-c ui-corner-all ui-shadow-inset' style='width: 100%' data-intro="Monitor SKU" data-position="right">
-			  </fieldset>
-			</div>
-			<div class="ui-field-contain ui-body ui-br" data-role='fieldcontain'>
-			  <fieldset data-role='controlgroup' data-mini=true>
-				<label for='serial'>Serial</label>
-				  <input id='serial' name='serial' placeholder='Serial (Red label)' type='text' class='ui-input-text ui-body-c ui-corner-all ui-shadow-inset' style='width: 100%' data-intro="Monitor serial number" data-position="right">
-			  </fieldset>
-			</div>
+		  <div id="message-add-warranty"></div>
 			<div class="ui-field-contain ui-body ui-br" data-role='fieldcontain'>
 			  <fieldset data-role='controlgroup' data-mini=true>
 				<label for='eowd'>EOWD</label>
-				  <input id='eowd' name='eowd' placeholder='End of warranty date' type='text' class='ui-input-text ui-body-c ui-corner-all ui-shadow-inset' style='width: 100%' data-role="datebox" data-options='{"mode":"calbox", "useNewStyle":true}' data-intro="End of warranty date" data-position="right">
+				  <input id='eowd' name='eowd' placeholder='End of warranty date' type='text' class='ui-input-text ui-body-c ui-corner-all ui-shadow-inset' style='width: 100%' data-role="datebox" data-options='{"mode":"calbox", "useNewStyle":true}' data-intro="Model end of warranty date" data-position="right">
 			  </fieldset>
 			</div>
 			<div class="ui-field-contain ui-body ui-br" data-role='fieldcontain'>
 			  <fieldset data-role='controlgroup' data-mini=true>
 				<label for='opd'>OPD</label>
-				  <input id='opd' name='opd' placeholder='Original purchase date' type='text' class='ui-input-text ui-body-c ui-corner-all ui-shadow-inset' style='width: 100%' data-role="datebox" data-options='{"mode":"calbox", "useNewStyle":true}' data-intro="Original purchase date" data-position="right">
-			  </fieldset>
-			</div>
-			<div class="ui-field-contain ui-body ui-br" data-role='fieldcontain'>
-			  <fieldset data-role='controlgroup' data-mini=true>
-				<label for='description'>Description</label>
-				  <textarea id='description' name='description' placeholder='Description' cols='300' rows='6' style='width: 100%' class='ui-input-text ui-body-c ui-corner-all ui-shadow-inset' data-intro="Monitor description" data-position="right"></textarea>
-			  </fieldset>
-			</div>
-			<div class="ui-field-contain ui-body ui-br" data-role='fieldcontain'>
-			  <fieldset data-role='controlgroup' data-mini=true>
-				<label for='notes'>Notes</label>
-				  <textarea id='notes' name='notes' placeholder='Notes' cols='300' rows='6' style='width: 100%' class='ui-input-text ui-body-c ui-corner-all ui-shadow-inset' data-intro="Monitor notes field" data-position="right"></textarea>
+				  <input id='opd' name='opd' placeholder='Original purchase date' type='text' class='ui-input-text ui-body-c ui-corner-all ui-shadow-inset' style='width: 100%' data-role="datebox" data-options='{"mode":"calbox", "useNewStyle":true}' data-intro="Model original purchase date" data-position="right">
 			  </fieldset>
 			</div>
 			<div data-role='fieldcontain'>
 			  <fieldset data-role='controlgroup' data-mini=true>
-				<input id='save' data-inline='true' data-mini='true' data-theme='c' data-icon='arrow-r' data-iconpos='right' value='Save changes' type='submit' data-intro="Click to save" data-position="right">
+				<input id='save' data-inline='true' data-mini='true' data-theme='c' data-icon='arrow-r' data-iconpos='right' value='Save changes' type='submit' data-intro="Click to save new warranty record" data-position="right">
 			  </fieldset>
 			</div>
 		  </form>
 		</div>
 
-		<!-- Monitor edit records -->
-		<div id="edit-monitor-records" class="ui-screen-hidden content ui-body ui-body-c">
+		<!-- Models edit records -->
+		<div id="edit-warranty-records" class="ui-screen-hidden content ui-body ui-body-c">
 		  <h3>
-			<a href="" data-toggle="chardinjs" onclick="$('#monitor-content').chardinJs('start')">
+			<a href="" data-toggle="chardinjs" onclick="$('#warranty-content').chardinJs('start')">
 			  <img src="images/help.png" alt="Inventory Management Help" title="Inventory Management Help" height="25" />
 			</a>
-			Edit monitor records
+			Edit existing warranty records
 		  </h3>
-		  <div id="message-edit-monitor"></div>
-		  <div id='jqxWidget-monitors'>
-			<div id="jqxgrid-monitor" data-intro="Edit monitor records" data-position="bottom"></div>
+		  <div id="message-edit-warranty"></div>
+		  <div id='jqxWidget-warranty'>
+			<div id="jqxgrid-warranty" data-intro="Edit current warranty records" data-position="bottom"></div>
 		  </div>
 		</div>
 
-		<!-- Advanced monitor search -->
-		<div id="search-monitor-records" class="ui-screen-hidden content ui-body ui-body-c">
-		  <form action='' id='monitor' name='monitor' method='post'>
+		<!-- Advanced warranty search -->
+		<div id="search-warranty-records" class="ui-screen-hidden content ui-body ui-body-c">
+		  <form action='' id='warranty' name='warranty' method='post'>
 		  <h3>
-			<a href="" data-toggle="chardinjs" onclick="$('#monitor-content').chardinJs('start')">
+			<a href="" data-toggle="chardinjs" onclick="$('#warranty-content').chardinJs('start')">
 			  <img src="images/help.png" alt="Inventory Management Help" title="Inventory Management Help" height="25" />
 			</a>
-			Advanced monitor search
+			Advanced warranty search
 		  </h3>
-		  <div id="message-search-monitor"></div>
+		  <div id="message-search-warranty"></div>
 			<div class="ui-field-contain ui-body ui-br" data-role='fieldcontain'>
 			  <fieldset data-role='controlgroup' data-mini=true>
 				<label for='search'>Search</label>
-				  <input id='search' name='search' placeholder='Search records (Use * as wildcard)' type='texts' class='ui-input-text ui-body-c ui-corner-all ui-shadow-inset' style='width: 100%' data-intro="Advanced monitor search. Use * as wildcard" data-position="right">
+				  <input id='search' name='search' placeholder='Search records (Use * as wildcard)' type='texts' class='ui-input-text ui-body-c ui-corner-all ui-shadow-inset' style='width: 100%' data-intro="Advanced warranty search. Use * as wildcard." data-position="right">
 			  </fieldset>
 			</div>
 			<div data-role='fieldcontain'>
@@ -257,8 +217,8 @@
   <!-- Inventory libs -->
   <script src="js/inventory.js"></script>
 
-  <!-- Monitor specific libs -->
-  <script src="js/monitors.js"></script>
+  <!-- Models specific libs -->
+  <script src="js/warranty.js"></script>
 
 </body>
 </html>
