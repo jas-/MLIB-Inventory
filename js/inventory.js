@@ -48,7 +48,6 @@ function localData(key, data, cb)
 	/* Add some expiration for object */
 	$(window).secStore({
 		appID: key,
-		debug: true,
     aes: true,
 		data: data,
     storage: 'session',
@@ -336,15 +335,21 @@ function valNumber(obj)
 /* Validate hostname (RFC 1123) */
 function valHostname(obj)
 {
-	return (/([a-z0-9]([a-z0-9-]{1,61}[a-z0-9])?(\.[a-z0-9]([a-z0-9-]{1,61}[a-z0-9])?)*)([^a-z0-9-]|$)/i.test(obj)) ?
-		true : { result: false, message: 'Hostname must conform to RFC-1123' };
+  if (obj) {
+  	return (/([a-z0-9]([a-z0-9-]{1,61}[a-z0-9])?(\.[a-z0-9]([a-z0-9-]{1,61}[a-z0-9])?)*)([^a-z0-9-]|$)/i.test(obj)) ?
+  		true : { result: false, message: 'Hostname must conform to RFC-1123' };
+  }
+  return true;
 }
 
 /* Validate model */
 function valModel(obj)
 {
-	return (/^[a-z0-9-]{0,128}$/i.test(obj)) ?
-		true : { result: false, message: 'Model is invalid [a-z0-9-]{1,128}' }
+  if (obj) {
+  	return (/^[a-z0-9-]{0,128}$/i.test(obj)) ?
+  		true : { result: false, message: 'Model is invalid [a-z0-9-]{1,128}' }
+  }
+  return true;
 }
 
 /* Validate SKU */
@@ -357,8 +362,11 @@ function valSKU(obj)
 /* Validate UUIC */
 function valUUIC(obj)
 {
-	return (/^[a-z0-9-]{1,128}$/i.test(obj)) ?
-		true : {result: false, message: 'UUIC is invalid [a-z0-9-]{1,128}' }
+  if (obj) {
+  	return (/^[a-z0-9-]{1,128}$/i.test(obj)) ?
+  		true : {result: false, message: 'UUIC is invalid [a-z0-9-]{1,128}' }
+  }
+  return true;
 }
 
 /* Validate Serial */
@@ -384,15 +392,21 @@ function valDate(obj)
 		obj = [d.getFullYear(), d.getMonth(), d.getDate()].join('-');
 	}
 
-	return (/^[\d+]{4}\-[\d+]{1,2}\-[\d+]{1,2}$/.test(obj)) ?
-		true : {result: false, message: 'Date is invalid [yyyy-mm-dd]' }
+  if (obj) {
+  	return (/^[\d+]{4}\-[\d+]{1,2}\-[\d+]{1,2}$/.test(obj)) ?
+  		true : {result: false, message: 'Date is invalid [yyyy-mm-dd]' }
+  }
+  return true;
 }
 
 /* Validate General (paragraph) */
 function valGeneral(obj)
 {
-	return (!/[`~!@#$%^&*()_|+\-=?;:'",.<>\{\}\[\]\\\/]/gi.test(obj)) ?
-		true : {result: false, message: 'Field is invalid [a-z0-9- .\n\r,;:]{1,128}' }
+  if (obj) {
+  	return (!/[`~!@#$%^&*()_|+\-=?;:'",.<>\{\}\[\]\\\/]/gi.test(obj)) ?
+  		true : {result: false, message: 'Field is invalid [a-z0-9- .\n\r,;:]{1,128}' }
+  }
+  return true;
 }
 
 
