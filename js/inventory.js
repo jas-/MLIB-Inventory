@@ -48,9 +48,10 @@ function localData(key, data, cb)
 	/* Add some expiration for object */
 	$(window).secStore({
 		appID: key,
-		aes: true,
+		debug: true,
+    aes: true,
 		data: data,
-		storage: 'session',
+    storage: 'session',
 		callback: function(obj){
 			(/function/.test(typeof(cb))) ? cb(obj) : false;
 		}
@@ -399,9 +400,11 @@ function valGeneral(obj)
 function message(obj, ele){
 	if (obj!='') {
 		var _d = '';
-//		if (obj[0]['details']){
-//			_d = _details(obj[0]['details']);
-//		}
+
+		if (obj[0]['details']){
+			_d = _details(obj[0].details);
+		}
+
 		$.each(obj, function(key, value){
 			$.each(value, function(k, v){
 				if(k=='error'){
@@ -421,6 +424,15 @@ function message(obj, ele){
 	} else {
 		$('#'+ele).html('<div class="warning">Empty response for request</div>').fadeIn(2000).delay(3500).fadeOut('slow');
 	}
+}
+
+/* Handle details of error */
+function _details(obj){
+  var resp = '<ul>';
+  $.each(obj, function(k, v){
+    resp += '<li>'+v+'</li>';
+  });
+  return resp+'</ul>';
 }
 
 /* Object inspection tool */
