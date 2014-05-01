@@ -40,7 +40,7 @@ $(document).ready(function(){
       },
 			{	text: 'Model',
 				datafield: 'Model',
-				width: '10%',
+				width: '5%',
 				columntype: 'dropdownlist',
 				createeditor: function (row, column, editor) {
 					doRequest('models', api.models.url, methods.all, false, function(obj){
@@ -63,7 +63,7 @@ $(document).ready(function(){
       },
 			{ text: 'Serial',
         datafield: 'Serial',
-        width: '10%',
+        width: '15%',
         validation: function(cell, value) {
           return valSerial(value);
         }
