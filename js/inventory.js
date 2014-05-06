@@ -170,8 +170,8 @@ function format_obj(obj, field, value)
 {
 	var d = obj;
 	d[field] = value;
-	d.EOWD = (/object/.test(typeof(obj.EOWD))) ? obj.EOWD.iso() : false;
-	d.OPD = (/object/.test(typeof(obj.OPD))) ? obj.OPD.iso() : false;
+	d.EOWD = (/object/.test(typeof(obj.EOWD))) ? obj.EOWD.iso() : '';
+	d.OPD = (/object/.test(typeof(obj.OPD))) ? obj.OPD.iso() : '';
 	return d;
 }
 
