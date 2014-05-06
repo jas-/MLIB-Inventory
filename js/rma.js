@@ -132,11 +132,31 @@ $(document).ready(function(){
 
 		$('#'+grid).jqxGrid('setcellvalue', args.rowindex, args.datafield, args.value);
 
-		var d = format_obj($('#'+grid).jqxGrid('getrowdata', args.rowindex), args.datafield, args.value);
+    /* Get current record object */
+    var d = $('#'+grid).jqxGrid('getrowdata', args.rowindex);
 
-		doRequest(grid, api.rmas.url+'/'+d.Id, methods.update, d, function(result){
+    /* Serialize object for remote update */
+		var o = format_obj(d, args.datafield, args.value);
+
+    /* Perform AJAX PUT to update remote record set */
+		doRequest(grid, api.rmas.url+'/'+d.Id, methods.update, o, function(result){
+
+      /* Update local record set */
+      localData(key, false, function(obj){
+        for (var i in Object.keys(obj)) {
+          if (typeof obj[i] == 'object') {
+            if (d.Id == obj[i].Id) {
+              obj[i] = d;
+            } else {
+              obj[i++] = d;
+            }
+          }
+        }
+      });
+
+      /* Display message from remote update */
 			message(result, 'message-edit-rma');
-		});
+    });
 	});
 
 	/* Bind computer & monitor objects to autocomplete */

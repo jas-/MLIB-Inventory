@@ -258,12 +258,6 @@ function ShowHide(e)
 				appID: _m[1],
 				callback: function(){
 					message($(this), 'message-add-'+_m[1]);
-/*
-					$(window).secStore('clear', {
-						storage: 'session',
-						appID: _m[1]
-					});
-*/
 				}
 			});
 		}
@@ -276,12 +270,6 @@ function ShowHide(e)
 				appID: _m[2],
 				callback: function(){
 					message($(this), 'message-search-'+_m[2]);
-/*
-					$(window).secStore('clear', {
-						storage: 'session',
-						appID: _m[2]
-					});
-*/
 				}
 			});
 		}
