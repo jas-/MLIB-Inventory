@@ -58,6 +58,7 @@ $(document).ready(function(){
 			{ text: 'SKU',
         datafield: 'SKU',
         width: '10%',
+				editable: false,
         validation: function(cell, value) {
           return valSKU(value);
         }
@@ -65,6 +66,7 @@ $(document).ready(function(){
 			{ text: 'UUIC',
         datafield: 'UUIC',
         width: '10%',
+				editable: false,
         validation: function(cell, value) {
           return valUUIC(value);
         }
@@ -72,6 +74,7 @@ $(document).ready(function(){
 			{ text: 'Serial',
         datafield: 'Serial',
         width: '10%',
+				editable: false,
         validation: function(cell, value) {
           return valSerial(value);
         }
@@ -82,7 +85,6 @@ $(document).ready(function(){
 				cellsformat: 'yyyy-MM-dd',
 				columntype: 'datetimeinput',
         filtertype: 'date',
-				editable: false,
 				initeditor: function(row, column, editor) {
 					var d = new Date()
 					_d = [d.getFullYear(), d.getMonth(), d.getDate()].join('-');
@@ -104,7 +106,6 @@ $(document).ready(function(){
 				cellsformat: 'yyyy-MM-dd',
 				columntype: 'datetimeinput',
         filtertype: 'date',
-				editable: false,
 				initeditor: function(row, column, editor) {
 					var d = new Date()
 					_d = [d.getFullYear(), d.getMonth(), d.getDate()].join('-');

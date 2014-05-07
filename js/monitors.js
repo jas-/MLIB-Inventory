@@ -57,6 +57,7 @@ $(document).ready(function(){
 			{ text: 'SKU',
         datafield: 'SKU',
         width: '10%',
+				editable: false,
         validation: function(cell, value) {
           return valSKU(value);
         }
@@ -64,6 +65,7 @@ $(document).ready(function(){
 			{ text: 'Serial',
         datafield: 'Serial',
         width: '15%',
+				editable: false,
         validation: function(cell, value) {
           return valSerial(value);
         }
