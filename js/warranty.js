@@ -88,15 +88,7 @@ $(document).ready(function(){
 
       /* Update local record set */
       localData(key, false, function(obj){
-        for (var i in Object.keys(obj)) {
-          if (typeof obj[i] == 'object') {
-            if (d.Id == obj[i].Id) {
-              obj[i] = d;
-            } else {
-              obj[i++] = d;
-            }
-          }
-        }
+				localData(key, _update(d, obj));
       });
 
       /* Display message from remote update */
