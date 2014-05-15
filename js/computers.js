@@ -150,6 +150,7 @@ $(document).ready(function(){
 
     /* Get current record object */
     var d = $('#'+grid).jqxGrid('getrowdata', args.rowindex);
+    d.Id = String(d.Id);
 
     /* Serialize object for remote update */
 		var o = format_obj(d, args.datafield, args.value);
@@ -159,15 +160,7 @@ $(document).ready(function(){
 
       /* Update local record set */
       localData(key, false, function(obj){
-        for (var i in Object.keys(obj)) {
-          if (typeof obj[i] == 'object') {
-            if (d.Id == obj[i].Id) {
-              obj[i] = d;
-            } else {
-              obj[i++] = d;
-            }
-          }
-        }
+				localData(key, _update(d, obj));
       });
 
       /* Display message from remote update */

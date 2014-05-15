@@ -48,7 +48,7 @@ function localData(key, data, cb)
 	/* Add some expiration for object */
 	$(window).secStore({
 		appID: key,
-    aes: true,
+    //aes: true,
 		data: data,
     storage: 'session',
 		callback: function(obj){
@@ -306,6 +306,20 @@ function modelList() {
 		}
 		return createList(obj);
 	});
+}
+
+/* Locate needle in haystack and update values */
+function _update(needle, haystack) {
+	var obj = {};
+	for (var i = 0; i < haystack.length; i++) (function(val){
+		if (val.Id === needle.Id) {
+	    obj[i] = needle;
+		} else {
+			obj[i] = val;
+		}
+	})(haystack[i]);
+
+	return obj;
 }
 
 /* Test for mobile device */
