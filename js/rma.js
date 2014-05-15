@@ -143,6 +143,12 @@ $(document).ready(function(){
 
       /* Update local record set */
       localData(key, false, function(obj){
+
+				$(window).secStore('empty', {
+					appID: key,
+					storage: 'session'
+				});
+
 				localData(key, _update(d, obj));
       });
 

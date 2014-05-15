@@ -48,7 +48,7 @@ function localData(key, data, cb)
 	/* Add some expiration for object */
 	$(window).secStore({
 		appID: key,
-    //aes: true,
+    aes: true,
 		data: data,
     storage: 'session',
 		callback: function(obj){
