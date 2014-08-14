@@ -10,13 +10,30 @@ var ctrl = angular.module('inventoryControllers', [])
 		cors: url+'/cors'
 	};
 
-ctrl.controller('list', function ($scope, $http) {
+ctrl.controller('list', function ($scope, $http, $window, $modal) {
   $http.get(api.computer).success(function(data) {
 		$scope.computers = data;
   });
+
 	$http.get(api.monitor).success(function(data) {
 		$scope.monitors = data;
-	})
+	});
+
+	$scope.selected = [];
+	$scope.handleRecord = function(){
+		$scope.$watch('selected.length', function(len){
+			if (len > 0) {
+				var modal = $modal({
+					title: 'Details for '+$scope.selected[0].Hostname,
+					template: 'partials/details.html',
+					show: false
+				});
+				$scope.showModal = function() {
+					modal.$promise.then(modal.show);
+				}
+			}
+		});
+	};
 });
 
 ctrl.controller('search', ['$scope', '$routeParams', '$http',

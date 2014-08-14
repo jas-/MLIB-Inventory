@@ -3,6 +3,7 @@
 var inventory = angular.module('MLIB-Inventory', [
 	'ngRoute',
 	'trNgGrid',
+	'mgcrea.ngStrap',
 	'inventoryControllers'
 ]);
 

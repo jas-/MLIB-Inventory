@@ -1,6 +1,9 @@
-<div ng-controller="list">
+<div ng-controller="list" ng-init="handleRecord()">
 	<h4>Computers</h4>
-	<table tr-ng-grid="" items="computers" page-items="5"></table>
+	<table tr-ng-grid="" items="computers" selected-items="selected" page-items="5" selection-mode="SingleRow"></table>
+
+	<br/><hr/><br/>
+
 	<h4>Monitors</h4>
-	<table tr-ng-grid="" items="monitors" page-items="5"></table>
+	<table tr-ng-grid="" items="monitors" selected-items="selected" page-items="5" selection-mode="SingleRow"></table>
 </div>
