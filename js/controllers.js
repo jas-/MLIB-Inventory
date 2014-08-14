@@ -12,10 +12,12 @@ var ctrl = angular.module('inventoryControllers', [])
 
 ctrl.controller('list', function ($scope, $http, $window, $modal) {
   $http.get(api.computer).success(function(data) {
+		$scope.selectedComputer = '';
 		$scope.computers = data;
   });
 
 	$http.get(api.monitor).success(function(data) {
+		$scope.selectedMonitor = '';
 		$scope.monitors = data;
 	});
 
@@ -23,14 +25,16 @@ ctrl.controller('list', function ($scope, $http, $window, $modal) {
 	$scope.handleRecord = function(){
 		$scope.$watch('selected.length', function(len){
 			if (len > 0) {
-				var modal = $modal({
-					title: 'Details for '+$scope.selected[0].Hostname,
-					template: 'partials/details.html',
-					show: false
+				var item = $scope.selected[0]
+					,	modal = $modal({
+							title: 'Details for '+(item.Hostname || 'SKU # '+item.SKU),
+							contentTemplate: 'partials/details.html',
+							show: false
+						});
+
+				modal.$promise.then(function(){
+					modal.show();
 				});
-				$scope.showModal = function() {
-					modal.$promise.then(modal.show);
-				}
 			}
 		});
 	};
